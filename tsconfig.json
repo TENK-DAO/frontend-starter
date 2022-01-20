@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2019",
     "module": "commonjs",
-    "lib": [ "es2020", "ESNext" ],
+    "lib": [ "es2020", "ESNext", "DOM" ],
     "allowJs": true,
     "jsx": "react",
     "esModuleInterop": true,
