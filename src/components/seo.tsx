@@ -9,40 +9,36 @@ import * as React from "react"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-
-type MetaTag = {
-  name: string;
-  content: string;
-} | {
-  property: string;
-  content: string;
-}
+type MetaTag =
+  | {
+      name: string
+      content: string
+    }
+  | {
+      property: string
+      content: string
+    }
 
 interface Props {
-  description?: string;
-  lang?: string;
-  meta?: MetaTag[];
-  title?: string;
+  description: string
+  lang: string
+  title: string
+  meta?: MetaTag[]
 }
 
-
-function Seo({ description = '', lang = 'en', meta = [], title }: Props) {
+function Seo({ description, lang, meta = [], title }: Props) {
   const { site } = useStaticQuery(
     graphql`
       query {
         site {
           siteMetadata {
-            title
-            description
             author
+            siteUrl
           }
         }
       }
     `
   )
-
-  const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
 
   return (
     <Helmet
@@ -50,19 +46,22 @@ function Seo({ description = '', lang = 'en', meta = [], title }: Props) {
         lang,
       }}
       title={title}
-      titleTemplate={defaultTitle ?? `%s | ${defaultTitle}`}
       meta={[
         {
           name: `description`,
-          content: metaDescription,
+          content: description,
         },
         {
           property: `og:title`,
           content: title,
         },
         {
+          property: `og:url`,
+          content: site.siteMetadata?.siteUrl || ``,
+        },
+        {
           property: `og:description`,
-          content: metaDescription,
+          content: description,
         },
         {
           property: `og:type`,
@@ -82,7 +81,7 @@ function Seo({ description = '', lang = 'en', meta = [], title }: Props) {
         },
         {
           name: `twitter:description`,
-          content: metaDescription,
+          content: description,
         },
       ].concat(meta)}
     />

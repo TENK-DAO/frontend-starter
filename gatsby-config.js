@@ -1,22 +1,24 @@
-const settings = require('./settings.json')
+const {
+  author,
+  siteUrl,
+} = require('./settings.json')
 
 module.exports = {
   siteMetadata: {
-    title: settings.title,
-    description: settings.description,
-    author: `@gatsbyjs`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    author: author,
+    siteUrl: siteUrl,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-image`,
+    `gatsby-transformer-json`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        name: `i18n`,
+        path: `${__dirname}/i18n`,
       },
     },
+    `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
