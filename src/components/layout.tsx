@@ -6,7 +6,7 @@
  */
 
 import * as React from "react"
-import { Link } from "gatsby"
+import { navigate } from "gatsby"
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
 import { GlobeIcon, TriangleDownIcon } from "@radix-ui/react-icons"
 
@@ -45,10 +45,10 @@ const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
               {locales.map(
                 locale =>
                   !locale.current && (
-                    <DropdownMenu.Item>
-                      <Link to={`/${locale.id}`}>
-                        {locale.id} - {locale.i18n.lang_picker}
-                      </Link>
+                    <DropdownMenu.Item
+                      onSelect={() => navigate(`/${locale.id}`)}
+                    >
+                      {locale.id} - {locale.i18n.lang_picker}
                     </DropdownMenu.Item>
                   )
               )}
