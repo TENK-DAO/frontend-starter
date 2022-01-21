@@ -32,7 +32,7 @@ const Landing: React.FC<PageProps<{}, PageContext>> = ({
           <Markdown children={i18n.hero_cta} />
         </button>
         <StaticImage
-          src="../images/hero.webp"
+          src="../images/hero.png"
           width={325}
           quality={95}
           formats={["auto", "webp", "avif"]}
