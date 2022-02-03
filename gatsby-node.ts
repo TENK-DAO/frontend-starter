@@ -1,8 +1,9 @@
-const { getLocales } = require("./lib/locales")
+import { GatsbyNode } from "gatsby"
+import { getLocales } from "./lib/locales"
 
 const locales = getLocales()
 
-exports.createPages = async ({ actions }) => {
+export const createPages: GatsbyNode["createPages"] = async ({ actions }) => {
   locales.forEach(locale => {
     actions.createPage({
       path: locale.id,

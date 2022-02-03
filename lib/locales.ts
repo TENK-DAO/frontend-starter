@@ -1,27 +1,23 @@
-const fs = require("fs")
-const path = require("path")
-// import fs from "fs"
-// import path from "path"
+import fs from "fs"
+import path from "path"
 
-// TODO: figure out how to load TS in gatsby-node.js
-// interface I18nFields {
-//   view_in: string
-//   lang_picker: string
-//   title: string
-//   description: string
-//   hero_title: string
-//   hero_body: string
-//   hero_cta: string
-// }
+interface I18nFields {
+  view_in: string
+  lang_picker: string
+  title: string
+  description: string
+  hero_title: string
+  hero_body: string
+  hero_cta: string
+}
 
-// export interface Locale {
-//   id: string
-//   i18n: I18nFields
-// }
+export interface Locale {
+  id: string
+  i18n: I18nFields
+}
 
 // for use with `sort`
-// function alphabeticOrder({ id: a }: Locale, { id: b }: Locale): -1 | 0 | 1 {
-function alphabeticOrder({ id: a }, { id: b }) {
+function alphabeticOrder({ id: a }: Locale, { id: b }: Locale): -1 | 0 | 1 {
   if (a < b) {
     return -1
   } else if (a > b) {
@@ -33,8 +29,7 @@ function alphabeticOrder({ id: a }, { id: b }) {
 
 const localesDirectory = path.join(process.cwd(), "i18n")
 
-// function checkI18nFields(fileName: string, data: { [key: string]: any }) {
-function checkI18nFields(fileName, data) {
+function checkI18nFields(fileName: string, data: { [key: string]: any }) {
   ;[
     "view_in",
     "lang_picker",
@@ -49,14 +44,12 @@ function checkI18nFields(fileName, data) {
     }
   })
 
-  // return data as I18nFields
-  return data
+  return data as I18nFields
 }
 
-// export function getLocales(): Locale[] {
-module.exports.getLocales = function getLocales() {
+export function getLocales(): Locale[] {
   // Get file names under /i18n
-  let fileNames
+  let fileNames: string[]
   try {
     fileNames = fs.readdirSync(localesDirectory)
   } catch {
@@ -79,8 +72,7 @@ module.exports.getLocales = function getLocales() {
   return allLocalesData.sort(alphabeticOrder)
 }
 
-// export async function getLocale(id: string): Promise<Locale> {
-module.exports.getLocale = async function getLocale(id) {
+export async function getLocale(id: string): Promise<Locale> {
   const fileName = `${id}.json`
   const fullPath = path.join(localesDirectory, fileName)
   const fileContents = fs.readFileSync(fullPath, "utf8")
