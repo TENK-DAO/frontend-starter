@@ -3,7 +3,7 @@ import { getLocales } from "./lib/locales"
 
 const locales = getLocales()
 
-export const createPages: GatsbyNode["createPages"] = async ({ actions }) => {
+export const createPages: GatsbyNode["createPages"] = ({ actions }) => {
   locales.forEach(locale => {
     actions.createPage({
       path: locale.id,
