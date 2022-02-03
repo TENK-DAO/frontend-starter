@@ -3,6 +3,7 @@ import { useLocation } from "@reach/router"
 import type { I18nFields, Locale as RawLocale } from "../../lib/locales"
 
 // TODO: look into for automatic TS typing for GraphQL queries
+// https://www.gatsbyjs.com/plugins/gatsby-typescript/
 interface Node {
   name: string
   childI18NJson: I18nFields
