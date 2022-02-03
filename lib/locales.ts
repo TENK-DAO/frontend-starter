@@ -1,7 +1,7 @@
 import fs from "fs"
 import path from "path"
 
-interface I18nFields {
+export interface I18nFields {
   view_in: string
   lang_picker: string
   title: string

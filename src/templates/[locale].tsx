@@ -5,18 +5,10 @@ import { StaticImage } from "gatsby-plugin-image"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import type { Locale } from "../../lib/locales"
 
 type PageContext = {
-  locale: {
-    id: string
-    i18n: {
-      title: string
-      description: string
-      hero_title: string
-      hero_body: string
-      hero_cta: string
-    }
-  }
+  locale: Locale
 }
 
 const Landing: React.FC<PageProps<{}, PageContext>> = ({
