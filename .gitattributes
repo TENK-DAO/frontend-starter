@@ -1,0 +1,2 @@
+yarn.lock linguist-generated=true -diff
+**/docs/**/* linguist-generated=true -diff

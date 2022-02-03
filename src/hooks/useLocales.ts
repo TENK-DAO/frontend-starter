@@ -1,27 +1,24 @@
 import { useStaticQuery, graphql } from "gatsby"
 import { useLocation } from "@reach/router"
+import type { I18nFields, Locale as RawLocale } from "../../lib/locales"
 
-interface I18nFields {
-  view_in: string
-  lang_picker: string
-  title: string
-  description: string
-  hero_title: string
-  hero_body: string
-  hero_cta: string
-}
-
+// TODO: look into for automatic TS typing for GraphQL queries
 interface Node {
   name: string
   childI18NJson: I18nFields
 }
 
-interface Locale {
+type Locale = RawLocale & {
   current: boolean
-  id: string
-  i18n: I18nFields
 }
 
+/**
+ * Gatsby really wants to push everything, even simple stuff like JSON files in
+ * a project folder, through a complicated GraphQL pipeline. This hook hides the
+ * details of looking up the locale files in the `i18n` folder and makes them
+ * easily accessible to any component that needs them. It also adds a `current`
+ * field for the current locale based on the current route.
+ */
 export default function useLocales(): Locale[] {
   const { allFile } = useStaticQuery(
     graphql`

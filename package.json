@@ -25,6 +25,7 @@
     "gatsby-transformer-json": "^4.5.0",
     "gatsby-transformer-sharp": "^4.5.0",
     "prettier": "^2.5.1",
+    "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
   },
   "keywords": [
