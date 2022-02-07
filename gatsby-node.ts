@@ -1,7 +1,5 @@
 import { GatsbyNode } from "gatsby"
-import { getLocales } from "./lib/locales"
-
-const locales = getLocales()
+import { locales } from "./lib/locales"
 
 export const createPages: GatsbyNode["createPages"] = ({ actions }) => {
   locales.forEach(locale => {

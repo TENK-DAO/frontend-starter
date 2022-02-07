@@ -72,15 +72,15 @@ function checkI18nFields(fileName: string, fileContents: string): I18nFields {
   return json as I18nFields
 }
 
-export function getLocales(): Locale[] {
-  // Get file names under /i18n
-  let fileNames: string[]
-  try {
-    fileNames = fs.readdirSync(localesDirectory)
-  } catch {
-    fileNames = []
-  }
-  const allLocalesData = fileNames.map(fileName => {
+let fileNames: string[]
+try {
+  fileNames = fs.readdirSync(localesDirectory)
+} catch {
+  fileNames = []
+}
+
+export const locales: Locale[] = fileNames
+  .map(fileName => {
     // Remove ".json" from file name to get id
     const id = fileName.replace(/\.json$/, "")
     const fullPath = path.join(localesDirectory, fileName)
@@ -93,18 +93,4 @@ export function getLocales(): Locale[] {
       i18n,
     }
   })
-
-  return allLocalesData.sort(alphabeticOrder)
-}
-
-export async function getLocale(id: string): Promise<Locale> {
-  const fileName = `${id}.json`
-  const fullPath = path.join(localesDirectory, fileName)
-  const fileContents = fs.readFileSync(fullPath, "utf8")
-  const i18n = checkI18nFields(fileName, fileContents)
-
-  return {
-    id,
-    i18n,
-  }
-}
+  .sort(alphabeticOrder)
