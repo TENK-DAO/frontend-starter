@@ -46,7 +46,7 @@ export default function useLocales(): Locale[] {
   const { pathname } = useLocation()
 
   return allFile.edges.map(({ node }: { node: Node }) => ({
-    current: new RegExp(`^/${node.name}`).test(pathname),
+    current: new RegExp(`/${node.name}`).test(pathname),
     id: node.name,
     i18n: node.childI18NJson,
   }))
