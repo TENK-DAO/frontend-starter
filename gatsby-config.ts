@@ -1,4 +1,9 @@
 const { author, siteUrl } = require("./settings.json")
+const { name } = require("./package.json")
+
+// Build with env var PREFIX_PATHS=true to prefix all links & image paths with pathPrefix
+// see https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/
+export const pathPrefix = name
 
 export const siteMetadata = {
   author: author,
