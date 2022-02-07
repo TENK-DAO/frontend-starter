@@ -1,12 +1,16 @@
 import { useStaticQuery, graphql } from "gatsby"
 import { useLocation } from "@reach/router"
-import type { I18nFields, Locale } from "../../lib/locales"
+import type { I18nFields, Locale as RawLocale } from "../../lib/locales"
 
 // TODO: look into for automatic TS typing for GraphQL queries
 // https://www.gatsbyjs.com/plugins/gatsby-typescript/
 interface Node {
   name: string
   childI18NJson: I18nFields
+}
+
+export type Locale = RawLocale & {
+  current: boolean
 }
 
 /**
@@ -16,7 +20,7 @@ interface Node {
  * easily accessible to any component that needs them. It also adds a `current`
  * field for the current locale based on the current route.
  */
-export default function useLocales(): (Locale & { current: boolean })[] {
+export default function useLocales(): Locale[] {
   const { allFile } = useStaticQuery(
     graphql`
       query {

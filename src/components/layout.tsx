@@ -7,12 +7,15 @@
 
 import * as React from "react"
 import { navigate } from "gatsby"
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu"
-import { GlobeIcon, TriangleDownIcon } from "@radix-ui/react-icons"
 
 import Header from "./header"
 import "./layout.css"
 import useLocales from "../hooks/useLocales"
+import type { Locale } from "../hooks/useLocales"
+
+function presentLocale(locale: Locale): string {
+  return `${locale.id} - ${locale.i18n.lang_picker}`
+}
 
 const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
   const locales = useLocales()
@@ -28,33 +31,24 @@ const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
         }}
       >
         <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `2rem`,
-          }}
-        >
-          <DropdownMenu.Root>
-            <DropdownMenu.Trigger>
-              <GlobeIcon />
-              {currentLocale
-                ? `${currentLocale.id} - ${currentLocale.i18n.lang_picker}`
-                : "..."}
-              <TriangleDownIcon />
-            </DropdownMenu.Trigger>
-            <DropdownMenu.Content>
-              {locales.map(
-                locale =>
-                  !locale.current && (
-                    <DropdownMenu.Item
-                      onSelect={() => navigate(`/${locale.id}`)}
-                    >
-                      {locale.id} - {locale.i18n.lang_picker}
-                    </DropdownMenu.Item>
-                  )
-              )}
-            </DropdownMenu.Content>
-          </DropdownMenu.Root>
-        </footer>
+        {currentLocale && (
+          <footer
+            style={{
+              marginTop: `2rem`,
+            }}
+          >
+            <select
+              defaultValue={currentLocale.id}
+              onChange={e => navigate("../" + e.target.value)}
+            >
+              {locales.map(locale => (
+                <option key={locale.id} value={locale.id}>
+                  {presentLocale(locale)}
+                </option>
+              ))}
+            </select>
+          </footer>
+        )}
       </div>
     </>
   )
