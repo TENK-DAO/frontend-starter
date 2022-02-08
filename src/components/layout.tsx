@@ -30,8 +30,16 @@ const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
           <footer
             style={{
               marginTop: `2rem`,
+              display: `flex`,
+              alignItems: `center`,
             }}
           >
+            <div role="img" style={{ marginRight: "0.5em" }} aria-label="globe">
+              🌐
+              <span className="visuallyHidden">
+                {locales.map(l => l.i18n.viewIn).join(" | ")}
+              </span>
+            </div>
             <select
               defaultValue={currentLocale.id}
               onChange={e => navigate("../" + e.target.value)}
