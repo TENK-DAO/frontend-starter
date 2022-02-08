@@ -15,6 +15,7 @@
   "devDependencies": {
     "@types/react-helmet": "^6.1.5",
     "gatsby": "^4.5.3",
+    "gatsby-plugin-dts-css-modules": "^2.2.0",
     "gatsby-plugin-gatsby-cloud": "^4.5.2",
     "gatsby-plugin-image": "^2.5.2",
     "gatsby-plugin-manifest": "^4.5.2",

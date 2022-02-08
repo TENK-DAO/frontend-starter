@@ -1,0 +1,21 @@
+.section {
+  display: grid;
+}
+
+.section > * {
+  /* By using the same grid area for both, they are stacked on top of each other */
+  grid-area: 1/1;
+}
+
+/* when there is a second immediate child (possible background image is first), position it relative */
+.section > * + * {
+  position: relative;
+}
+
+.content {
+  /* This centers the other elements inside the hero component */
+  place-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+  grid-gap: 2rem;
+}

@@ -15,6 +15,8 @@ export const plugins = [
   `gatsby-plugin-graphql-codegen`,
   // generates `./schema.graphql`, which is referenced by `.graphqlrc.yml`, used by VS Code plugin GraphQL.vscode-graphql
   `gatsby-plugin-extract-schema`,
+  // types for CSS modules
+  `gatsby-plugin-dts-css-modules`,
   `gatsby-plugin-react-helmet`,
   `gatsby-transformer-json`,
   {

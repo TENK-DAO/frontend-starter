@@ -4437,6 +4437,13 @@ dset@^3.1.0:
   resolved "https://registry.yarnpkg.com/dset/-/dset-3.1.1.tgz#07de5af7a8d03eab337ad1a8ba77fe17bba61a8c"
   integrity sha512-hYf+jZNNqJBD2GiMYb+5mqOIX4R4RRHXU3qWMWYN+rqcR2/YpRL2bUHr8C8fU+5DNvqYjJ8YvMGSLuVPWU1cNg==
 
+dts-css-modules-loader@1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/dts-css-modules-loader/-/dts-css-modules-loader-1.2.4.tgz#ae0f3001f000f3b78394c4925670593eef39fe80"
+  integrity sha512-/uB7sPhjWsovzN2TKll+/KrK1F2fv3iM4QT+kDZA97ljCoy7csIOoGTgjjwSqMPIAiXVeeaNZHOgXfLnYzmj8g==
+  dependencies:
+    loader-utils "^2.0.0"
+
 duplexer3@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
@@ -5523,6 +5530,13 @@ gatsby-page-utils@^2.5.2:
     glob "^7.2.0"
     lodash "^4.17.21"
     micromatch "^4.0.4"
+
+gatsby-plugin-dts-css-modules@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-dts-css-modules/-/gatsby-plugin-dts-css-modules-2.2.0.tgz#7d2b00ff0f6b1c4bbc3dc7b3536e80b9ccb63638"
+  integrity sha512-3vEmGedd4MFpg65Mh6MM0bk8DPyYStM5e18aM0ojs0K+naB5nhnFulElStc9GjzZllkGYqh9leQWCJ/x4SuJ2w==
+  dependencies:
+    dts-css-modules-loader "1.2.4"
 
 gatsby-plugin-extract-schema@^0.2.1:
   version "0.2.1"
