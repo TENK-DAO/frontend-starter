@@ -27,7 +27,7 @@ const IndexPage = () => {
     <Layout>
       {locales.map(({ id, i18n }) => (
         <p key={id}>
-          <Link to={`/${id}/`}>{i18n.view_in}</Link>
+          <Link to={`/${id}/`}>{i18n.viewIn}</Link>
         </p>
       ))}
     </Layout>

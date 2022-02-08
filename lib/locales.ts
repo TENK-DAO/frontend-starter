@@ -1,23 +1,35 @@
 import fs from "fs"
 import path from "path"
 
-const i18nFields = [
-  "view_in",
-  "lang_picker",
+const rootFields = [
+  "viewIn",
+  "langPicker",
   "title",
   "description",
-  "hero_title",
-  "hero_body",
-  "hero_cta",
+  "connectWallet",
 ] as const
 
-export type I18nFields = {
-  [K in typeof i18nFields[number]]: string
+const pageSectionFields = [
+  "text",
+  "cta",
+  "image",
+  "backgroundImage",
+  "backgroundColor",
+] as const
+
+export type SectionI18n = {
+  [K in typeof pageSectionFields[number]]: string | undefined
+}
+
+export type I18n = {
+  [K in typeof rootFields[number]]: string
+} & {
+  pageSections: SectionI18n[]
 }
 
 export interface Locale {
   id: string
-  i18n: I18nFields
+  i18n: I18n
 }
 
 // for use with `sort`
@@ -33,43 +45,66 @@ function alphabeticOrder({ id: a }: Locale, { id: b }: Locale): -1 | 0 | 1 {
 
 const localesDirectory = path.join(process.cwd(), "i18n")
 
-/**
- * Returns something close to `I18nFields`, but with the type of each field being `unknown`
- *
- * This and the subsequent check that each field is a string can be combined
- * into a single loop once TS implements `in` as a proper type guard:
- * https://github.com/microsoft/TypeScript/issues/21732
- */
-function isI18nShape(
-  fileName: string,
-  obj: {}
-): obj is { [K in typeof i18nFields[number]]: unknown } {
-  i18nFields.forEach(field => {
+function isI18n(fileName: string, obj: {}): obj is I18n {
+  rootFields.forEach(field => {
     if (!(field in obj)) {
       console.error(`Expected ${fileName} to have field "${field}"`)
       return false
     }
-  })
-  return true
-}
-function checkI18nFields(fileName: string, fileContents: string): I18nFields {
-  const json: unknown = JSON.parse(fileContents)
-  if (
-    typeof json !== "object" ||
-    json === null ||
-    !isI18nShape(fileName, json)
-  ) {
-    throw new Error(
-      `Expected ${fileName} to contain an object with keys: ${i18nFields}`
-    )
-  }
-  i18nFields.forEach(attr => {
-    if (typeof json[attr] !== "string") {
-      throw new Error(`Expected ${fileName} to have string field "${attr}"`)
+    // @ts-expect-error Property '...' does not exist on type '{}'. https://github.com/microsoft/TypeScript/issues/21732
+    if (typeof obj[field] !== "string") {
+      console.error(`Expected ${fileName} to have string field "${field}"`)
+      return false
     }
   })
+  for (let key of Object.keys(obj)) {
+    if (![...rootFields, "pageSections"].includes(key)) {
+      console.error(`Unknown i18n field "${key}" in ${fileName}`)
+      return false
+    }
+  }
 
-  return json as I18nFields
+  if (!obj.hasOwnProperty("pageSections")) {
+    console.error(`Expected ${fileName} to have array field "pageSections"`)
+    return false
+  }
+  // @ts-expect-error Property 'pageSections' does not exist on type '{}'. https://github.com/microsoft/TypeScript/issues/21732
+  return obj.pageSections.reduce(
+    (
+      lookingGood: boolean,
+      pageSection: { [K in typeof pageSectionFields[number]]: unknown }
+    ) => {
+      pageSectionFields.forEach(field => {
+        if (!["string", "undefined"].includes(typeof pageSection[field])) {
+          console.error(
+            `Expected ${fileName} to have string field "pageSections[].${field}" or to omit it entirely`
+          )
+          return false
+        }
+      })
+      for (let key of Object.keys(pageSection)) {
+        // @ts-expect-error Argument of type 'string' is not assignable to parameter of type (union of literal values in pageSectionFields)
+        if (!pageSectionFields.includes(key)) {
+          console.error(
+            `Unknown i18n field "pageSections[].${key}" in ${fileName}`
+          )
+          return false
+        }
+      }
+      return lookingGood && true
+    },
+    true
+  )
+}
+
+function checkI18nFields(fileName: string, fileContents: string): I18n {
+  const json: unknown = JSON.parse(fileContents)
+
+  if (typeof json !== "object" || json === null || !isI18n(fileName, json)) {
+    throw new Error(`Malformed JSON in ${fileName}`)
+  }
+
+  return json
 }
 
 let fileNames: string[]

@@ -1,17 +1,6 @@
 import { useStaticQuery, graphql } from "gatsby"
 import { useLocation } from "@reach/router"
-import type { I18nFields, Locale as RawLocale } from "../../lib/locales"
-
-// TODO: look into for automatic TS typing for GraphQL queries
-// https://www.gatsbyjs.com/plugins/gatsby-typescript/
-interface Node {
-  name: string
-  childI18NJson: I18nFields
-}
-
-export type Locale = RawLocale & {
-  current: boolean
-}
+import type { AllLocalesQuery } from "../../graphql-types"
 
 /**
  * Gatsby really wants to push everything, even simple stuff like JSON files in
@@ -20,23 +9,19 @@ export type Locale = RawLocale & {
  * easily accessible to any component that needs them. It also adds a `current`
  * field for the current locale based on the current route.
  */
-export default function useLocales(): Locale[] {
-  const { allFile } = useStaticQuery(
+export default function useLocales() {
+  const { allFile }: AllLocalesQuery = useStaticQuery(
     graphql`
-      query {
-        allFile {
-          edges {
-            node {
-              name
-              childI18NJson {
-                view_in
-                lang_picker
-                title
-                description
-                hero_title
-                hero_body
-                hero_cta
-              }
+      query AllLocales {
+        allFile(filter: { sourceInstanceName: { eq: "i18n" } }) {
+          nodes {
+            name
+            childI18NJson {
+              viewIn
+              langPicker
+              title
+              description
+              connectWallet
             }
           }
         }
@@ -45,9 +30,9 @@ export default function useLocales(): Locale[] {
   )
   const { pathname } = useLocation()
 
-  return allFile.edges.map(({ node }: { node: Node }) => ({
+  return allFile.nodes.map(node => ({
     current: new RegExp(`/${node.name}`).test(pathname),
     id: node.name,
-    i18n: node.childI18NJson,
+    i18n: node.childI18NJson!,
   }))
 }

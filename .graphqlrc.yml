@@ -1,0 +1,6 @@
+# Used by https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql
+schemaPath: "schema.graphql"
+extensions:
+  endpoints:
+    default:
+      url: "http://localhost:8000/___graphql"

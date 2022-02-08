@@ -11,11 +11,6 @@ import { navigate } from "gatsby"
 import Header from "./header"
 import "./layout.css"
 import useLocales from "../hooks/useLocales"
-import type { Locale } from "../hooks/useLocales"
-
-function presentLocale(locale: Locale): string {
-  return `${locale.id} - ${locale.i18n.lang_picker}`
-}
 
 const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
   const locales = useLocales()
@@ -43,7 +38,7 @@ const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
             >
               {locales.map(locale => (
                 <option key={locale.id} value={locale.id}>
-                  {presentLocale(locale)}
+                  {locale.id} - {locale.i18n.langPicker}
                 </option>
               ))}
             </select>
