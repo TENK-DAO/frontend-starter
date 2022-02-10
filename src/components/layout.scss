@@ -1,0 +1,277 @@
+@import "./a11y.css";
+@import "@fontsource/montserrat/400.css"; /* Weight 400 */
+@import "@fontsource/montserrat/600.css";
+@import "@fontsource/montserrat/700.css";
+@import "../../config/colors.scss";
+
+$white: white !default;
+$black: black !default;
+$primary: #e73b93 !default;
+$secondary: #aad055 !default;
+$tertiary: #a463b0 !default;
+
+:root {
+  /* Typographic Scale */
+  --base-font-size: 14px;
+  @media(min-width: 415px) {
+    --base-font-size: 16px;
+  }
+  @media(min-width: 600px) {
+    --base-font-size: 18px;
+  }
+
+  /* Font Family */
+  --sans: Montserrat, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  --monospace: "Source Code Pro", monospace;
+
+  /* Font Weights */
+  --fw-regular: 400;
+  --fw-bold: 600;
+  --fw-black: 700;
+
+  /* Line Heights */
+  --lh-headings: 1.1;
+  --lh-copy: 1.5;
+
+  /* Spacing Scale */
+  --base-spacing: 0.5rem;
+  --spacing-xs: calc(var(--base-spacing) / 2);
+  --spacing-s: var(--base-spacing);
+  --spacing-m: calc(var(--base-spacing) * 2);
+  --spacing-l: calc(var(--base-spacing) * 3);
+  --spacing-xl: calc(var(--base-spacing) * 4);
+  --spacing-xxl: calc(var(--base-spacing) * 5);
+
+  /* Sizes */
+  --header-height: 80px;
+  --input-height: 48px;
+  --input-height--small: 40px;
+
+  /* Border Radius */
+  --br-base: 1000px;
+  --br-small: var(--base-spacing);;
+
+  /* Colors */
+  /* TODO: move these base colors to settings.json or similar */
+  --white: white;
+  --black: #262626;
+  --primary: #{$primary};
+  --secondary: #{$secondary};
+  --tertiary: #{$tertiary};
+
+  --fg: var(--black);
+  --bg: var(--white);
+
+  --gray-100: #fafafa;
+  --gray-200: #f0f0f1;
+  --gray-300: #e5e5e6;
+  --gray-400: #d5d4d8;
+  --gray-500: #a2a2a8;
+  --gray-600: #72727a;
+  --gray-700: #3f4045;
+  --gray-800: #272729;
+
+  --red: #fc5b5b;
+  @media (prefers-color-scheme: dark) {
+    --bg: var(--black);
+    --fg: var(--white);
+
+    /* simple inversion of colors in dark mode – designers would not approve! */
+    --gray-800: #fafafa;
+    --gray-700: #f0f0f1;
+    --gray-600: #e5e5e6;
+    --gray-500: #d5d4d8;
+    --gray-400: #a2a2a8;
+    --gray-300: #72727a;
+    --gray-200: #3f4045;
+    --gray-100: #272729;
+
+    --red: #ff8588;
+  }
+}
+
+@function light($color) {
+  @return adjust-color($color, $saturation: 53%, $lightness: 15%);
+}
+
+@function soft($color) {
+  @return adjust-color($color, $alpha: -0.75);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  background-color: var(--bg);
+  color: var(--fg);
+  line-height: var(--lh-copy);
+  font-family: var(--sans);
+  font-size: var(--base-font-size);
+  font-weight: var(--fw-regular);
+}
+
+body {
+  margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--fw-black);
+  margin: 0;
+  line-height: var(--lh-headings);
+}
+
+img,
+picture {
+  display: block;
+}
+
+a,
+.link {
+  color: var(--secondary);
+  padding: 0;
+  text-decoration: none;
+}
+a:hover,
+a:focus,
+.link:hover,
+.link:focus {
+  color: var(--primary);
+  text-decoration: underline;
+}
+a:active,
+.link:active {
+  color: var(--tertiary);
+}
+
+strong {
+  font-weight: var(--fw-bold);
+}
+
+em {
+  color: var(--primary);
+  font-style: inherit;
+  font-weight: inherit;
+}
+
+label {
+  display: block;
+}
+
+code {
+  padding: var(--spacing-xs) var(--spacing-s);
+  margin: 0;
+  font-size: 85%;
+  font-family: var(--monospace);
+  background-color: var(--gray-200);
+  border-radius: 6px;
+}
+
+button,
+.button,
+input,
+select {
+  font: inherit;
+  outline: none;
+}
+
+button,
+.button {
+  --color: #{$primary};
+  --color-shadow: #{soft(light($primary))};
+  background-color: transparent;
+  border-radius: var(--br-base);
+  border: 2px solid var(--color);
+  color: var(--color);
+  cursor: pointer;
+  display: inline-block;
+  font-size: inherit;
+  font-weight: var(--fw-bold);
+  padding: var(--spacing-s) var(--spacing-m);
+}
+button.cta,
+.button.cta {
+  padding: var(--spacing-m) var(--spacing-xl);
+}
+
+button:hover,
+.button:hover,
+button:focus,
+.button:focus {
+  box-shadow: 0 0 10px 4px var(--color-shadow);
+  text-decoration: none;
+}
+button:active,
+.button:active {
+  position: relative;
+  top: 2px;
+}
+button.secondary,
+.button.secondary {
+  --color: var(--secondary);
+  --color-shadow: soft(var(--color-hover));
+}
+button.link,
+.button.link {
+  background: none;
+  box-shadow: none;
+  display: inline;
+}
+[disabled] button,
+button[disabled],
+.button[disabled] {
+  box-shadow: none;
+  background-color: var(--gray-300);
+  color: var(--gray-500);
+  cursor: not-allowed;
+  transform: none;
+}
+
+input,
+select {
+  background-color: var(--bg);
+  border: 2px solid var(--gray-300);
+  border-radius: var(--br-base);
+  color: var(--gray-700);
+  padding: var(--spacing-s);
+}
+
+select {
+  cursor: pointer;
+}
+
+input.error,
+select.error {
+  border-color: var(--red);
+}
+
+input::selection {
+  background-color: var(--primary);
+  color: var(--bg);
+}
+
+input:hover {
+  background-color: var(--gray-100);
+}
+
+input:focus,
+input:active {
+  color: var(--gray-700);
+  border-color: var(--blue-400);
+}
+
+.container {
+  margin: 0 auto;
+  max-width: calc(55 * var(--spacing-m));
+  padding: 0 var(--spacing-l);
+}

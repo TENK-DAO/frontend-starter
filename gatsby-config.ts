@@ -1,4 +1,4 @@
-const { author, siteUrl } = require("./settings.json")
+const { author, siteUrl } = require("./config/settings.json")
 const { name } = require("./package.json")
 
 // Build with env var PREFIX_PATHS=true to prefix all links & image paths with pathPrefix
@@ -23,14 +23,14 @@ export const plugins = [
     resolve: `gatsby-source-filesystem`,
     options: {
       name: `i18n`,
-      path: `${__dirname}/i18n`,
+      path: `${__dirname}/config/i18n`,
     },
   },
   {
     resolve: `gatsby-source-filesystem`,
     options: {
       name: `images`,
-      path: `${__dirname}/images`,
+      path: `${__dirname}/config/images`,
     },
   },
   `gatsby-plugin-image`,
@@ -65,9 +65,10 @@ export const plugins = [
       // https://css-tricks.com/meta-theme-color-and-trickery/
       // theme_color: `#663399`,
       display: `minimal-ui`,
-      icon: `images/hero.png`, // This path is relative to the root of the site.
+      icon: `config/images/hero.png`, // This path is relative to the root of the site.
     },
   },
+  `gatsby-plugin-sass`,
   // this (optional) plugin enables Progressive Web App + Offline functionality
   // To learn more, visit: https://gatsby.dev/offline
   // `gatsby-plugin-offline`,

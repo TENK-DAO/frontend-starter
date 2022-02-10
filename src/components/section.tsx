@@ -20,16 +20,17 @@ export default function Section({
       }}
     >
       {backgroundImage && <Image src={backgroundImage} alt="" />}
-      <div className={css.content}>
-        <div>
-          {text && <Markdown children={text} />}
-          {cta && (
-            <button>
-              <Markdown children={cta} />
-            </button>
-          )}
+      {/* following div is styled by `css.section` to overlap backgroundImage */}
+      <div>
+        <div className="container">
+          <div className={css.content}>
+            <div>
+              {text && <Markdown children={text} />}
+              {cta && <button className="cta">{cta}</button>}
+            </div>
+            {image && <Image src={image} alt="" />}
+          </div>
         </div>
-        {image && <Image src={image} alt="" />}
       </div>
     </section>
   )

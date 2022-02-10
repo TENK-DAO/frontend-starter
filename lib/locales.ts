@@ -43,7 +43,7 @@ function alphabeticOrder({ id: a }: Locale, { id: b }: Locale): -1 | 0 | 1 {
   }
 }
 
-const localesDirectory = path.join(process.cwd(), "i18n")
+const localesDirectory = path.join(process.cwd(), "config/i18n")
 
 function isI18n(fileName: string, obj: {}): obj is I18n {
   rootFields.forEach(field => {

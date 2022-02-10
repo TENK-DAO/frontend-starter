@@ -8,8 +8,7 @@
 import * as React from "react"
 import { navigate } from "gatsby"
 
-import Header from "./header"
-import "./layout.css"
+import "./layout.scss"
 import useLocales from "../hooks/useLocales"
 
 const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
@@ -17,42 +16,43 @@ const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
   const currentLocale = locales.find(l => l.current)
   return (
     <>
-      <Header siteTitle={title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        {currentLocale && (
-          <footer
-            style={{
-              marginTop: `2rem`,
-              display: `flex`,
-              alignItems: `center`,
-            }}
-          >
-            <div role="img" style={{ marginRight: "0.5em" }} aria-label="globe">
-              🌐
-              <span className="visuallyHidden">
-                {locales.map(l => l.i18n.viewIn).join(" | ")}
-              </span>
+      {children}
+      {currentLocale && (
+        <footer
+          style={{
+            padding: `var(--spacing-xl) 0`,
+          }}
+        >
+          <div className="container">
+            <div style={{ position: "relative" }}>
+              <div
+                style={{
+                  position: "absolute",
+                  left: "var(--spacing-s)",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                }}
+              >
+                🌐
+                <span className="visuallyHidden">
+                  {locales.map(l => l.i18n.viewIn).join(" | ")}
+                </span>
+              </div>
+              <select
+                defaultValue={currentLocale.id}
+                onChange={e => navigate("../" + e.target.value)}
+                style={{ paddingLeft: "var(--spacing-l)" }}
+              >
+                {locales.map(locale => (
+                  <option key={locale.id} value={locale.id}>
+                    {locale.id} - {locale.i18n.langPicker}
+                  </option>
+                ))}
+              </select>
             </div>
-            <select
-              defaultValue={currentLocale.id}
-              onChange={e => navigate("../" + e.target.value)}
-            >
-              {locales.map(locale => (
-                <option key={locale.id} value={locale.id}>
-                  {locale.id} - {locale.i18n.langPicker}
-                </option>
-              ))}
-            </select>
-          </footer>
-        )}
-      </div>
+          </div>
+        </footer>
+      )}
     </>
   )
 }
