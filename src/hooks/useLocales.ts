@@ -2,6 +2,12 @@ import { useStaticQuery, graphql } from "gatsby"
 import { useLocation } from "@reach/router"
 import type { AllLocalesQuery } from "../../graphql-types"
 
+type I18n = AllLocalesQuery["allFile"]["nodes"][number]["childI18NJson"]
+type Locale = {
+  id: string
+  i18n: NonNullable<I18n>
+}
+
 /**
  * Gatsby really wants to push everything, even simple stuff like JSON files in
  * a project folder, through a complicated GraphQL pipeline. This hook hides the
@@ -9,7 +15,7 @@ import type { AllLocalesQuery } from "../../graphql-types"
  * easily accessible to any component that needs them. It also adds a `current`
  * field for the current locale based on the current route.
  */
-export default function useLocales() {
+export default function useLocales(): { locales: Locale[]; locale?: Locale } {
   const { allFile }: AllLocalesQuery = useStaticQuery(
     graphql`
       query AllLocales {
@@ -22,6 +28,7 @@ export default function useLocales() {
               title
               description
               connectWallet
+              signOut
             }
           }
         }
@@ -30,9 +37,12 @@ export default function useLocales() {
   )
   const { pathname } = useLocation()
 
-  return allFile.nodes.map(node => ({
-    current: new RegExp(`/${node.name}`).test(pathname),
+  const locales = allFile.nodes.map(node => ({
     id: node.name,
     i18n: node.childI18NJson!,
   }))
+
+  const locale = locales.find(l => new RegExp(`/${l.id}`).test(pathname))
+
+  return { locales, locale }
 }

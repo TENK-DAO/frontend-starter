@@ -5,7 +5,7 @@ import useLocales from "../hooks/useLocales"
 import Layout from "../components/layout"
 
 const IndexPage = () => {
-  const locales = useLocales()
+  const { locales } = useLocales()
 
   React.useEffect(() => {
     const preferredLocale = window.navigator.language

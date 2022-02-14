@@ -7,6 +7,7 @@ const rootFields = [
   "title",
   "description",
   "connectWallet",
+  "signOut",
 ] as const
 
 const pageSectionFields = [

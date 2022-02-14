@@ -1,16 +1,17 @@
 import * as React from "react"
 import { navigate } from "gatsby"
 
+import Nav from "../nav"
 import "./layout.scss"
 import useLocales from "../../hooks/useLocales"
 
 const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
-  const locales = useLocales()
-  const currentLocale = locales.find(l => l.current)
+  const { locales, locale } = useLocales()
   return (
     <>
+      <Nav />
       {children}
-      {currentLocale && (
+      {locale && (
         <footer
           style={{
             padding: `var(--spacing-xl) 0`,
@@ -32,7 +33,7 @@ const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
                 </span>
               </div>
               <select
-                defaultValue={currentLocale.id}
+                defaultValue={locale.id}
                 onChange={e => navigate("../" + e.target.value)}
                 style={{ paddingLeft: "var(--spacing-l)" }}
               >

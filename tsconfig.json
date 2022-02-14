@@ -6,6 +6,7 @@
     "allowJs": true,
     "jsx": "react",
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
     "declaration": true,

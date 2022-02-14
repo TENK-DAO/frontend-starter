@@ -1,0 +1,26 @@
+/* This is a CSS Module; see https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/ */
+.nav {
+  align-items: center;
+  display: grid;
+  grid-gap: var(--spacing-l);
+  grid-template-columns: repeat(auto-fit, minmax(5em, 1fr));
+  justify-content: space-between;
+  padding-bottom: var(--spacing-m);
+  padding-top: var(--spacing-m);
+}
+
+.nav > *:last-child {
+  text-align: right;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.title svg,
+.title img {
+  display: inline-block;
+  height: var(--fs-heading-1);
+  width: var(--fs-heading-1);
+}
