@@ -1,7 +1,7 @@
 import * as React from "react"
 import Markdown from "react-markdown"
-import Image from "../components/image"
-import type { SectionI18n } from "../../lib/locales"
+import Image from "../image"
+import type { SectionI18n } from "../../../lib/locales"
 
 import * as css from "./section.module.css"
 

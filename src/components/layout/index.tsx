@@ -9,7 +9,7 @@ import * as React from "react"
 import { navigate } from "gatsby"
 
 import "./layout.scss"
-import useLocales from "../hooks/useLocales"
+import useLocales from "../../hooks/useLocales"
 
 const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
   const locales = useLocales()
