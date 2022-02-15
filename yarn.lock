@@ -8888,9 +8888,9 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
-near-api-js@ahalabs/near-api-js#1.0.0-0:
+near-api-js@AhaLabs/near-api-js#fix/rm-constructor-window:
   version "0.44.2"
-  resolved "https://codeload.github.com/ahalabs/near-api-js/tar.gz/1dd9e6ca861293b3abd7c59cc5acc72d24be851f"
+  resolved "https://codeload.github.com/AhaLabs/near-api-js/tar.gz/7fbd14021a1933248e0b76728a712dc2693d4f21"
   dependencies:
     bn.js "5.2.0"
     borsh "^0.7.0"
@@ -8900,7 +8900,6 @@ near-api-js@ahalabs/near-api-js#1.0.0-0:
     http-errors "^1.7.2"
     js-sha256 "^0.9.0"
     mustache "^4.0.0"
-    near-units "^0.1.9"
     node-fetch "^2.6.1"
     text-encoding-utf-8 "^1.0.2"
     tweetnacl "^1.0.1"

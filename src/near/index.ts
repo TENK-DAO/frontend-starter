@@ -1,18 +1,46 @@
 import * as naj from "near-api-js"
+import settings from "../../config/settings.json"
+
+const { contractName } = settings
 
 // TODO: remove pending https://github.com/near/near-api-js/issues/757
 import { Buffer } from "buffer"
-window.Buffer = Buffer
+if (typeof window !== "undefined") window.Buffer = Buffer
+if (typeof global !== "undefined") global.Buffer = Buffer
+
+const nearConfig = /near$/.test(contractName)
+  ? {
+      networkId: "mainnet",
+      nodeUrl: "https://rpc.mainnet.near.org",
+      walletUrl: "https://wallet.near.org",
+      helperUrl: "https://helper.mainnet.near.org",
+    }
+  : /testnet$/.test(contractName)
+  ? {
+      networkId: "testnet",
+      nodeUrl: "https://rpc.testnet.near.org",
+      walletUrl: "https://wallet.testnet.near.org",
+      helperUrl: "https://helper.testnet.near.org",
+    }
+  : undefined
+
+if (!nearConfig) {
+  throw new Error(
+    `Don't know what network settings to use for contract "${contractName}"; expected name to end in 'testnet' or 'near'`
+  )
+}
+
+const keyStore =
+  typeof window === "undefined"
+    ? new naj.keyStores.InMemoryKeyStore()
+    : new naj.keyStores.BrowserLocalStorageKeyStore()
 
 /**
  * NEAR Config object
  */
 export const near = new naj.Near({
-  keyStore: new naj.keyStores.BrowserLocalStorageKeyStore(),
-  networkId: process.env.GATSBY_NEAR_NETWORK!,
-  nodeUrl: process.env.GATSBY_RPC_URL!,
-  walletUrl: process.env.GATSBY_WALLET_URL,
-  helperUrl: process.env.GATSBY_HELPER_URL,
+  ...nearConfig,
+  keyStore,
 
   // TODO: remove `headers` argument pending https://github.com/near/near-api-js/pull/772
   headers: {},
