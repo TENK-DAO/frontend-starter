@@ -1,8 +1,8 @@
 import React from "react"
 import { wallet } from "../../near"
 import * as css from "./nav.module.css"
-
 import useLocales from "../../hooks/useLocales"
+import Dropdown from "../../components/dropdown"
 
 function signIn() {
   wallet.requestSignIn({ contractId: process.env.GATSBY_CONTRACT_NAME })
@@ -32,16 +32,17 @@ export default function Nav() {
       </h1>
       <span>
         {currentUser ? (
-          <>
-            <strong style={{ color: "var(--secondary)" }}>{currentUser}</strong>{" "}
-            <button className="secondary" onClick={signOut}>
-              {locale.i18n.signOut}
-            </button>
-          </>
+          <Dropdown
+            trigger={currentUser}
+            items={[
+              {
+                children: locale.i18n.signOut,
+                onSelect: signOut,
+              },
+            ]}
+          />
         ) : (
-          <button className="secondary" onClick={signIn}>
-            {locale.i18n.connectWallet}
-          </button>
+          <button onClick={signIn}>{locale.i18n.connectWallet}</button>
         )}
       </span>
     </nav>

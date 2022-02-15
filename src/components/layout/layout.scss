@@ -53,8 +53,8 @@ $tertiary: #a463b0 !default;
 
   /* Colors */
   /* TODO: move these base colors to settings.json or similar */
-  --white: white;
-  --black: #262626;
+  --white: #{$white};
+  --black: #{$black};
   --primary: #{$primary};
   --secondary: #{$secondary};
   --tertiary: #{$tertiary};
@@ -62,14 +62,14 @@ $tertiary: #a463b0 !default;
   --fg: var(--black);
   --bg: var(--white);
 
-  --gray-100: #fafafa;
-  --gray-200: #f0f0f1;
-  --gray-300: #e5e5e6;
-  --gray-400: #d5d4d8;
-  --gray-500: #a2a2a8;
-  --gray-600: #72727a;
-  --gray-700: #3f4045;
-  --gray-800: #272729;
+  --gray-100: #{lighten($black, 80%)};
+  --gray-200: #{lighten($black, 70%)};
+  --gray-300: #{lighten($black, 60%)};
+  --gray-400: #{lighten($black, 50%)};
+  --gray-500: #{lighten($black, 40%)};
+  --gray-600: #{lighten($black, 30%)};
+  --gray-700: #{lighten($black, 20%)};
+  --gray-800: #{lighten($black, 10%)};
 
   --red: #fc5b5b;
   @media (prefers-color-scheme: dark) {
@@ -77,14 +77,14 @@ $tertiary: #a463b0 !default;
     --fg: var(--white);
 
     /* simple inversion of colors in dark mode – designers would not approve! */
-    --gray-800: #fafafa;
-    --gray-700: #f0f0f1;
-    --gray-600: #e5e5e6;
-    --gray-500: #d5d4d8;
-    --gray-400: #a2a2a8;
-    --gray-300: #72727a;
-    --gray-200: #3f4045;
-    --gray-100: #272729;
+  --gray-800: #{lighten($black, 80%)};
+  --gray-700: #{lighten($black, 70%)};
+  --gray-600: #{lighten($black, 60%)};
+  --gray-500: #{lighten($black, 50%)};
+  --gray-400: #{lighten($black, 40%)};
+  --gray-300: #{lighten($black, 30%)};
+  --gray-200: #{lighten($black, 20%)};
+  --gray-100: #{lighten($black, 10%)};
 
     --red: #ff8588;
   }
@@ -240,10 +240,17 @@ button[disabled],
 input,
 select {
   background-color: var(--bg);
-  border: 2px solid var(--gray-300);
-  border-radius: var(--br-base);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--br-small);
   color: inherit;
   padding: var(--spacing-xs) var(--spacing-s);
+}
+
+input:hover,
+input:focus,
+select:hover,
+select:focus {
+  border-color: var(--gray-500);
 }
 
 select {
