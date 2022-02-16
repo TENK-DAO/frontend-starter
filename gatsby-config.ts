@@ -1,11 +1,5 @@
 import settings from "./config/settings.json"
 import pkg from "./package.json"
-import dotenv from "dotenv"
-
-// add settings from .env file to process.env
-dotenv.config({
-  path: `config/.env`,
-})
 
 // Build with env var PREFIX_PATHS=true to prefix all links & image paths with pathPrefix
 // see https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/
