@@ -41,17 +41,9 @@ const keyStore =
 export const near = new naj.Near({
   ...nearConfig,
   keyStore,
-
-  // TODO: remove `headers` argument pending https://github.com/near/near-api-js/pull/772
-  headers: {},
 })
 
 /**
  * Interface to NEAR Wallet
  */
-export const wallet = new naj.WalletConnection(
-  near,
-
-  // TODO: remove this second argument to WalletConnection pending https://github.com/near/near-api-js/pull/772
-  process.env.GATSBY_LOCALSTORAGE_PREFIX!
-)
+export const wallet = new naj.WalletConnection(near)
