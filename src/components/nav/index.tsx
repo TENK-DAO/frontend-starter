@@ -42,7 +42,7 @@ export default function Nav() {
             ]}
           />
         ) : (
-          <button onClick={signIn}>{locale.i18n.connectWallet}</button>
+          <button className="secondary" onClick={signIn}>{locale.i18n.connectWallet}</button>
         )}
       </span>
     </nav>
