@@ -42,10 +42,8 @@ export type PlaceholderString = keyof typeof replacers
 export function fill(text: string, data: Data): string {
   let updatedText = text
   Object.entries(replacers).forEach(([placeholder, replacer]) => {
-    console.log({ placeholder, var: replacer(data) })
     updatedText = updatedText.replace(new RegExp(placeholder, 'gm'), String(replacer(data)))
   })
-  console.log({updatedText})
   return updatedText
 }
 
