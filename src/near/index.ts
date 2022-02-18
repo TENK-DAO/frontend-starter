@@ -30,17 +30,14 @@ if (!nearConfig) {
   )
 }
 
-const keyStore =
-  typeof window === "undefined"
-    ? new naj.keyStores.InMemoryKeyStore()
-    : new naj.keyStores.BrowserLocalStorageKeyStore()
-
 /**
  * NEAR Config object
  */
 export const near = new naj.Near({
   ...nearConfig,
-  keyStore,
+  keyStore: typeof window === "undefined"
+    ? new naj.keyStores.InMemoryKeyStore()
+    : new naj.keyStores.BrowserLocalStorageKeyStore()
 })
 
 /**

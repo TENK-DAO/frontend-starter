@@ -5,15 +5,49 @@
   "description": "Los primeros NFTs de tipo \"PFP\" de NEAR",
   "connectWallet": "Connectar Billeta",
   "signOut": "Desconectar",
-  "pageSections": [
-    {
-      "text": "# El primero fleeto de la\n# *Metaverse*\n\nJoino un exclusivo comunidad de NEAR early adopters and BUIDLers.\n\n Misfits Dropping Soon",
-      "cta": "¡Crear tu primero!",
-      "backgroundImage": "hero-bg.svg",
-      "image": "hero.png"
+  "myNFTs": "Mi NFTs",
+  "hero": {
+    "backgroundImage": "hero-bg.svg",
+    "image": "hero.png",
+    "title": "El primero fleeto de la  \n*Metaverse*",
+    "body": "Joino un exclusivo comunidad de NEAR early adopters and BUIDLers.",
+    "ps": "¡Puedes crear tu primero a las SALE_START!",
+    "cta": "Añadir a Calendario",
+    "action": "ADD_TO_CALENDAR(SALE_START)",
+    "saleClosed": {
+      "signedIn": {
+        "ps": "* Crear tu primero: SALE_START\n\n* Si estás en el listo \"VIP\": PRESALE_START\n\nQuedate un/a VIP! [Joino nuestro Discord](https: //discord.com/invite/UY9Xf2k)."
+      },
+      "vip": {
+        "ps": "Bienvenid@, CURRENT_USER! Puedes crear un Misfito a las PRESALE_START",
+        "action": "ADD_TO_CALENDAR(PRESALE_START)"
+      }
     },
+    "presale": {
+      "vip": {
+        "ps": "Puedes crear MINT_LIMIT",
+        "cta": "Crear Uno!",
+        "action": "MINT_ONE"
+      }
+    },
+    "saleOpen": {
+      "ps": "Misfit Minting Has Begin!",
+      "cta": "¡Crear Uno!",
+      "action": "MINT_ONE",
+      "signedOut": {
+        "action": "SIGN_IN"
+      }
+    },
+    "allSold": {
+      "title": "¡Todos INITIAL_COUNT han estado creado!",
+      "body": "",
+      "ps": "",
+      "cta": "Buy Pre-Owned",
+      "action": "GO_TO_PARAS"
+    }
+  },
+  "extraSections": [
     {
-
       "text": "# Introducing\n# NEAR Misfits (Gen 0)\n\n10,000 brave souls set out into the vast unknown to explore the Metaverse... Only 1,923 survived.\n\nThese Misfits are part of a Decentralised Special Operations crew from all over the world and all walks of life. A group of humans rising to the challenge of their times, coming together to build the Metaverse: challenge the status quo, push the boundaries of what is possible, build and contribute to enabling technology.",
       "image": "learn.webp"
     }

@@ -18,7 +18,6 @@ const IndexPage = () => {
       )
 
     if (matchingLocale) {
-      console.log({ locales, preferredLocale, matchingLocale })
       navigate(`/${matchingLocale.id}/`)
     }
   }, [])
