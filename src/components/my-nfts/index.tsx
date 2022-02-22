@@ -25,7 +25,7 @@ const MyNFTs: React.FC<{}> = () => {
       <div className={css.grid}>
         {nfts.map(nft => (
           <div key={nft.token_id}>
-            <img alt="" src={nft.metadata?.media} />
+            <img alt={nft.metadata?.description} src={nft.metadata?.media} />
             #{nft.token_id}
           </div>
         ))}

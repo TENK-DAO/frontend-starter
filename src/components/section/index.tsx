@@ -17,7 +17,7 @@ const Section: React.FC<{ backgroundColor?: string, backgroundImage?: string, im
     {/* following div is styled by `css.section` to overlap backgroundImage */}
     <div>
       <div className="container">
-        <div className={css.content}>
+        <div className={`${css.content} ${image ? css.hasImage : ''}`}>
           <div>
             {children}
           </div>

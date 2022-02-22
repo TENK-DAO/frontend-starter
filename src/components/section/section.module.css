@@ -28,32 +28,24 @@
   justify-content: space-around;
 }
 
-/* when there is a second immediate child (possible background image is first), position it relative */
-.section > * + * {
-  position: relative;
-}
-
 .content {
-  /* This centers the other elements inside the hero component */
   place-items: center;
-  display: grid;
   grid-template-columns: 5fr 1fr;
   grid-gap: var(--spacing-l);
 }
 
-@media(min-width: 450px) {
+.content.hasImage {
+  display: grid;
+}
+
+@media (min-width: 450px) {
   .content {
-    /* This centers the other elements inside the hero component */
-    place-items: center;
-    display: grid;
     grid-template-columns: 3fr 1fr;
-    grid-gap: var(--spacing-l);
   }
 }
 
-@media(min-width: 600px) {
+@media (min-width: 600px) {
   .content {
-    /* This centers the other elements inside the hero component */
     grid-template-columns: 2fr 1fr;
   }
 }
