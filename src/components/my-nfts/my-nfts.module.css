@@ -1,0 +1,11 @@
+.grid {
+  display: grid;
+  gap: var(--spacing-m);
+  grid-template-columns: repeat(auto-fit, minmax(4em, 10em));
+  margin-bottom: var(--spacing-m);
+  margin-top: var(--spacing-m);
+}
+
+.grid img {
+  border-radius: var(--br-small);
+}

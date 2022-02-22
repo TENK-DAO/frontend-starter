@@ -3,9 +3,8 @@ import { useLocation } from "@reach/router"
 import type { AllLocalesQuery } from "../../graphql-types"
 
 type I18n = AllLocalesQuery["allFile"]["nodes"][number]["childI18NJson"]
-type Locale = {
+type Locale = NonNullable<I18n> & {
   id: string
-  i18n: NonNullable<I18n>
 }
 
 /**
@@ -29,6 +28,7 @@ export default function useLocales(): { locales: Locale[]; locale?: Locale } {
               description
               connectWallet
               signOut
+              myNFTs
             }
           }
         }
@@ -39,7 +39,7 @@ export default function useLocales(): { locales: Locale[]; locale?: Locale } {
 
   const locales = allFile.nodes.map(node => ({
     id: node.name,
-    i18n: node.childI18NJson!,
+    ...node.childI18NJson!,
   }))
 
   const locale = locales.find(l => new RegExp(`/${l.id}`).test(pathname))

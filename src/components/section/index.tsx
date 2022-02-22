@@ -4,7 +4,7 @@ import type { Hero, SectionI18n } from "../../../lib/locales/Locale"
 
 import * as css from "./section.module.css"
 
-const Section: React.FC<SectionI18n | Hero> = ({
+const Section: React.FC<{ backgroundColor?: string, backgroundImage?: string, image?: string }> = ({
   backgroundColor, backgroundImage, image, children
 }) => (
   <section

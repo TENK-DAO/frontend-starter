@@ -29,7 +29,7 @@ const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
               >
                 🌐
                 <span className="visuallyHidden">
-                  {locales.map(l => l.i18n.viewIn).join(" | ")}
+                  {locales.map(l => l.viewIn).join(" | ")}
                 </span>
               </div>
               <select
@@ -39,7 +39,7 @@ const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
               >
                 {locales.map(locale => (
                   <option key={locale.id} value={locale.id}>
-                    {locale.id} - {locale.i18n.langPicker}
+                    {locale.id} - {locale.langPicker}
                   </option>
                 ))}
               </select>

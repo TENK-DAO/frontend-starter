@@ -1,8 +1,7 @@
 import settings from "../../../config/settings.json"
 import { wallet } from ".."
-import { Contract, ViewFunctionOptions } from "./tenk"
+import { Contract, Token, ViewFunctionOptions } from "./tenk"
 
-// every page load, at least do this:
 export interface SaleInfo {
   status: 'CLOSED' | 'OPEN' | 'PRESALE'
   presale_start: number // nanosecond-based timestamp
@@ -13,10 +12,15 @@ export interface SaleInfo {
   }
 }
 
-// if sale closed, no further queries needed
-// if presale and user logged in, check if they're `whitelisted`
-// if whitelisted, check token price using `total_cost` and `remaining_allowance`
-// if sale open, check if sold out using `tokens_left`
+const fakeToken = (id: number, owner_id: string): Token  => ({
+  token_id: String(id),
+  owner_id,
+  metadata: {
+    title: 'lol',
+    description: 'omg nfts hahaha',
+    media: 'https://ipfs.io/ipfs/bafybeiabjp7akpupfhnr53bmwp5gyesorlqzn4a3qk4g5hdami3epfw2me/1844.png'
+  }
+})
 
 class TenKContract extends Contract {
   async get_sale_info(
@@ -36,6 +40,18 @@ class TenKContract extends Contract {
         remaining: tokensLeft,
       }
     }
+  }
+
+  async nft_tokens_for_owner(
+    { account_id }: {
+      account_id: string,
+      from_index?: string, // default: 0
+      limit?: number, // default: unlimited (could fail due to gas limit)
+    },
+    options?: ViewFunctionOptions
+  ): Promise<Token[]> {
+    const supply = Number(await this.nft_supply_for_owner({ account_id }))
+    return [...Array(supply).keys()].map(id => fakeToken(id, account_id))
   }
 }
 
