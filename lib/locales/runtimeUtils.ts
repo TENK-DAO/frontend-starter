@@ -1,6 +1,9 @@
 import type { SaleInfo } from '../../src/near/contracts'
 
-type Data = SaleInfo & { mintLimit: number } & { locale?: string }
+type Data = SaleInfo &
+{ mintLimit: number } &
+{ locale?: string } &
+{ currentUser: string }
 
 type NanosecondTimestamp = number
 
@@ -31,8 +34,9 @@ function formatDate(
 }
 
 const replacers = {
-  SALE_START: (d: Data) => formatDate(d.sale_start, d.locale),
+  CURRENT_USER: (d: Data) => d.currentUser,
   PRESALE_START: (d: Data) => formatDate(d.presale_start, d.locale),
+  SALE_START: (d: Data) => formatDate(d.sale_start, d.locale),
   MINT_LIMIT: (d: Data) => d.mintLimit,
   INITIAL_COUNT: (d: Data) => d.tokens.initial
 } as const

@@ -53,6 +53,7 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
     ...saleInfo,
     mintLimit,
     locale: locale?.id,
+    currentUser,
   }
 
   return (
