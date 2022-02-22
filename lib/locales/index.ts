@@ -3,6 +3,7 @@ import path from "path"
 import { execSync } from "child_process"
 import { requiredHeroFields, optionalHeroFields, saleStatuses, userStatuses } from "./Locale"
 import type Locale from "./Locale"
+import { placeholderStrings } from './runtimeUtils'
 import type { Hero, RawHeroTree } from "./Locale"
 
 // re-create `Locale.validator.ts` based of current contents of `Locale.ts`
@@ -52,6 +53,20 @@ function computeField({ rawHeroTree, saleStatus, userStatus, required }: {
         `(if set in more than one of these, a more specific setting overrides a more general)`
       )
     }
+    // warn if it looks like there might be an unknown placeholder string
+    // ('action' field values are validated as part of the schema, so we can skip them here)
+    const allCapsSubStrings = field !== 'action' && hero[field]?.matchAll(/\b[A-Z_]+\b/g)
+    Array.from(allCapsSubStrings || []).forEach(([possiblePlaceholder]) => {
+      // TODO: update above regex to only match strings with underscores in them to avoid `.match('_')`
+      if (possiblePlaceholder.match('_') && !placeholderStrings.includes(possiblePlaceholder)) {
+        console.warn(
+          `"hero" field "${field}" contains what looks like a placeholder string "${possiblePlaceholder}", ` +
+          `but no substitution is available for this string. Did you mean to include one of the following?\n\n` +
+          `  • ${placeholderStrings.join('\n  • ')}\n\n` +
+          `The full text given for this field was:\n\n  ${hero[field]}\n\n`
+        )
+      }
+    })
     return hero
   }
 }
@@ -95,6 +110,7 @@ export const locales: DecoratedLocale[] = fileNames
     const fullPath = path.join(localesDirectory, fileName)
     const fileContents: unknown = JSON.parse(fs.readFileSync(fullPath, "utf8"))
     const i18n = validate(fileContents)
+
     let hero: ExpandedHeroTree
     try {
       hero = hoistHeroFields(i18n.hero)

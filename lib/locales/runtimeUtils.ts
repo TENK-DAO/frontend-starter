@@ -41,14 +41,16 @@ const replacers = {
   INITIAL_COUNT: (d: Data) => d.tokens.initial
 } as const
 
+export const placeholderStrings = Object.keys(replacers)
+
 export type PlaceholderString = keyof typeof replacers
 
+const placeholderRegex = new RegExp(`(${placeholderStrings.join('|')})`, 'gm')
+
 export function fill(text: string, data: Data): string {
-  let updatedText = text
-  Object.entries(replacers).forEach(([placeholder, replacer]) => {
-    updatedText = updatedText.replace(new RegExp(placeholder, 'gm'), String(replacer(data)))
+  return text.replace(placeholderRegex, (match) => {
+    return String(replacers[match as PlaceholderString](data))
   })
-  return updatedText
 }
 
 const actions = {
