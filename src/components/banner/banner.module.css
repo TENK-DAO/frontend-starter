@@ -1,0 +1,49 @@
+.banner {
+  align-items: center;
+  background-color: var(--secondary);
+  text-align: center;
+  padding: var(--spacing-m);
+  position: relative;
+}
+
+.banner a,
+.banner a:after {
+  border-style: solid;
+  border-color: transparent;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.banner a {
+  border-width: var(--spacing-m) var(--spacing-s);
+}
+.banner a:after {
+  content: " ";
+  border-width: var(--spacing-s) var(--spacing-xs);
+}
+
+.banner a:first-child,
+.banner a:first-child:after {
+  border-left-width: 0;
+}
+.banner a:first-child {
+  border-right-color: var(--fg);
+  left: var(--spacing-m);
+}
+.banner a:first-child:after {
+  border-right-color: var(--secondary);
+  left: var(--spacing-xs);
+}
+
+.banner a:last-child,
+.banner a:last-child:after {
+  border-right-width: 0;
+}
+.banner a:last-child {
+  border-left-color: var(--fg);
+  right: var(--spacing-m);
+}
+.banner a:last-child:after {
+  border-left-color: var(--secondary);
+  right: var(--spacing-xs);
+}

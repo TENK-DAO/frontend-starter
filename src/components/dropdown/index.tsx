@@ -13,8 +13,9 @@ const Dropdown: React.FC<{
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Content className={css.content}>
-        {items.map(({ className, ...props }) => (
+        {items.map(({ className, ...props }, i) => (
           <DropdownMenu.Item
+            key={i}
             className={`${css.item} ${className}`}
             {...props}
           />

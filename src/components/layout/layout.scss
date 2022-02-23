@@ -62,29 +62,28 @@ $tertiary: #a463b0 !default;
   --fg: var(--black);
   --bg: var(--white);
 
-  --gray-100: #{lighten($black, 80%)};
-  --gray-200: #{lighten($black, 70%)};
-  --gray-300: #{lighten($black, 60%)};
-  --gray-400: #{lighten($black, 50%)};
-  --gray-500: #{lighten($black, 40%)};
-  --gray-600: #{lighten($black, 30%)};
-  --gray-700: #{lighten($black, 20%)};
-  --gray-800: #{lighten($black, 10%)};
+  --gray-100: #{adjust-color($black, $alpha: -0.9)};
+  --gray-200: #{adjust-color($black, $alpha: -0.8)};
+  --gray-300: #{adjust-color($black, $alpha: -0.7)};
+  --gray-400: #{adjust-color($black, $alpha: -0.6)};
+  --gray-500: #{adjust-color($black, $alpha: -0.5)};
+  --gray-600: #{adjust-color($black, $alpha: -0.4)};
+  --gray-700: #{adjust-color($black, $alpha: -0.3)};
+  --gray-800: #{adjust-color($black, $alpha: -0.2)};
 
   --red: #fc5b5b;
   @media (prefers-color-scheme: dark) {
     --bg: var(--black);
     --fg: var(--white);
 
-    /* simple inversion of colors in dark mode – designers would not approve! */
-    --gray-800: #{lighten($black, 80%)};
-    --gray-700: #{lighten($black, 70%)};
-    --gray-600: #{lighten($black, 60%)};
-    --gray-500: #{lighten($black, 50%)};
-    --gray-400: #{lighten($black, 40%)};
-    --gray-300: #{lighten($black, 30%)};
-    --gray-200: #{lighten($black, 20%)};
-    --gray-100: #{lighten($black, 10%)};
+    --gray-100: #{adjust-color($white, $alpha: -0.9)};
+    --gray-200: #{adjust-color($white, $alpha: -0.8)};
+    --gray-300: #{adjust-color($white, $alpha: -0.7)};
+    --gray-400: #{adjust-color($white, $alpha: -0.6)};
+    --gray-500: #{adjust-color($white, $alpha: -0.5)};
+    --gray-600: #{adjust-color($white, $alpha: -0.4)};
+    --gray-700: #{adjust-color($white, $alpha: -0.3)};
+    --gray-800: #{adjust-color($white, $alpha: -0.2)};
 
     --red: #ff8588;
   }
@@ -170,6 +169,7 @@ label {
 }
 
 code {
+  color: var(--fg);
   padding: var(--spacing-xs) var(--spacing-s);
   margin: 0;
   font-size: 85%;
