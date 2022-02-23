@@ -21,7 +21,7 @@ export default function () {
         </Link>
       )}
       <div>
-        Hero section override:{' '}
+        Hero override:{' '}
         <code>saleStatus=<strong>{saleStatus}</strong></code> &amp;{' '}
         <code>userStatus=<strong>{userStatus}</strong></code>
       </div>
