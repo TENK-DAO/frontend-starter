@@ -1,12 +1,13 @@
 import React from 'react'
 import type { ExpandedHeroTree } from '../../../lib/locales'
-import { fill, act } from '../../../lib/locales/runtimeUtils'
+import { act, can, fill } from '../../../lib/locales/runtimeUtils'
 import { wallet } from "../../near"
 import Section from '../section'
 import Markdown from "../markdown"
 import useLocales from '../../hooks/useLocales'
 import useHeroStatuses from '../../hooks/useHeroStatuses'
 import useTenk from '../../hooks/useTenk'
+import * as css from './hero.module.css'
 
 const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
   const { locale } = useLocales()
@@ -17,6 +18,8 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
 
   const data = {
     ...saleInfo,
+    saleStatus,
+    userStatus,
     mintLimit,
     locale: locale?.id,
     currentUser,
@@ -27,14 +30,16 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
       <Markdown children={fill(hero.title, data)} components={{ p: 'h1' }} />
       <Markdown children={fill(hero.body, data)} />
       {hero.ps && <Markdown children={fill(hero.ps, data)} />}
-      <button
-        className="cta"
-        onClick={() => {
-          act(hero.action, data)
-        }}
-      >
-        {fill(hero.cta, data)}
-      </button>
+      {can(hero.action, data) && (
+        <button
+          className={css.cta}
+          onClick={() => {
+            act(hero.action, data)
+          }}
+        >
+          {fill(hero.cta, data)}
+        </button>
+      )}
     </Section>
   )
 }

@@ -19,13 +19,13 @@
         "ps": "* Crear tu primero: SALE_START\n\n* Si estás en el listo \"VIP\": PRESALE_START\n\nQuedate un/a VIP! [Joino nuestro Discord](https://discord.com/invite/UY9Xf2k)."
       },
       "vip": {
-        "ps": "Bienvenid@, CURRENT_USER! Puedes crear un Misfito a las PRESALE_START",
+        "ps": "¡Bienvenid@, CURRENT_USER! Puedes crear un Misfito a las PRESALE_START",
         "action": "ADD_TO_CALENDAR(PRESALE_START)"
       }
     },
     "presale": {
       "vip": {
-        "ps": "Puedes crear MINT_LIMIT",
+        "ps": "¡Bienvenid@, CURRENT_USER! Los VIPs puedes mint ahora. El mint publico empezar a las SALE_START.\n\nTu VIP asignación restante: MINT_LIMIT",
         "cta": "Crear Uno!",
         "action": "MINT_ONE"
       }

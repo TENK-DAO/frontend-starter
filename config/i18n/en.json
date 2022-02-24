@@ -25,7 +25,7 @@
     },
     "presale": {
       "vip": {
-        "ps": "Pre-mint started! You can mint MINT_LIMIT",
+        "ps": "Welcome, CURRENT_USER! Pre-mint started. Public minting starts at SALE_START.\n\nYour remaining pre-mint allowance: MINT_LIMIT",
         "cta": "Mint One!",
         "action": "MINT_ONE"
       }

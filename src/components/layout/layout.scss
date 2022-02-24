@@ -62,28 +62,28 @@ $tertiary: #a463b0 !default;
   --fg: var(--black);
   --bg: var(--white);
 
-  --gray-100: #{adjust-color($black, $alpha: -0.9)};
-  --gray-200: #{adjust-color($black, $alpha: -0.8)};
-  --gray-300: #{adjust-color($black, $alpha: -0.7)};
-  --gray-400: #{adjust-color($black, $alpha: -0.6)};
-  --gray-500: #{adjust-color($black, $alpha: -0.5)};
-  --gray-600: #{adjust-color($black, $alpha: -0.4)};
-  --gray-700: #{adjust-color($black, $alpha: -0.3)};
-  --gray-800: #{adjust-color($black, $alpha: -0.2)};
+  --gray-1: #{adjust-color($black, $alpha: -0.9)};
+  --gray-2: #{adjust-color($black, $alpha: -0.8)};
+  --gray-3: #{adjust-color($black, $alpha: -0.7)};
+  --gray-4: #{adjust-color($black, $alpha: -0.6)};
+  --gray-5: #{adjust-color($black, $alpha: -0.5)};
+  --gray-6: #{adjust-color($black, $alpha: -0.4)};
+  --gray-7: #{adjust-color($black, $alpha: -0.3)};
+  --gray-8: #{adjust-color($black, $alpha: -0.2)};
 
   --red: #fc5b5b;
   @media (prefers-color-scheme: dark) {
     --bg: var(--black);
     --fg: var(--white);
 
-    --gray-100: #{adjust-color($white, $alpha: -0.9)};
-    --gray-200: #{adjust-color($white, $alpha: -0.8)};
-    --gray-300: #{adjust-color($white, $alpha: -0.7)};
-    --gray-400: #{adjust-color($white, $alpha: -0.6)};
-    --gray-500: #{adjust-color($white, $alpha: -0.5)};
-    --gray-600: #{adjust-color($white, $alpha: -0.4)};
-    --gray-700: #{adjust-color($white, $alpha: -0.3)};
-    --gray-800: #{adjust-color($white, $alpha: -0.2)};
+    --gray-1: #{adjust-color($white, $alpha: -0.9)};
+    --gray-2: #{adjust-color($white, $alpha: -0.8)};
+    --gray-3: #{adjust-color($white, $alpha: -0.7)};
+    --gray-4: #{adjust-color($white, $alpha: -0.6)};
+    --gray-5: #{adjust-color($white, $alpha: -0.5)};
+    --gray-6: #{adjust-color($white, $alpha: -0.4)};
+    --gray-7: #{adjust-color($white, $alpha: -0.3)};
+    --gray-8: #{adjust-color($white, $alpha: -0.2)};
 
     --red: #ff8588;
   }
@@ -174,7 +174,7 @@ code {
   margin: 0;
   font-size: 85%;
   font-family: var(--monospace);
-  background-color: var(--gray-200);
+  background-color: var(--gray-2);
   border-radius: 6px;
 }
 
@@ -199,10 +199,6 @@ button,
   font-size: inherit;
   font-weight: var(--fw-bold);
   padding: var(--spacing-s) var(--spacing-m);
-}
-button.cta,
-.button.cta {
-  padding: var(--spacing-m) var(--spacing-xl);
 }
 
 button:hover,
@@ -232,8 +228,8 @@ button.link,
 button[disabled],
 .button[disabled] {
   box-shadow: none;
-  background-color: var(--gray-300);
-  color: var(--gray-500);
+  background-color: var(--gray-3);
+  color: var(--gray-5);
   cursor: not-allowed;
   transform: none;
 }
@@ -241,7 +237,7 @@ button[disabled],
 input,
 select {
   background-color: var(--bg);
-  border: 1px solid var(--gray-300);
+  border: 1px solid var(--gray-3);
   border-radius: var(--br-small);
   color: inherit;
   padding: var(--spacing-xs) var(--spacing-s);
@@ -251,7 +247,7 @@ input:hover,
 input:focus,
 select:hover,
 select:focus {
-  border-color: var(--gray-500);
+  border-color: var(--gray-5);
 }
 
 select {
@@ -275,12 +271,12 @@ input::selection {
 }
 
 input:hover {
-  background-color: var(--gray-100);
+  background-color: var(--gray-1);
 }
 
 input:focus,
 input:active {
-  color: var(--gray-700);
+  color: var(--gray-7);
   border-color: var(--blue-400);
 }
 

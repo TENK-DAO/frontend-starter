@@ -1,11 +1,15 @@
-import type { SaleInfo } from '../../src/near/contracts'
-
-type Data = SaleInfo &
-{ mintLimit: number } &
-{ locale?: string } &
-{ currentUser: string }
+import { SaleInfo } from '../../src/near/contracts'
+import { saleStatuses, userStatuses } from './Locale'
 
 type NanosecondTimestamp = number
+
+type Data = Omit<SaleInfo, 'status'> & {
+  saleStatus: typeof saleStatuses[number]
+  userStatus: typeof userStatuses[number]
+  mintLimit: number
+  locale?: string
+  currentUser: string
+}
 
 function dateFrom(d: NanosecondTimestamp): Date {
   const adjustedTimestamp = d / 1e6
@@ -65,4 +69,14 @@ export type Action = keyof typeof actions
 
 export function act(action: Action, data: Data): void {
   actions[action](data)
+}
+
+export function can(action: Action, data: Data): boolean {
+  if (action === 'MINT_ONE') {
+    return Boolean(data.currentUser) && (
+      (data.saleStatus === 'presale' && data.mintLimit > 0) ||
+      (data.saleStatus === 'saleOpen')
+    )
+  }
+  return true
 }
