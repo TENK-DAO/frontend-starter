@@ -3,7 +3,7 @@ import type { ExpandedHeroTree } from '../../../lib/locales'
 import { fill, act } from '../../../lib/locales/runtimeUtils'
 import { wallet } from "../../near"
 import Section from '../section'
-import Markdown from "react-markdown"
+import Markdown from "../markdown"
 import useLocales from '../../hooks/useLocales'
 import useHeroStatuses from '../../hooks/useHeroStatuses'
 import useTenk from '../../hooks/useTenk'

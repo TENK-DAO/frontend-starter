@@ -16,7 +16,7 @@
     "action": "ADD_TO_CALENDAR(SALE_START)",
     "saleClosed": {
       "signedIn": {
-        "ps": "* Crear tu primero: SALE_START\n\n* Si estás en el listo \"VIP\": PRESALE_START\n\nQuedate un/a VIP! [Joino nuestro Discord](https: //discord.com/invite/UY9Xf2k)."
+        "ps": "* Crear tu primero: SALE_START\n\n* Si estás en el listo \"VIP\": PRESALE_START\n\nQuedate un/a VIP! [Joino nuestro Discord](https://discord.com/invite/UY9Xf2k)."
       },
       "vip": {
         "ps": "Bienvenid@, CURRENT_USER! Puedes crear un Misfito a las PRESALE_START",

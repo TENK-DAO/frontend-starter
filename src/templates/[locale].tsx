@@ -6,7 +6,7 @@ import MyNFTs from "../components/my-nfts"
 import Section from "../components/section"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import Markdown from "react-markdown"
+import Markdown from "../components/markdown"
 import type { DecoratedLocale } from "../../lib/locales"
 
 type PageContext = {
