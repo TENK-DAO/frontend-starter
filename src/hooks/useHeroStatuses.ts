@@ -1,5 +1,6 @@
 import { useLocation } from "@reach/router"
 import { wallet } from "../near"
+import { Status } from "../near/contracts/tenk"
 import useTenk from './useTenk'
 
 const overrides = [
@@ -18,9 +19,10 @@ const overrides = [
 ] as const
 
 const saleStatuses = {
-  'CLOSED': () => 'saleClosed' as const,
-  'PRESALE': () => 'presale' as const,
-  'OPEN': (remaining: number) => remaining === 0 ? 'allSold' : 'saleOpen' as const,
+  [Status.Closed]: 'saleClosed',
+  [Status.Presale]: 'presale',
+  [Status.Open]: 'saleOpen',
+  [Status.SoldOut]: 'allSold',
 } as const
 
 export default function useHeroStatuses() {
@@ -32,8 +34,7 @@ export default function useHeroStatuses() {
   return {
     heroParam,
     overrides,
-    saleStatus: override?.saleStatus ??
-      saleStatuses[saleInfo.status](saleInfo.tokens.remaining),
+    saleStatus: override?.saleStatus ?? saleStatuses[saleInfo.status],
     userStatus: override?.userStatus ??
       (vip ? 'vip' : wallet.getAccountId() ? 'signedIn' : 'signedOut'),
   }

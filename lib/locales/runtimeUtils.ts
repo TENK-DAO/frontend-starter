@@ -1,7 +1,7 @@
-import { SaleInfo } from '../../src/near/contracts'
+import { SaleInfo } from '../../src/near/contracts/tenk'
 import { saleStatuses, userStatuses } from './Locale'
 
-type NanosecondTimestamp = number
+type Timestamp = number
 
 type Data = Omit<SaleInfo, 'status'> & {
   saleStatus: typeof saleStatuses[number]
@@ -11,24 +11,16 @@ type Data = Omit<SaleInfo, 'status'> & {
   currentUser: string
 }
 
-function dateFrom(d: NanosecondTimestamp): Date {
-  const adjustedTimestamp = d / 1e6
-  if (Math.log10(adjustedTimestamp) < 12) {
-    throw new Error(
-      `dateFrom expects a nanosecond-based timestamp, like those from NEAR. ` +
-      `Was given ${d}, which results in a calculated date of ${new Date(adjustedTimestamp)}`
-    )
-  }
-  return new Date(adjustedTimestamp)
-}
-
 function formatDate(
-  d: NanosecondTimestamp | Date,
-  // `undefined` will default to browser's locale (may not work correctly in Node during build)
+  d: Timestamp | Date,
+
+  /**
+   * `undefined` will default to browser's locale (may not work correctly in Node during build)
+   */
   locale?: string,
   options: Intl.DateTimeFormatOptions = {}
 ): string {
-  const date = typeof d === "number" ? dateFrom(d) : d
+  const date = typeof d === "number" ? new Date(d) : d
 
   return new Intl.DateTimeFormat(locale,  {
     dateStyle: 'short',
@@ -42,7 +34,7 @@ const replacers = {
   PRESALE_START: (d: Data) => formatDate(d.presale_start, d.locale),
   SALE_START: (d: Data) => formatDate(d.sale_start, d.locale),
   MINT_LIMIT: (d: Data) => d.mintLimit,
-  INITIAL_COUNT: (d: Data) => d.tokens.initial
+  INITIAL_COUNT: (d: Data) => d.token_final_supply,
 } as const
 
 export const placeholderStrings = Object.keys(replacers)
@@ -58,8 +50,8 @@ export function fill(text: string, data: Data): string {
 }
 
 const actions = {
-  'ADD_TO_CALENDAR(SALE_START)': (d: Data) => alert(`Add ${dateFrom(d.sale_start).toISOString()} to calendar!`),
-  'ADD_TO_CALENDAR(PRESALE_START)': (d: Data) => alert(`Add ${dateFrom(d.presale_start).toISOString()} to calendar!`),
+  'ADD_TO_CALENDAR(SALE_START)': (d: Data) => alert(`Add ${new Date(d.sale_start).toISOString()} to calendar!`),
+  'ADD_TO_CALENDAR(PRESALE_START)': (d: Data) => alert(`Add ${new Date(d.presale_start).toISOString()} to calendar!`),
   'SIGN_IN': (d: Data) => alert('Sign in!'),
   'MINT_ONE': (d: Data) => alert('Mint one!'),
   'GO_TO_PARAS': (d: Data) => alert('Go to Paras!'),
