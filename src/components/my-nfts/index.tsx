@@ -17,7 +17,7 @@ const MyNFTs: React.FC<{}> = () => {
     }
   }, [currentUser])
 
-  if (!locale || !currentUser) return null
+  if (!locale || !currentUser || nfts.length === 0) return null
 
   return (
     <Section>

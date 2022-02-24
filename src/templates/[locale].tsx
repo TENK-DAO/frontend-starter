@@ -21,8 +21,8 @@ const Landing: React.FC<PageProps<{}, PageContext>> = ({
   return (
     <Layout title={i18n.title}>
       <Seo lang={id} title={i18n.title} description={i18n.description} />
-      <Hero heroTree={i18n.hero} />
       <MyNFTs />
+      <Hero heroTree={i18n.hero} />
       {i18n.extraSections?.map((section, i) => (
         <Section key={i} {...section}>
           <Markdown children={section.text} />
