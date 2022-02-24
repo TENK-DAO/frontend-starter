@@ -32,15 +32,18 @@ export default function Nav() {
       </h1>
       <span>
         {currentUser ? (
-          <Dropdown
-            trigger={currentUser}
-            items={[
-              {
-                children: locale.signOut,
-                onSelect: signOut,
-              },
-            ]}
-          />
+          <span>
+            {/* extra span so that Gatsby's hydration notices this is not the same as the signIn button */}
+            <Dropdown
+              trigger={currentUser}
+              items={[
+                {
+                  children: locale.signOut,
+                  onSelect: signOut,
+                },
+              ]}
+            />
+          </span>
         ) : (
           <button className="secondary" onClick={signIn}>{locale.connectWallet}</button>
         )}
