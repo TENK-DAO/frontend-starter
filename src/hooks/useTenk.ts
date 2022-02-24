@@ -1,6 +1,5 @@
 import React from "react"
-import { TenK } from "../near/contracts"
-import type { SaleInfo } from "../near/contracts"
+import { SaleInfo, TenK } from "../near/contracts"
 import { wallet } from "../near"
 
 const currentUser = wallet.getAccountId()
@@ -17,8 +16,8 @@ const stubSaleInfo: SaleInfo = {
 
 const rpcCalls = Promise.all([
   TenK.get_sale_info(),
-  currentUser ?? TenK.whitelisted({ account_id: currentUser }),
-  currentUser ?? TenK.remaining_allowance({ account_id: currentUser }),
+  currentUser && TenK.whitelisted({ account_id: currentUser }),
+  currentUser && TenK.remaining_allowance({ account_id: currentUser }),
 ])
 
 export default function useTenk() {
