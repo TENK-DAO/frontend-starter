@@ -102,7 +102,9 @@ try {
   fileNames = []
 }
 
-export const locales: DecoratedLocale[] = fileNames
+const IS_JSON = /.json$/
+
+export const locales: DecoratedLocale[] = fileNames.filter(f => IS_JSON.test(f))
   .map(fileName => {
     // Remove ".json" from file name to get id
     // TODO: validate that `id` is valid according to https://www.npmjs.com/package/iso-639-1
