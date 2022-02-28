@@ -9,9 +9,10 @@ import useHeroStatuses from '../../hooks/useHeroStatuses'
 import useTenk from '../../hooks/useTenk'
 import * as css from './hero.module.css'
 
+const currentUser = wallet.getAccountId()
+
 const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
   const { locale } = useLocales()
-  const currentUser = wallet.getAccountId()
   const { saleInfo, mintLimit } = useTenk()
   const { saleStatus, userStatus } = useHeroStatuses()
   const hero = heroTree[saleStatus][userStatus]
@@ -21,7 +22,6 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
     saleStatus,
     userStatus,
     mintLimit,
-    locale: locale?.id,
     currentUser,
   }
 
