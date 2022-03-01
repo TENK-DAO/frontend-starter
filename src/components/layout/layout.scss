@@ -198,6 +198,20 @@ button,
   display: inline-block;
   font-size: inherit;
   font-weight: var(--fw-bold);
+}
+
+input,
+select {
+  background-color: var(--bg);
+  border: 1px solid var(--gray-3);
+  border-radius: var(--br-small);
+  color: inherit;
+}
+
+input,
+select,
+button,
+.button {
   padding: var(--spacing-s) var(--spacing-m);
 }
 
@@ -232,15 +246,6 @@ button[disabled],
   color: var(--gray-5);
   cursor: not-allowed;
   transform: none;
-}
-
-input,
-select {
-  background-color: var(--bg);
-  border: 1px solid var(--gray-3);
-  border-radius: var(--br-small);
-  color: inherit;
-  padding: var(--spacing-xs) var(--spacing-s);
 }
 
 input:hover,

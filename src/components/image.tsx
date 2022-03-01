@@ -55,7 +55,7 @@ export default function ({ src, ...props }: Props) {
     }
     if (image.publicURL) {
       if (/\.svg$/.test(src)) {
-        return <object type="image/svg+xml" data={image.publicURL}></object>
+        return <object tabIndex={-1} type="image/svg+xml" data={image.publicURL}></object>
       }
       return <img src={image.publicURL} {...props} />
     }

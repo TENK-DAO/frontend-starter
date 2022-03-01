@@ -3,6 +3,7 @@ import { wallet } from "../../near"
 import * as css from "./nav.module.css"
 import useLocales from "../../hooks/useLocales"
 import Dropdown from "../../components/dropdown"
+import LangPicker from "../../components/lang-picker"
 
 function signIn() {
   wallet.requestSignIn({ contractId: process.env.GATSBY_CONTRACT_NAME })
@@ -30,7 +31,8 @@ export default function Nav() {
         </svg>{" "}
         {locale.title}
       </h1>
-      <span>
+      <div className={css.right}>
+        <LangPicker />
         {currentUser ? (
           <span>
             {/* extra span so that Gatsby's hydration notices this is not the same as the signIn button */}
@@ -47,7 +49,7 @@ export default function Nav() {
         ) : (
           <button className="secondary" onClick={signIn}>{locale.connectWallet}</button>
         )}
-      </span>
+      </div>
     </nav>
   )
 }

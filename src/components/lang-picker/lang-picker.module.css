@@ -1,0 +1,19 @@
+.wrap {
+  position: relative;
+}
+
+.globe {
+  position: absolute;
+  left: var(--spacing-s);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.select {
+  border: 1px solid transparent;
+  padding-left: var(--spacing-l);
+}
+.select:hover,
+.select:focus {
+  border-color: var(--gray-3);
+}
