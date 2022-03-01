@@ -30,7 +30,7 @@ export const LocaleSchema = {
             "ADD_TO_CALENDAR(PRESALE_START)",
             "ADD_TO_CALENDAR(SALE_START)",
             "GO_TO_PARAS",
-            "MINT_ONE",
+            "MINT",
             "SIGN_IN",
           ],
           type: "string",
@@ -51,6 +51,9 @@ export const LocaleSchema = {
           type: "string",
         },
         ps: {
+          type: "string",
+        },
+        setNumber: {
           type: "string",
         },
         title: {
@@ -103,7 +106,7 @@ export const LocaleSchema = {
             "ADD_TO_CALENDAR(PRESALE_START)",
             "ADD_TO_CALENDAR(SALE_START)",
             "GO_TO_PARAS",
-            "MINT_ONE",
+            "MINT",
             "SIGN_IN",
           ],
           type: "string",
@@ -116,7 +119,7 @@ export const LocaleSchema = {
                 "ADD_TO_CALENDAR(PRESALE_START)",
                 "ADD_TO_CALENDAR(SALE_START)",
                 "GO_TO_PARAS",
-                "MINT_ONE",
+                "MINT",
                 "SIGN_IN",
               ],
               type: "string",
@@ -137,6 +140,9 @@ export const LocaleSchema = {
               type: "string",
             },
             ps: {
+              type: "string",
+            },
+            setNumber: {
               type: "string",
             },
             signedIn: {
@@ -177,7 +183,7 @@ export const LocaleSchema = {
                 "ADD_TO_CALENDAR(PRESALE_START)",
                 "ADD_TO_CALENDAR(SALE_START)",
                 "GO_TO_PARAS",
-                "MINT_ONE",
+                "MINT",
                 "SIGN_IN",
               ],
               type: "string",
@@ -198,6 +204,9 @@ export const LocaleSchema = {
               type: "string",
             },
             ps: {
+              type: "string",
+            },
+            setNumber: {
               type: "string",
             },
             signedIn: {
@@ -226,7 +235,7 @@ export const LocaleSchema = {
                 "ADD_TO_CALENDAR(PRESALE_START)",
                 "ADD_TO_CALENDAR(SALE_START)",
                 "GO_TO_PARAS",
-                "MINT_ONE",
+                "MINT",
                 "SIGN_IN",
               ],
               type: "string",
@@ -247,6 +256,9 @@ export const LocaleSchema = {
               type: "string",
             },
             ps: {
+              type: "string",
+            },
+            setNumber: {
               type: "string",
             },
             signedIn: {
@@ -272,7 +284,7 @@ export const LocaleSchema = {
                 "ADD_TO_CALENDAR(PRESALE_START)",
                 "ADD_TO_CALENDAR(SALE_START)",
                 "GO_TO_PARAS",
-                "MINT_ONE",
+                "MINT",
                 "SIGN_IN",
               ],
               type: "string",
@@ -295,6 +307,9 @@ export const LocaleSchema = {
             ps: {
               type: "string",
             },
+            setNumber: {
+              type: "string",
+            },
             signedIn: {
               $ref: "#/definitions/Partial<Hero>",
             },
@@ -309,6 +324,9 @@ export const LocaleSchema = {
             },
           },
           type: "object",
+        },
+        setNumber: {
+          type: "string",
         },
         title: {
           type: "string",

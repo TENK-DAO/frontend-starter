@@ -250,8 +250,10 @@ button[disabled],
 
 input:hover,
 input:focus,
+input:active,
 select:hover,
-select:focus {
+select:focus,
+select:active {
   border-color: var(--gray-5);
 }
 
@@ -270,19 +272,13 @@ select.error {
   border-color: var(--red);
 }
 
+input {
+  caret-color: var(--primary);
+}
+
 input::selection {
   background-color: var(--primary);
   color: var(--bg);
-}
-
-input:hover {
-  background-color: var(--gray-1);
-}
-
-input:focus,
-input:active {
-  color: var(--gray-7);
-  border-color: var(--blue-400);
 }
 
 .container {

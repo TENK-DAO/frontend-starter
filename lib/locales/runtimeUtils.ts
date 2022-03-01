@@ -4,11 +4,13 @@ import { saleStatuses, userStatuses } from './Locale'
 type Timestamp = number
 
 type Data = Omit<SaleInfo, 'status'> & {
+  currentUser: string
+  locale?: string
+  mintLimit: number
+  mintRateLimit: number
+  numberToMint?: number
   saleStatus: typeof saleStatuses[number]
   userStatus: typeof userStatuses[number]
-  mintLimit: number
-  locale?: string
-  currentUser: string
 }
 
 function formatDate(
@@ -34,6 +36,7 @@ const replacers = {
   PRESALE_START: (d: Data) => formatDate(d.presale_start, d.locale),
   SALE_START: (d: Data) => formatDate(d.sale_start, d.locale),
   MINT_LIMIT: (d: Data) => d.mintLimit,
+  MINT_RATE_LIMIT: (d: Data) => d.mintRateLimit,
   INITIAL_COUNT: (d: Data) => d.token_final_supply,
 } as const
 
@@ -53,7 +56,7 @@ const actions = {
   'ADD_TO_CALENDAR(SALE_START)': (d: Data) => alert(`Add ${new Date(d.sale_start).toISOString()} to calendar!`),
   'ADD_TO_CALENDAR(PRESALE_START)': (d: Data) => alert(`Add ${new Date(d.presale_start).toISOString()} to calendar!`),
   'SIGN_IN': (d: Data) => alert('Sign in!'),
-  'MINT_ONE': (d: Data) => alert('Mint one!'),
+  'MINT': (d: Data) => alert(`Mint ${d.numberToMint}!`),
   'GO_TO_PARAS': (d: Data) => alert('Go to Paras!'),
 }
 
@@ -64,7 +67,7 @@ export function act(action: Action, data: Data): void {
 }
 
 export function can(action: Action, data: Data): boolean {
-  if (action === 'MINT_ONE') {
+  if (action === 'MINT') {
     return Boolean(data.currentUser) && (
       (data.saleStatus === 'presale' && data.mintLimit > 0) ||
       (data.saleStatus === 'saleOpen')

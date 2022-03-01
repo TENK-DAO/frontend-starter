@@ -1,3 +1,15 @@
 .cta {
   padding: var(--spacing-m) var(--spacing-xl);
 }
+
+.setNumber {
+  align-items: center;
+  display: grid;
+  grid-template-columns: auto 5em;
+  justify-content: flex-start;
+  gap: var(--spacing-s);
+}
+
+.setNumber label:after {
+  content: ":";
+}

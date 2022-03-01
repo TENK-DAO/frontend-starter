@@ -26,14 +26,16 @@
     "presale": {
       "vip": {
         "ps": "Welcome, CURRENT_USER! Pre-mint started. Public minting starts at SALE_START.\n\nYour remaining pre-mint allowance: MINT_LIMIT",
-        "cta": "Mint One!",
-        "action": "MINT_ONE"
+        "setNumber": "Number to mint",
+        "cta": "Mint!",
+        "action": "MINT"
       }
     },
     "saleOpen": {
       "ps": "Misfit Minting Has Begun!",
-      "cta": "Mint One!",
-      "action": "MINT_ONE",
+      "setNumber": "Number to mint",
+      "cta": "Mint!",
+      "action": "MINT",
       "signedOut": {
         "action": "SIGN_IN"
       }

@@ -12,9 +12,9 @@ import * as css from './hero.module.css'
 const currentUser = wallet.getAccountId()
 
 const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
-  const { locale } = useLocales()
-  const { saleInfo, mintLimit } = useTenk()
+  const { saleInfo, mintLimit, mintRateLimit } = useTenk()
   const { saleStatus, userStatus } = useHeroStatuses()
+  const [numberToMint, setNumberToMint] = React.useState(1)
   const hero = heroTree[saleStatus][userStatus]
 
   const data = {
@@ -22,6 +22,7 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
     saleStatus,
     userStatus,
     mintLimit,
+    mintRateLimit,
     currentUser,
   }
 
@@ -31,14 +32,26 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
       <Markdown children={fill(hero.body, data)} />
       {hero.ps && <Markdown children={fill(hero.ps, data)} />}
       {can(hero.action, data) && (
-        <button
-          className={css.cta}
-          onClick={() => {
-            act(hero.action, data)
-          }}
-        >
-          {fill(hero.cta, data)}
-        </button>
+        <form onSubmit={e => {
+          e.preventDefault()
+          act(hero.action, { ...data, numberToMint })
+        }}>
+          {hero.setNumber && (
+            <p className={css.setNumber}>
+              <label htmlFor="numberToMint">{hero.setNumber}</label>
+              <input
+                max={fill('MINT_RATE_LIMIT', data)}
+                min={1}
+                onChange={e => setNumberToMint(parseInt(e.target.value))}
+                value={numberToMint}
+                type="number"
+              />
+            </p>
+          )}
+          <button className={css.cta}>
+            {fill(hero.cta, data)}
+          </button>
+        </form>
       )}
     </Section>
   )
