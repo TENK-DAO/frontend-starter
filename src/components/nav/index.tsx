@@ -1,13 +1,9 @@
 import React from "react"
-import { wallet } from "../../near"
+import { signIn, wallet } from "../../near"
 import * as css from "./nav.module.css"
 import useLocales from "../../hooks/useLocales"
 import Dropdown from "../../components/dropdown"
 import LangPicker from "../lang-picker"
-
-function signIn() {
-  wallet.requestSignIn({ contractId: process.env.GATSBY_CONTRACT_NAME })
-}
 
 function signOut() {
   wallet.signOut()

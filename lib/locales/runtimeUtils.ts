@@ -1,3 +1,6 @@
+import settings from '../../config/settings.json'
+import { signIn } from '../../src/near'
+import { TenK } from '../../src/near/contracts'
 import { SaleInfo } from '../../src/near/contracts/tenk'
 import { saleStatuses, userStatuses } from './Locale'
 
@@ -55,9 +58,9 @@ export function fill(text: string, data: Data): string {
 const actions = {
   'ADD_TO_CALENDAR(SALE_START)': (d: Data) => alert(`Add ${new Date(d.sale_start).toISOString()} to calendar!`),
   'ADD_TO_CALENDAR(PRESALE_START)': (d: Data) => alert(`Add ${new Date(d.presale_start).toISOString()} to calendar!`),
-  'SIGN_IN': (d: Data) => alert('Sign in!'),
-  'MINT': (d: Data) => alert(`Mint ${d.numberToMint}!`),
-  'GO_TO_PARAS': (d: Data) => alert('Go to Paras!'),
+  'SIGN_IN': signIn,
+  'MINT': (d: Data) => TenK.nft_mint_many({ num: d.numberToMint ?? 1 }),
+  'GO_TO_PARAS': () => window.open(`https://paras.id/search?q=${settings.contractName}&sort=priceasc&pmin=.01&is_verified=true`),
 }
 
 export type Action = keyof typeof actions

@@ -44,3 +44,7 @@ export const near = new naj.Near({
  * Interface to NEAR Wallet
  */
 export const wallet = new naj.WalletConnection(near)
+
+export function signIn() {
+  wallet.requestSignIn({ contractId: settings.contractName })
+}
