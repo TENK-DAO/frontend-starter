@@ -3,7 +3,7 @@ import { useLocation } from "@reach/router"
 import type { AllLocalesQuery } from "../../graphql-types"
 
 type I18n = AllLocalesQuery["allFile"]["nodes"][number]["childI18NJson"]
-type Locale = NonNullable<I18n> & {
+export type Locale = NonNullable<I18n> & {
   id: string
 }
 
@@ -27,6 +27,7 @@ export default function useLocales(): { locales: Locale[]; locale?: Locale } {
               langPicker
               title
               description
+              calendarEvent
               connectWallet
               signOut
               myNFTs

@@ -86,6 +86,9 @@ export const LocaleSchema = {
     },
   },
   properties: {
+    calendarEvent: {
+      type: "string",
+    },
     connectWallet: {
       type: "string",
     },
@@ -351,6 +354,7 @@ export const LocaleSchema = {
     },
   },
   required: [
+    "calendarEvent",
     "connectWallet",
     "description",
     "hero",

@@ -1,14 +1,16 @@
+import { addToCalendar } from "add-to-calendar-button"
 import settings from '../../config/settings.json'
 import { signIn } from '../../src/near'
 import { TenK } from '../../src/near/contracts'
 import { SaleInfo } from '../../src/near/contracts/tenk'
 import { saleStatuses, userStatuses } from './Locale'
+import { Locale } from '../../src/hooks/useLocales'
 
 type Timestamp = number
 
 type Data = Omit<SaleInfo, 'status'> & {
   currentUser: string
-  locale?: string
+  locale: Locale
   mintLimit: number
   mintRateLimit: number
   numberToMint?: number
@@ -36,8 +38,8 @@ function formatDate(
 
 const replacers = {
   CURRENT_USER: (d: Data) => d.currentUser,
-  PRESALE_START: (d: Data) => formatDate(d.presale_start, d.locale),
-  SALE_START: (d: Data) => formatDate(d.sale_start, d.locale),
+  PRESALE_START: (d: Data) => formatDate(d.presale_start),
+  SALE_START: (d: Data) => formatDate(d.sale_start),
   MINT_LIMIT: (d: Data) => d.mintLimit,
   MINT_RATE_LIMIT: (d: Data) => d.mintRateLimit,
   INITIAL_COUNT: (d: Data) => d.token_final_supply,
@@ -55,9 +57,37 @@ export function fill(text: string, data: Data): string {
   })
 }
 
+// add-to-calendar-button has strange strict requirements on time format
+function formatDatesForAtcb(d: Timestamp) {
+  let [start, end] = new Date(d).toISOString().split('T')
+  return [
+    start,
+    end.replace(/:\d\d\..*$/, '') // strip seconds, ms, & TZ
+  ]
+}
+
+// add-to-calendar-button doesn't allow passing simple ISO strings for start/end
+function getStartAndEnd(d: Timestamp) {
+  const [startDate, startTime] = formatDatesForAtcb(d)
+  const [endDate, endTime] = formatDatesForAtcb(d + 3600000)
+  return { startDate, startTime, endDate, endTime }
+}
+
 const actions = {
-  'ADD_TO_CALENDAR(SALE_START)': (d: Data) => alert(`Add ${new Date(d.sale_start).toISOString()} to calendar!`),
-  'ADD_TO_CALENDAR(PRESALE_START)': (d: Data) => alert(`Add ${new Date(d.presale_start).toISOString()} to calendar!`),
+  'ADD_TO_CALENDAR(SALE_START)': (d: Data) => addToCalendar({
+    name: d.locale.calendarEvent!,
+    ...getStartAndEnd(d.sale_start),
+    options: ['Google', 'iCal', 'Apple', 'Microsoft365', 'MicrosoftTeams', 'Outlook.com', 'Yahoo'],
+    timeZone: "UTC",
+    trigger: 'click',
+  }),
+  'ADD_TO_CALENDAR(PRESALE_START)': (d: Data) => addToCalendar({
+    name: d.locale.calendarEvent!,
+    ...getStartAndEnd(d.presale_start),
+    options: ['Google', 'iCal', 'Apple', 'Microsoft365', 'MicrosoftTeams', 'Outlook.com', 'Yahoo'],
+    timeZone: "UTC",
+    trigger: 'click',
+  }),
   'SIGN_IN': signIn,
   'MINT': (d: Data) => TenK.nft_mint_many({ num: d.numberToMint ?? 1 }),
   'GO_TO_PARAS': () => window.open(`https://paras.id/search?q=${settings.contractName}&sort=priceasc&pmin=.01&is_verified=true`),

@@ -56,6 +56,7 @@ export default interface Locale {
   langPicker: string
   title: string
   description: string
+  calendarEvent: string
   connectWallet: string
   signOut: string
   myNFTs: string
