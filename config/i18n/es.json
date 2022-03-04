@@ -28,14 +28,14 @@
       "vip": {
         "ps": "¡Bienvenid@, CURRENT_USER! Los VIPs puedes mint ahora. El mint publico empezar a las SALE_START.\n\nTu VIP asignación restante: MINT_LIMIT",
         "setNumber": "Crear quantidad de",
-        "cta": "¡Crear!",
+        "cta": "Crear para MINT_PRICE",
         "action": "MINT"
       }
     },
     "saleOpen": {
       "ps": "Misfit Minting Has Begin!",
       "setNumber": "Crear quantidad de",
-      "cta": "¡Crear!",
+      "cta": "Crear para MINT_PRICE",
       "action": "MINT",
       "signedOut": {
         "action": "SIGN_IN"

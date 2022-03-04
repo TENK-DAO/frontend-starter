@@ -28,14 +28,14 @@
       "vip": {
         "ps": "Welcome, CURRENT_USER! Pre-mint started. Public minting starts at SALE_START.\n\nYour remaining pre-mint allowance: MINT_LIMIT",
         "setNumber": "Number to mint",
-        "cta": "Mint!",
+        "cta": "Mint for MINT_PRICE",
         "action": "MINT"
       }
     },
     "saleOpen": {
       "ps": "Misfit Minting Has Begun!",
       "setNumber": "Number to mint",
-      "cta": "Mint!",
+      "cta": "Mint for MINT_PRICE",
       "action": "MINT",
       "signedOut": {
         "action": "SIGN_IN"

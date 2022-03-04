@@ -1,3 +1,4 @@
+import { Gas, NEAR } from 'near-units'
 import { addToCalendar } from "add-to-calendar-button"
 import settings from '../../config/settings.json'
 import { signIn } from '../../src/near'
@@ -41,6 +42,7 @@ const replacers = {
   PRESALE_START: (d: Data) => formatDate(d.presale_start),
   SALE_START: (d: Data) => formatDate(d.sale_start),
   MINT_LIMIT: (d: Data) => d.mintLimit,
+  MINT_PRICE: (d: Data) => NEAR.from(d.price).mul(NEAR.from('' + (d.numberToMint ?? 1))).toHuman(),
   MINT_RATE_LIMIT: (d: Data) => d.mintRateLimit,
   INITIAL_COUNT: (d: Data) => d.token_final_supply,
 } as const
@@ -89,7 +91,10 @@ const actions = {
     trigger: 'click',
   }),
   'SIGN_IN': signIn,
-  'MINT': (d: Data) => TenK.nft_mint_many({ num: d.numberToMint ?? 1 }),
+  'MINT': (d: Data) => TenK.nft_mint_many({ num: d.numberToMint ?? 1 }, {
+    gas: Gas.parse('20 Tgas').mul(Gas.from('' + d.numberToMint)),
+    attachedDeposit: NEAR.from(d.price).mul(NEAR.from('' + d.numberToMint)),
+  }),
   'GO_TO_PARAS': () => window.open(`https://paras.id/search?q=${settings.contractName}&sort=priceasc&pmin=.01&is_verified=true`),
 }
 

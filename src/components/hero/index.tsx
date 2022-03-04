@@ -52,7 +52,7 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
             </p>
           )}
           <button className={css.cta}>
-            {fill(hero.cta, data)}
+            {fill(hero.cta, { ...data, numberToMint })}
           </button>
         </form>
       )}

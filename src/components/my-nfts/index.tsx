@@ -9,9 +9,11 @@ import * as css from './my-nfts.module.css'
 const MyNFTs: React.FC<{}> = () => {
   const currentUser = wallet.getAccountId()
   const { locale } = useLocales()
-  const { nfts } = useTenk()
+  const { contractMetadata, nfts } = useTenk()
 
-  if (!locale || !currentUser || nfts.length === 0) return null
+  if (!locale || !currentUser || !contractMetadata || nfts.length === 0) return null
+
+  const { base_uri } = contractMetadata
 
   return (
     <Section>
@@ -19,7 +21,10 @@ const MyNFTs: React.FC<{}> = () => {
       <div className={css.grid}>
         {nfts.map(nft => (
           <div key={nft.token_id}>
-            <img alt={nft.metadata?.description} src={nft.metadata?.media} />
+            <img
+              alt={nft.metadata?.description}
+              src={`${base_uri ?? ''}${nft.metadata?.media}`}
+            />
             #{nft.token_id}
           </div>
         ))}
