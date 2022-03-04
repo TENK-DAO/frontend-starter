@@ -1,16 +1,28 @@
 /* This is a CSS Module; see https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/ */
 .nav {
   align-items: center;
-  display: grid;
-  gap: var(--spacing-l);
-  grid-template-columns: 1fr auto;
-  padding-bottom: var(--spacing-m);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-s) var(--spacing-m);
+  justify-content: space-between;
+  padding-bottom: var(--spacing-l);
   padding-top: var(--spacing-m);
 }
 
+.social,
 .title {
   display: flex;
   align-items: center;
+}
+
+.social {
+  gap: var(--spacing-s);
+}
+
+.social object {
+  height: var(--spacing-m);
+  width: var(--spacing-m);
+  vertical-align: middle;
 }
 
 .title svg,
@@ -18,10 +30,4 @@
   display: inline-block;
   height: var(--fs-heading-1);
   width: var(--fs-heading-1);
-}
-
-.right {
-  align-items: center;
-  display: flex;
-  gap: var(--spacing-l);
 }

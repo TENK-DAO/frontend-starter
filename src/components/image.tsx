@@ -73,6 +73,6 @@ export default function ({ src, ...props }: Props) {
       )
     )
   }
-  // if we make it here, we couldn't figure out how to render the image :(
+  console.error(new Error(`Image ${src} found, but don't know how to render it :(\n\nImage data: ${image}`))
   return <span>🖼</span>
 }
