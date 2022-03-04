@@ -12,7 +12,7 @@ type Data = Omit<SaleInfo, 'status'> & {
   currentUser: string
   locale: Locale
   mintLimit: number
-  mintRateLimit: number
+  mintRateLimit?: number
   numberToMint?: number
   saleStatus: typeof saleStatuses[number]
   userStatus: typeof userStatuses[number]

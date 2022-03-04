@@ -28,17 +28,22 @@ export default function useTenk() {
     vip: boolean
     mintLimit: number
     nfts: Token[]
-    mintRateLimit: number
+    mintRateLimit?: number
   }>({
     saleInfo: stubSaleInfo,
     vip: false,
     mintLimit: 0,
     nfts: [],
-    mintRateLimit: 10,
   })
   React.useEffect(() => {
     rpcCalls.then(([saleInfo, vip, mintLimit, nfts, mintRateLimit ]) => {
-      setData({ saleInfo, vip, mintLimit: mintLimit ?? 0, nfts, mintRateLimit })
+      setData({
+        saleInfo,
+        vip,
+        mintLimit: mintLimit ?? 0,
+        nfts,
+        mintRateLimit: mintRateLimit ?? undefined
+      })
     })
   }, [])
   return data
