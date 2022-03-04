@@ -4,21 +4,25 @@ import { act, can, fill } from '../../../lib/locales/runtimeUtils'
 import { wallet } from "../../near"
 import Section from '../section'
 import Markdown from "../markdown"
-import useLocales from '../../hooks/useLocales'
 import useHeroStatuses from '../../hooks/useHeroStatuses'
 import useTenk from '../../hooks/useTenk'
+import useLocales from '../../hooks/useLocales'
 import * as css from './hero.module.css'
 
 const currentUser = wallet.getAccountId()
 
 const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
+  const { locale } = useLocales()
   const { saleInfo, mintLimit, mintRateLimit } = useTenk()
   const { saleStatus, userStatus } = useHeroStatuses()
   const [numberToMint, setNumberToMint] = React.useState(1)
   const hero = heroTree[saleStatus][userStatus]
 
+  if (!locale) return null
+
   const data = {
     ...saleInfo,
+    locale,
     saleStatus,
     userStatus,
     mintLimit,
