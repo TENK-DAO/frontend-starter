@@ -5,8 +5,7 @@
   flex-wrap: wrap;
   gap: var(--spacing-s) var(--spacing-m);
   justify-content: space-between;
-  padding-bottom: var(--spacing-l);
-  padding-top: var(--spacing-m);
+  padding: var(--spacing-l);
 }
 
 .social,

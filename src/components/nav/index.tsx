@@ -17,7 +17,7 @@ export default function Nav() {
   const { locale } = useLocales()
   if (!locale) return null
   return (
-    <nav className={`container ${css.nav}`}>
+    <nav className={css.nav}>
       <h1 className={css.title}>
         <svg
           viewBox="0 0 288 288"
