@@ -1,9 +1,9 @@
 {
-  "name": "tenk-template-gatsby",
+  "name": "frontend-starter",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Template for NFT Launches on TenK",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Chad Ostrowski <chad@ahalabs.dev>",
   "dependencies": {
     "@fontsource/montserrat": "^4.5.4",
     "@radix-ui/react-dropdown-menu": "0.1.4",
