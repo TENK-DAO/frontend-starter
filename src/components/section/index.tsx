@@ -1,10 +1,14 @@
 import * as React from "react"
-import Image from "../image"
+import Image, { ImageProps } from "../image"
 import type { Hero, SectionI18n } from "../../../lib/locales/Locale"
 
 import * as css from "./section.module.css"
 
-const Section: React.FC<{ backgroundColor?: string, backgroundImage?: string, image?: string }> = ({
+const Section: React.FC<{
+  backgroundColor?: string,
+  backgroundImage?: string | ImageProps,
+  image?: string | ImageProps
+}> = ({
   backgroundColor, backgroundImage, image, children
 }) => (
   <section
@@ -13,7 +17,10 @@ const Section: React.FC<{ backgroundColor?: string, backgroundImage?: string, im
       backgroundColor: backgroundColor,
     }}
   >
-    {backgroundImage && <Image src={backgroundImage} alt="" />}
+    {backgroundImage && (typeof backgroundImage === 'string'
+      ? <Image src={backgroundImage} alt="" />
+      : <Image {...backgroundImage} />
+    )}
     {/* following div is styled by `css.section` to overlap backgroundImage */}
     <div>
       <div className="container">
@@ -21,7 +28,10 @@ const Section: React.FC<{ backgroundColor?: string, backgroundImage?: string, im
           <div>
             {children}
           </div>
-          {image && <Image src={image} alt="" />}
+          {image && (typeof image === 'string'
+            ? <Image src={image} alt="" />
+            : <Image {...image} />
+          )}
         </div>
       </div>
     </div>

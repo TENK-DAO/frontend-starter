@@ -30,7 +30,19 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
   }
 
   return (
-    <Section {...hero}>
+    <Section
+      backgroundColor={hero.backgroundColor}
+      backgroundImage={!hero.backgroundImage ? undefined : {
+        src: hero.backgroundImage,
+        loading: "eager",
+        alt: "",
+      }}
+      image={!hero.image ? undefined : {
+        src: hero.image,
+        loading: "eager",
+        alt: "",
+      }}
+    >
       <Markdown children={fill(hero.title, data)} components={{ p: 'h1' }} />
       <Markdown children={fill(hero.body, data)} />
       {hero.ps && <Markdown children={fill(hero.ps, data)} />}

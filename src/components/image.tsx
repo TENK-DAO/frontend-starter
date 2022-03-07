@@ -1,32 +1,38 @@
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { getImage, GatsbyImage } from "gatsby-plugin-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 import type { GatsbyImageProps } from "gatsby-plugin-image"
 import type { AllImagesQuery } from "../../graphql-types"
 
-type Props = Omit<GatsbyImageProps, "image"> & {
+export type ImageProps = Omit<GatsbyImageProps, "image"> & {
   src: string
 }
 
 /**
- * Gatsby optimizes images well, but makes it REALLY hard to actually use them.
- * You have to use a static query, meaning NO VARIABLES, and the fact that you
- * have to use GraphQL at all is just really unfortunate.
- *
- * But! This component simplifies it all for you. Just pass the name of one of
- * the files in `PROJECT_ROOT/images` and this component will take care of the
- * rest.
+ * Simple image handling for Gatsby! Pass in the name of a file in
+ * `config/images`, and this will render it correctly. It will render it either
+ * as an SVG using the gatsby-transformer-inline-svg plugin, or using
+ * GatsbyImage.
  */
-export default function ({ src, ...props }: Props) {
+export default function ({ src, ...props }: ImageProps) {
   const {
-    allFile: { nodes: images },
+    svg: { nodes: svgs },
+    nonSvg: { nodes: images },
   }: AllImagesQuery = useStaticQuery(
     graphql`
       query AllImages {
-        allFile(filter: { sourceInstanceName: { eq: "images" } }) {
+        svg: allFile(filter: { sourceInstanceName: { eq: "images" }, extension: { eq: "svg" } }) {
           nodes {
             relativePath
-            publicURL
+            svg {
+              content
+              dataURI
+            }
+          }
+        }
+        nonSvg: allFile(filter: { sourceInstanceName: { eq: "images" }, extension: { ne: "svg" } }) {
+          nodes {
+            relativePath
             childImageSharp {
               gatsbyImageData
             }
@@ -35,44 +41,36 @@ export default function ({ src, ...props }: Props) {
       }
     `
   )
+
+  const svg = svgs.find(s => s.relativePath === src)
+
+  if (svg) {
+    if (svg.svg?.content) {
+      // Inlined SVGs
+      return <div dangerouslySetInnerHTML={{ __html: svg.svg.content }} />
+    }
+    // SVGs that can/should not be inlined
+    return <img src={svg.svg?.dataURI ?? undefined} alt={props.alt} />
+  }
+
   const image = images.find(i => i.relativePath === src)
-  if (image) {
-    if (image.childImageSharp) {
-      if (image.childImageSharp?.gatsbyImageData) {
-        return (
-          <GatsbyImage
-            image={image.childImageSharp.gatsbyImageData}
-            {...props}
-          />
-        )
-      } else {
-        console.error(
-          new Error(
-            `childImageSharp defined but does not have gatsbyImageData! Found image: ${image}`
-          )
-        )
-      }
-    }
-    if (image.publicURL) {
-      if (/\.svg$/.test(src)) {
-        return <object tabIndex={-1} type="image/svg+xml" data={image.publicURL}></object>
-      }
-      return <img src={image.publicURL} {...props} />
-    }
+
+  if (!image) {
     console.error(
       new Error(
-        `Don't know how to render image; maybe need to query more attributes and read some docs? image: ${image}`
-      )
-    )
-  } else {
-    console.error(
-      new Error(
-        `No image "${src}" in PROJECT_ROOT/images. Set "src" to one of the following:\n  • ${images
+        `No image "${src}" in PROJECT_ROOT/config/images. Set "src" to one of the following:\n  • ${images
           .map(i => i.relativePath)
           .join("\n  • ")}`
       )
     )
+    return null
   }
-  console.error(new Error(`Image ${src} found, but don't know how to render it :(\n\nImage data: ${image}`))
-  return <span>🖼</span>
+
+  return (
+    <GatsbyImage
+      image={image.childImageSharp?.gatsbyImageData}
+      objectFit="contain"
+      {...props}
+    />
+  )
 }

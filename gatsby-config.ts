@@ -23,6 +23,7 @@ export const plugins = [
       path: `${__dirname}/config/i18n`,
     },
   },
+  `gatsby-transformer-inline-svg`,
   {
     resolve: `gatsby-source-filesystem`,
     options: {
@@ -30,27 +31,18 @@ export const plugins = [
       path: `${__dirname}/config/images`,
     },
   },
-  `gatsby-plugin-image`,
-  `gatsby-transformer-sharp`,
   {
     // See https://www.gatsbyjs.com/plugins/gatsby-plugin-image/
     resolve: `gatsby-plugin-sharp`,
     options: {
       defaults: {
-        formats: [`auto`, `webp`],
-        placeholder: `dominantColor`,
-        quality: 50,
-        breakpoints: [750, 1080, 1366, 1920],
-        backgroundColor: `transparent`,
-        tracedSVGOptions: {},
-        blurredOptions: {},
-        jpgOptions: {},
-        pngOptions: {},
-        webpOptions: {},
-        avifOptions: {},
+        formats: [`auto`, `avif`, `webp`],
+        placeholder: `blurred`,
       },
     },
   },
+  `gatsby-transformer-sharp`,
+  `gatsby-plugin-image`,
   {
     resolve: `gatsby-plugin-manifest`,
     options: {

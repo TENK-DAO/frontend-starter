@@ -31,6 +31,7 @@
     "gatsby-plugin-sass": "^5.7.0",
     "gatsby-plugin-sharp": "^4.5.2",
     "gatsby-source-filesystem": "^4.5.2",
+    "gatsby-transformer-inline-svg": "^1.1.0",
     "gatsby-transformer-json": "^4.5.0",
     "gatsby-transformer-sharp": "^4.5.0",
     "node-sass": "6",
