@@ -1,4 +1,5 @@
 lib/locales/Locale.validator.ts linguist-generated=true -diff
 src/near/contracts/tenk.ts linguist-generated=true -diff
+src/hooks/stale-data-from-build-time.json linguist-generated=true -diff
 yarn.lock linguist-generated=true -diff
 **/docs/**/* linguist-generated=true -diff
