@@ -18,7 +18,7 @@
   gap: var(--spacing-s);
 }
 
-.social object {
+.social svg {
   height: var(--spacing-m);
   width: var(--spacing-m);
   vertical-align: middle;
