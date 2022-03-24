@@ -43,7 +43,7 @@
   "keywords": [
     "gatsby"
   ],
-  "license": "0BSD",
+  "license": "LGPL-3.0",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
