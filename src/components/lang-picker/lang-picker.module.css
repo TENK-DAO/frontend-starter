@@ -7,6 +7,13 @@
   left: var(--spacing-s);
   top: 50%;
   transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.globe svg {
+  height: 1em;
+  width: 1em;
 }
 
 .select {
