@@ -14,13 +14,14 @@ const stubSaleInfo: SaleInfo = {
   price: '0',
 }
 
-interface TenkData {
-  saleInfo: SaleInfo
+export interface TenkData {
   contractMetadata?: NftContractMetadata
-  vip: boolean
   mintLimit: number
-  nfts: Token[]
   mintRateLimit?: number
+  nfts: Token[]
+  saleInfo: SaleInfo
+  tokensLeft?: number
+  vip: boolean
 }
 
 // initialize calls at root of file so that first evaluation of this file causes
@@ -28,6 +29,7 @@ interface TenkData {
 const rpcCalls = Promise.all([
   TenK.get_sale_info(),
   TenK.nft_metadata(),
+  TenK.tokens_left(),
   !account_id ? undefined : TenK.whitelisted({ account_id }),
   !account_id ? undefined : TenK.remaining_allowance({ account_id }),
   !account_id ? undefined : TenK.nft_tokens_for_owner({ account_id }),
@@ -40,6 +42,7 @@ export async function rpcData(): Promise<TenkData> {
   const [
     saleInfo,
     contractMetadata,
+    tokensLeft,
     vip,
     mintLimit,
     nfts,
@@ -48,6 +51,7 @@ export async function rpcData(): Promise<TenkData> {
   return {
     saleInfo,
     contractMetadata,
+    tokensLeft,
     vip: vip ?? false,
     mintLimit: mintLimit ?? 0,
     nfts: nfts ?? [],

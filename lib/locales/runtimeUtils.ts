@@ -3,17 +3,15 @@ import { addToCalendar } from "add-to-calendar-button"
 import settings from '../../config/settings.json'
 import { signIn } from '../../src/near'
 import { TenK } from '../../src/near/contracts'
-import { SaleInfo } from '../../src/near/contracts/tenk'
+import { TenkData } from "../../src/hooks/useTenk"
 import { saleStatuses, userStatuses } from './Locale'
 import { Locale } from '../../src/hooks/useLocales'
 
 type Timestamp = number
 
-type Data = Omit<SaleInfo, 'status'> & {
+type Data = TenkData & {
   currentUser: string
   locale: Locale
-  mintLimit: number
-  mintRateLimit?: number
   numberToMint?: number
   saleStatus: typeof saleStatuses[number]
   userStatus: typeof userStatuses[number]
@@ -39,12 +37,13 @@ function formatDate(
 
 const replacers = {
   CURRENT_USER: (d: Data) => d.currentUser,
-  PRESALE_START: (d: Data) => formatDate(d.presale_start),
-  SALE_START: (d: Data) => formatDate(d.sale_start),
+  PRESALE_START: (d: Data) => formatDate(d.saleInfo.presale_start),
+  SALE_START: (d: Data) => formatDate(d.saleInfo.sale_start),
   MINT_LIMIT: (d: Data) => d.mintLimit,
-  MINT_PRICE: (d: Data) => NEAR.from(d.price).mul(NEAR.from('' + (d.numberToMint ?? 1))).toHuman(),
+  MINT_PRICE: (d: Data) => NEAR.from(d.saleInfo.price).mul(NEAR.from('' + (d.numberToMint ?? 1))).toHuman(),
   MINT_RATE_LIMIT: (d: Data) => d.mintRateLimit,
-  INITIAL_COUNT: (d: Data) => d.token_final_supply,
+  INITIAL_COUNT: (d: Data) => d.saleInfo.token_final_supply,
+  REMAINING_COUNT: (d: Data) => d.tokensLeft,
 } as const
 
 export const placeholderStrings = Object.keys(replacers)
@@ -78,14 +77,14 @@ function getStartAndEnd(d: Timestamp) {
 const actions = {
   'ADD_TO_CALENDAR(SALE_START)': (d: Data) => addToCalendar({
     name: d.locale.calendarEvent!,
-    ...getStartAndEnd(d.sale_start),
+    ...getStartAndEnd(d.saleInfo.sale_start),
     options: ['Google', 'iCal', 'Apple', 'Microsoft365', 'MicrosoftTeams', 'Outlook.com', 'Yahoo'],
     timeZone: "UTC",
     trigger: 'click',
   }),
   'ADD_TO_CALENDAR(PRESALE_START)': (d: Data) => addToCalendar({
     name: d.locale.calendarEvent!,
-    ...getStartAndEnd(d.presale_start),
+    ...getStartAndEnd(d.saleInfo.presale_start),
     options: ['Google', 'iCal', 'Apple', 'Microsoft365', 'MicrosoftTeams', 'Outlook.com', 'Yahoo'],
     timeZone: "UTC",
     trigger: 'click',
@@ -93,7 +92,7 @@ const actions = {
   'SIGN_IN': signIn,
   'MINT': (d: Data) => TenK.nft_mint_many({ num: d.numberToMint ?? 1 }, {
     gas: Gas.parse('20 Tgas').mul(Gas.from('' + d.numberToMint)),
-    attachedDeposit: NEAR.from(d.price).mul(NEAR.from('' + d.numberToMint)),
+    attachedDeposit: NEAR.from(d.saleInfo.price).mul(NEAR.from('' + d.numberToMint)),
   }),
   'GO_TO_PARAS': () => window.open(`https://paras.id/search?q=${settings.contractName}&sort=priceasc&pmin=.01&is_verified=true`),
 }
