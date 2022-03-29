@@ -20,12 +20,13 @@ const MyNFTs: React.FC<{}> = () => {
       <h1>{locale.myNFTs}</h1>
       <div className={css.grid}>
         {nfts.map(nft => (
-          <div key={nft.token_id}>
-            <img
-              alt={nft.metadata?.description}
-              src={`${base_uri ?? ''}${nft.metadata?.media}`}
-            />
-            #{nft.token_id}
+          <div
+            key={nft.token_id}
+            className={css.nft}
+          >
+            <div style={{ backgroundImage: `url("${base_uri ?? ''}${nft.metadata?.media}")` }} />
+            <span className="visually-hidden">{nft.metadata?.description}</span>
+            <footer>#{nft.token_id}</footer>
           </div>
         ))}
       </div>
