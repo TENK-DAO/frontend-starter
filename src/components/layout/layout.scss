@@ -199,6 +199,7 @@ button,
   display: inline-block;
   font-size: inherit;
   font-weight: var(--fw-bold);
+  position: relative;
 }
 
 input,
@@ -225,7 +226,6 @@ button:focus,
 }
 button:active,
 .button:active {
-  position: relative;
   top: 2px;
 }
 button.secondary,
