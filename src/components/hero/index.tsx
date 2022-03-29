@@ -31,11 +31,7 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
   return (
     <Section
       backgroundColor={hero.backgroundColor}
-      backgroundImage={!hero.backgroundImage ? undefined : {
-        src: hero.backgroundImage,
-        loading: "eager",
-        alt: "",
-      }}
+      backgroundImage={hero.backgroundImage}
       image={!hero.image ? undefined : {
         src: hero.image,
         loading: "eager",

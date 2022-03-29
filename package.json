@@ -9,6 +9,8 @@
     "@radix-ui/react-dropdown-menu": "0.1.4",
     "add-to-calendar-button": "AhaLabs/add-to-calendar-button#develop",
     "bn.js": "^5.2.0",
+    "gatsby-background-image": "^1.6.0",
+    "gbimage-bridge": "^0.2.1",
     "near-api-js": "AhaLabs/near-api-js#1.0.1",
     "near-units": "^0.1.9",
     "react": "^17.0.1",
