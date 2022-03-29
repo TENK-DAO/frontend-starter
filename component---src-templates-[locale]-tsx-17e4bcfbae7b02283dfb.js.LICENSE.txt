@@ -5,6 +5,11 @@
  * @license  MIT
  */
 
+/*!
+ * html-attributes
+ * https://github.com/alexmingoia/html-attributes
+ */
+
 /** @license React v17.0.2
  * react-is.production.min.js
  *
