@@ -6,9 +6,18 @@
 }
 
 .nft {
+  color: inherit;
+  padding: 0;
+  margin: 0;
+  border: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.nft:hover,
+.nft:focus {
+  box-shadow: none;
+  top: -2px;
 }
 
 .nft > div:first-child {

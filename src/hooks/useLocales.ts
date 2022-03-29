@@ -2,9 +2,12 @@ import { useStaticQuery, graphql } from "gatsby"
 import { useLocation } from "@reach/router"
 import type { AllLocalesQuery } from "../../graphql-types"
 
-type I18n = AllLocalesQuery["allFile"]["nodes"][number]["childI18NJson"]
-export type Locale = NonNullable<I18n> & {
+type I18n = NonNullable<AllLocalesQuery["allFile"]["nodes"][number]["childI18NJson"]>
+
+export type Locale = {
   id: string
+} & {
+  [K in keyof I18n]: NonNullable<I18n[K]>
 }
 
 /**
@@ -31,6 +34,11 @@ export default function useLocales(): { locales: Locale[]; locale?: Locale } {
               connectWallet
               signOut
               myNFTs
+              nextNFT
+              prevNFT
+              close
+              zoomIn
+              zoomOut
             }
           }
         }
@@ -42,7 +50,7 @@ export default function useLocales(): { locales: Locale[]; locale?: Locale } {
   const locales = allFile.nodes.map(node => ({
     id: node.name,
     ...node.childI18NJson!,
-  }))
+  }) as Locale) // type coercion removes the `| null` that GraphQL includes
 
   const locale = locales.find(l => new RegExp(`/${l.id}`).test(pathname))
 

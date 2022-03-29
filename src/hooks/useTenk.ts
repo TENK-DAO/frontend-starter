@@ -1,17 +1,13 @@
 import React from "react"
-import { NftContractMetadata, SaleInfo, Status, Token } from "../near/contracts/tenk"
+import { NftContractMetadata, SaleInfo, Token as RawToken } from "../near/contracts/tenk"
 import { TenK } from "../near/contracts"
 import { wallet } from "../near"
 import staleData from "./stale-data-from-build-time.json"
 
 const account_id = wallet.getAccountId()
 
-const stubSaleInfo: SaleInfo = {
-  status: Status.Closed,
-  presale_start: 1648771200000, // 2022-04-01T00:00:00Z
-  sale_start: 1648774800000, // 2022-04-01T01:00:00Z
-  token_final_supply: 0,
-  price: '0',
+type Token = RawToken & {
+  media: string
 }
 
 export interface TenkData {
@@ -54,7 +50,9 @@ export async function rpcData(): Promise<TenkData> {
     tokensLeft,
     vip: vip ?? false,
     mintLimit: mintLimit ?? 0,
-    nfts: nfts ?? [],
+    nfts: nfts?.map(nft => ({ ...nft,
+      media: `${contractMetadata.base_uri ?? ''}${nft.metadata?.media}`
+    })) ?? [],
     mintRateLimit: mintRateLimit ?? undefined,
   }
 }

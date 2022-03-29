@@ -89,6 +89,9 @@ export const LocaleSchema = {
     calendarEvent: {
       type: "string",
     },
+    close: {
+      type: "string",
+    },
     connectWallet: {
       type: "string",
     },
@@ -343,6 +346,12 @@ export const LocaleSchema = {
     myNFTs: {
       type: "string",
     },
+    nextNFT: {
+      type: "string",
+    },
+    prevNFT: {
+      type: "string",
+    },
     signOut: {
       type: "string",
     },
@@ -352,17 +361,28 @@ export const LocaleSchema = {
     viewIn: {
       type: "string",
     },
+    zoomIn: {
+      type: "string",
+    },
+    zoomOut: {
+      type: "string",
+    },
   },
   required: [
     "calendarEvent",
+    "close",
     "connectWallet",
     "description",
     "hero",
     "langPicker",
     "myNFTs",
+    "nextNFT",
+    "prevNFT",
     "signOut",
     "title",
     "viewIn",
+    "zoomIn",
+    "zoomOut",
   ],
   type: "object",
 }

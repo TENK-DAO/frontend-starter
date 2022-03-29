@@ -60,6 +60,11 @@ export default interface Locale {
   connectWallet: string
   signOut: string
   myNFTs: string
+  nextNFT: string
+  prevNFT: string
+  close: string
+  zoomIn: string
+  zoomOut: string
   hero: RawHeroTree
   extraSections?: SectionI18n[]
 }

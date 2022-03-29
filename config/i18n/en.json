@@ -7,6 +7,11 @@
   "connectWallet": "Connect Wallet",
   "signOut": "Sign Out",
   "myNFTs": "My NFTs",
+  "nextNFT": "Next NFT",
+  "prevNFT": "Previous NFT",
+  "close": "Close",
+  "zoomIn": "Zoom In",
+  "zoomOut": "Zoom Out",
   "hero": {
     "backgroundImage": "hero-bg.svg",
     "image": "hero.png",
