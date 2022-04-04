@@ -34,6 +34,7 @@ export default function useImageData(src: string): SvgOrImage {
         nonSvg: allFile(filter: { sourceInstanceName: { eq: "images" }, extension: { ne: "svg" } }) {
           nodes {
             relativePath
+            publicURL
             childImageSharp {
               gatsbyImageData
             }
