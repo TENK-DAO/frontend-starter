@@ -51,7 +51,7 @@ export async function rpcData(): Promise<TenkData> {
     vip: vip ?? false,
     mintLimit: mintLimit ?? 0,
     nfts: nfts?.map(nft => ({ ...nft,
-      media: `${contractMetadata.base_uri ?? ''}${nft.metadata?.media}`
+      media: new URL(nft.metadata?.media ?? '', contractMetadata.base_uri ?? '').href
     })) ?? [],
     mintRateLimit: mintRateLimit ?? undefined,
   }
