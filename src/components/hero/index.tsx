@@ -55,7 +55,7 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
             <p className={css.setNumber}>
               <label htmlFor="numberToMint">{hero.setNumber}</label>
               <input
-                max={tenkData.mintRateLimit}
+                max={tenkData.remainingAllowance ?? tenkData.mintRateLimit}
                 min={1}
                 onChange={e => setNumberToMint(parseInt(e.target.value))}
                 value={numberToMint}

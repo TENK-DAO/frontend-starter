@@ -39,7 +39,7 @@ const replacers = {
   CURRENT_USER: (d: Data) => d.currentUser,
   PRESALE_START: (d: Data) => formatDate(d.saleInfo.presale_start),
   SALE_START: (d: Data) => formatDate(d.saleInfo.sale_start),
-  MINT_LIMIT: (d: Data) => d.mintLimit,
+  MINT_LIMIT: (d: Data) => d.remainingAllowance ?? 0,
   MINT_PRICE: (d: Data) => NEAR.from(d.saleInfo.price).mul(NEAR.from('' + (d.numberToMint ?? 1))).toHuman(),
   MINT_RATE_LIMIT: (d: Data) => d.mintRateLimit,
   INITIAL_COUNT: (d: Data) => d.saleInfo.token_final_supply,
@@ -106,7 +106,10 @@ export function act(action: Action, data: Data): void {
 export function can(action: Action, data: Data): boolean {
   if (action === 'MINT') {
     return Boolean(data.currentUser) && (
-      (data.saleStatus === 'presale' && data.mintLimit > 0) ||
+      (data.saleStatus === 'presale' &&
+        data.remainingAllowance !== undefined &&
+        data.remainingAllowance > 0
+      ) ||
       (data.saleStatus === 'saleOpen')
     )
   }
