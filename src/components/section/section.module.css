@@ -5,22 +5,10 @@
 
 .content {
   place-items: center;
-  grid-template-columns: 5fr 1fr;
-  grid-gap: var(--spacing-l);
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-s);
 }
 
-.content.hasImage {
+.content.hasMedia {
   display: grid;
-}
-
-@media (min-width: 450px) {
-  .content {
-    grid-template-columns: 3fr 1fr;
-  }
-}
-
-@media (min-width: 600px) {
-  .content {
-    grid-template-columns: 2fr 1fr;
-  }
 }
