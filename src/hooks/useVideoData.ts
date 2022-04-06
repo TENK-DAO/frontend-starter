@@ -2,19 +2,13 @@ import { useStaticQuery, graphql } from "gatsby"
 import type { AllVideosQuery } from "../../graphql-types"
 
 type VideoQuery = AllVideosQuery['allFile']['videos'][number]
-type VideoVP9 = NonNullable<VideoQuery['videoVP9']>
 type VideoH264 = NonNullable<VideoQuery['videoH264']>
-
-type VP9 = {
-  [K in keyof VideoVP9]: NonNullable<VideoVP9[K]>
-}
 
 type H264 = {
   [K in keyof VideoH264]: NonNullable<VideoH264[K]>
 }
 
 type VideoData = {
-  videoVP9: VP9
   videoH264: H264
 }
 
@@ -45,21 +39,6 @@ export default function useImageData(src: string): VideoData  {
               width
               startTime
             }
-            videoVP9 {
-              width
-              startTime
-              size
-              path
-              name
-              height
-              formatName
-              formatLongName
-              ext
-              duration
-              bitRate
-              aspectRatio
-              absolutePath
-            }
           }
         }
       }
@@ -76,14 +55,13 @@ export default function useImageData(src: string): VideoData  {
     )
   }
 
-  if (!video.videoH264 || !video.videoVP9) {
+  if (!video.videoH264) {
     throw new Error(
-      `Video "PROJECT_ROOT/config/videos/${src}" returned bad data; expected videoH264 and videoVP9 to both be present, got: ${JSON.stringify(video)}`
+      `Video "PROJECT_ROOT/config/videos/${src}" returned bad data; expected videoH264 to both be present, got: ${JSON.stringify(video)}`
     )
   }
 
   return {
     videoH264: video.videoH264 as H264,
-    videoVP9: video.videoVP9 as VP9,
   }
 }
