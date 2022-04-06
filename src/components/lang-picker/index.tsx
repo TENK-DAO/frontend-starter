@@ -5,7 +5,7 @@ import * as css from "./lang-picker.module.css"
 
 export default function LangPicker() {
   const { locales, locale } = useLocales()
-  if (!locale) return null
+  if (!locale || locales.length <= 1) return null
   return (
     <div className={css.wrap}>
       <div className={css.globe}>
