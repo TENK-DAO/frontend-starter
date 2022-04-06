@@ -1,5 +1,5 @@
 import { Gas, NEAR } from 'near-units'
-import { addToCalendar } from "add-to-calendar-button"
+import { atcb_action as addToCalendar } from "add-to-calendar-button"
 import settings from '../../config/settings.json'
 import { signIn } from '../../src/near'
 import { TenK } from '../../src/near/contracts'

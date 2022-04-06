@@ -7,7 +7,7 @@ import { rpcData } from "./src/hooks/useTenk"
 export const onPreInit: GatsbyNode["onPreInit"] = async () => {
   const data = await rpcData()
   fs.writeFileSync(
-    path.join(__dirname, './src/hooks/stale-data-from-build-time.json'),
+    path.join(process.cwd(), './src/hooks/stale-data-from-build-time.json'),
     JSON.stringify(data)
   )
 }

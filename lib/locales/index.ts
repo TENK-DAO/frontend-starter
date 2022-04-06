@@ -93,6 +93,7 @@ function alphabeticOrder({ id: a }: DecoratedLocale, { id: b }: DecoratedLocale)
   }
 }
 
+console.log('lib/locales/index.ts', { cwd: process.cwd() })
 const localesDirectory = path.join(process.cwd(), "config/i18n")
 
 let fileNames: string[]
