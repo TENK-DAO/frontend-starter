@@ -59,6 +59,9 @@ export const LocaleSchema = {
         title: {
           type: "string",
         },
+        video: {
+          type: "string",
+        },
       },
       type: "object",
     },
@@ -78,6 +81,9 @@ export const LocaleSchema = {
         text: {
           description:
             "This file specifies the exact shape of data required in the locales files\nlocated in `config/locales/*.json`\n\nWe then use `typescript-json-validator` to generate a JSON validator based on\nthese types, which lives in `./Locale.validator.ts`",
+          type: "string",
+        },
+        video: {
           type: "string",
         },
       },
@@ -160,6 +166,9 @@ export const LocaleSchema = {
             title: {
               type: "string",
             },
+            video: {
+              type: "string",
+            },
             vip: {
               $ref: "#/definitions/Partial<Hero>",
             },
@@ -224,6 +233,9 @@ export const LocaleSchema = {
             title: {
               type: "string",
             },
+            video: {
+              type: "string",
+            },
             vip: {
               $ref: "#/definitions/Partial<Hero>",
             },
@@ -276,6 +288,9 @@ export const LocaleSchema = {
             title: {
               type: "string",
             },
+            video: {
+              type: "string",
+            },
             vip: {
               $ref: "#/definitions/Partial<Hero>",
             },
@@ -325,6 +340,9 @@ export const LocaleSchema = {
             title: {
               type: "string",
             },
+            video: {
+              type: "string",
+            },
             vip: {
               $ref: "#/definitions/Partial<Hero>",
             },
@@ -335,6 +353,9 @@ export const LocaleSchema = {
           type: "string",
         },
         title: {
+          type: "string",
+        },
+        video: {
           type: "string",
         },
       },

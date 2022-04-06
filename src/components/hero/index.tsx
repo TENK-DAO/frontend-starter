@@ -37,6 +37,11 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
         loading: "eager",
         alt: "",
       }}
+      video={!hero.video ? undefined : {
+        src: hero.video,
+        loop: true,
+        autoPlay: true,
+      }}
     >
       <Markdown children={fill(hero.title, data)} components={{ p: 'h1' }} />
       <Markdown children={fill(hero.body, data)} />

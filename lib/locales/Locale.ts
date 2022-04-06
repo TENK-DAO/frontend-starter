@@ -22,6 +22,7 @@ export const optionalHeroFields = [
   'backgroundImage',
   'backgroundColor',
   'image',
+  'video',
   'ps',
   'setNumber',
 ] as const
@@ -47,6 +48,7 @@ export type RawHeroTree = Partial<Hero> & {
 export interface SectionI18n {
   text: Markdown
   image?: string
+  video?: string
   backgroundImage?: string
   backgroundColor?: string
 }
