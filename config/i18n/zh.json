@@ -32,14 +32,14 @@
       "vip": {
         "ps": "欢迎, CURRENT_USER! 白名单预售正在进行中. 公开销售时间为 SALE_START.\n\n 剩余购买额度: MINT_LIMIT",
         "setNumber": "购买数量",
-        "cta": "金额 MINT_PRICE",
+        "cta": "支付金额: MINT_PRICE",
         "action": "MINT"
       }
     },
     "saleOpen": {
       "ps": "Misfit 公开销售已启动!",
       "setNumber": "购买数量",
-      "cta": "金额 MINT_PRICE",
+      "cta": "支付金额: MINT_PRICE",
       "action": "MINT",
       "signedOut": {
         "action": "SIGN_IN"
