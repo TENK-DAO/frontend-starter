@@ -8,15 +8,16 @@ import * as css from "./section.module.css"
 const Section: React.FC<{
   backgroundColor?: string,
   backgroundImage?: string,
+  className?: string,
   image?: string | ImageProps
   video?: string | VideoProps
 }> = ({
-  backgroundColor, backgroundImage, image, video, children
+  backgroundColor, backgroundImage, className, image, video, children
 }) => (
   <BackgroundImage
     src={backgroundImage}
     Tag="section"
-    className={css.section}
+    className={`${css.section} ${className ?? ''}`}
     style={{ backgroundColor }}
   >
     <div className="container">
@@ -24,10 +25,12 @@ const Section: React.FC<{
         <div>
           {children}
         </div>
-        {video && (typeof video === 'string'
-          ? <Video src={video} />
-          : <Video {...video} />
-        )}
+        {video && <div>{
+          // wrap in div for proper styling
+          typeof video === 'string'
+              ? <Video src={video} />
+              : <Video {...video} />
+        }</div>}
         {image && (typeof image === 'string'
           ? <Image src={image} alt="" />
           : <Image {...image} />

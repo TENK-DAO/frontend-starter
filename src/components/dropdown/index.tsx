@@ -8,7 +8,7 @@ const Dropdown: React.FC<{
 }> = ({ trigger, items }) => {
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger className={css.trigger}>
+      <DropdownMenu.Trigger className={`secondary ${css.trigger}`}>
         {trigger}
       </DropdownMenu.Trigger>
 

@@ -49,8 +49,7 @@ $tertiary: #a463b0 !default;
   --input-height--small: 40px;
 
   /* Border Radius */
-  --br-base: 1000px;
-  --br-small: var(--base-spacing);
+  --br-base: 4px;
 
   /* Colors */
   /* TODO: move these base colors to settings.json or similar */
@@ -71,6 +70,7 @@ $tertiary: #a463b0 !default;
   --gray-6: #{adjust-color($black, $alpha: -0.4)};
   --gray-7: #{adjust-color($black, $alpha: -0.3)};
   --gray-8: #{adjust-color($black, $alpha: -0.2)};
+  --gray-9: #{adjust-color($black, $alpha: -0.1)};
 
   --red: #fc5b5b;
   @media (prefers-color-scheme: dark) {
@@ -85,6 +85,7 @@ $tertiary: #a463b0 !default;
     --gray-6: #{adjust-color($white, $alpha: -0.4)};
     --gray-7: #{adjust-color($white, $alpha: -0.3)};
     --gray-8: #{adjust-color($white, $alpha: -0.2)};
+    --gray-9: #{adjust-color($white, $alpha: -0.1)};
 
     --red: #ff8588;
   }
@@ -190,16 +191,14 @@ select {
 
 button,
 .button {
-  --color: #{$primary};
-  --color-shadow: #{soft(light($primary))};
-  background-color: transparent;
+  background-color: var(--fg);
   border-radius: var(--br-base);
-  border: 2px solid var(--color);
-  color: var(--color);
+  border: none;
+  color: var(--bg);
   cursor: pointer;
   display: inline-block;
   font-size: inherit;
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-regular);
   position: relative;
 }
 
@@ -207,7 +206,7 @@ input,
 select {
   background-color: var(--bg);
   border: 1px solid var(--gray-3);
-  border-radius: var(--br-small);
+  border-radius: var(--br-base);
   color: inherit;
 }
 
@@ -222,18 +221,27 @@ button:hover,
 .button:hover,
 button:focus,
 .button:focus {
-  box-shadow: 0 0 10px 4px var(--color-shadow);
+  background-color: var(--gray-9);
   text-decoration: none;
 }
 button:active,
 .button:active {
-  top: 2px;
+  top: 1px;
 }
 button.secondary,
 .button.secondary {
-  --color: #{$secondary};
-  --color-shadow: #{soft(light($secondary))};
+  background-color: transparent;
+  border: 1px solid var(--gray-3);
+  color: var(--fg);
 }
+button.secondary:focus,
+button.secondary:hover,
+.button.secondary:focus,
+.button.secondary:hover {
+  background-color: transparent;
+  border-color: var(--gray-5);
+}
+
 button.link,
 .button.link {
   background: none;

@@ -1,10 +1,10 @@
 {
   "viewIn": "View in English",
   "langPicker": "English",
-  "title": "Misfits",
-  "description": "NEAR's first PFP-style NFTs",
-  "calendarEvent": "Go Mint a Misfit!",
-  "connectWallet": "Connect Wallet",
+  "title": "Cool NFT Project",
+  "description": "This is the minting page for Cool NFT Project",
+  "calendarEvent": "Go Mint an NFT!",
+  "connectWallet": "Login with NEAR",
   "signOut": "Sign Out",
   "myNFTs": "My NFTs",
   "nextNFT": "Next NFT",
@@ -14,9 +14,9 @@
   "zoomOut": "Zoom Out",
   "hero": {
     "video": "pexels-olya-kobruseva-5236593.mp4",
-    "title": "The first fleet of the  \n*Metaverse*",
-    "body": "Join an Exclusive Community of NEAR early adopters and BUIDLers.",
-    "ps": "Misfits drop at SALE_START!",
+    "title": "Cool NFT Project",
+    "body": "This is a one-line description of the project.",
+    "ps": "NFTs drop at SALE_START!",
     "cta": "Add to Calendar",
     "action": "ADD_TO_CALENDAR(SALE_START)",
     "saleClosed": {
@@ -37,7 +37,7 @@
       }
     },
     "saleOpen": {
-      "ps": "Misfit Minting Has Begun! Misfits remaining: REMAINING_COUNT",
+      "ps": "Minting Has Begun! Misfits remaining: REMAINING_COUNT",
       "setNumber": "Number to mint",
       "cta": "Mint for MINT_PRICE",
       "action": "MINT",
@@ -47,16 +47,17 @@
     },
     "allSold": {
       "title": "All INITIAL_COUNT minted!",
-      "body": "The Misfits have all been created",
+      "body": "The NFTs have all been created",
       "ps": "",
-      "cta": "Buy Pre-Owned",
+      "cta": "Buy on Marketplace",
       "action": "GO_TO_PARAS"
     }
   },
   "extraSections": [
     {
-      "text": "# Introducing\n# NEAR Misfits (Gen 0)\n\n10,000 brave souls set out into the vast unknown to explore the Metaverse... Only 1,923 survived.\n\nThese Misfits are part of a Decentralised Special Operations crew from all over the world and all walks of life. A group of humans rising to the challenge of their times, coming together to build the Metaverse: challenge the status quo, push the boundaries of what is possible, build and contribute to enabling technology.",
-      "image": "learn.webp"
+      "className": "optional-section-class-name-for-styling",
+      "text": "# Introducing Cool NFT Project\n\nThis is a longer description of the project. About a paragraph long. Some [filler text](https://placehodler.shapelabs.co/) to demonstrate: Token standard surrendered some burned mnemonic phrase until some hot wallet because blockchain detected many pre-mine. It based on many automated token generation event, and when Tether formed some trustless in the FUD, Dogecoin slept on lots of anti-money laundering of many stale block!",
+      "image": "example.png"
     }
   ]
 }

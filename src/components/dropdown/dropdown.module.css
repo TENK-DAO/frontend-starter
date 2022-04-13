@@ -3,28 +3,20 @@
   background-repeat: no-repeat;
   background-position: bottom 50% right var(--spacing-s);
   background-size: var(--spacing-s);
-  border-radius: var(--br-small);
-  border: 1px solid var(--gray-3);
   padding-right: var(--spacing-l);
 }
 
-.trigger,
 .item {
-  border-radius: var(--br-small);
   color: inherit;
+  cursor: pointer;
   font-weight: var(--fw-regular);
+  padding: 0 var(--spacing-s);
 }
 
-.trigger:focus,
-.trigger:hover,
 .item:focus,
 .item:hover {
   box-shadow: none;
   outline: none;
-}
-.trigger:focus,
-.trigger:hover {
-  border-color: var(--gray-5);
 }
 .item:focus,
 .item:hover {
@@ -47,13 +39,8 @@
 
 .content {
   background-color: var(--bg);
-  border-radius: var(--br-small);
+  border-radius: var(--br-base);
   border: 1px solid var(--gray-4);
   box-shadow: rgba(22, 23, 24, 0.35) 0px 10px 38px -10px, rgba(22, 23, 24, 0.2) 0px 10px 20px -15px;
   padding: var(--spacing-xs);
-}
-
-.item {
-  cursor: pointer;
-  padding: 0 var(--spacing-s);
 }

@@ -1,10 +1,10 @@
 {
   "viewIn": "Ver en Español",
   "langPicker": "Español",
-  "title": "Misfitos",
+  "title": "Cool NFT Project",
   "description": "Los primeros NFTs de tipo \"PFP\" de NEAR",
-  "calendarEvent": "¡Crear un Misfito!",
-  "connectWallet": "Connectar Billeta",
+  "calendarEvent": "¡Crear un NFT!",
+  "connectWallet": "Iniciar Sesión con NEAR",
   "signOut": "Desconectar",
   "myNFTs": "Mi NFTs",
   "nextNFT": "Siguiente NFT",
@@ -14,8 +14,8 @@
   "zoomOut": "Disminuir el zoom",
   "hero": {
     "video": "pexels-olya-kobruseva-5236593.mp4",
-    "title": "El primero fleeto de la  \n*Metaverse*",
-    "body": "Joino un exclusivo comunidad de NEAR early adopters and BUIDLers.",
+    "title": "Cool NFT Project",
+    "body": "Esta es una descripción de una línea del proyecto.",
     "ps": "¡Puedes crear tu primero a las SALE_START!",
     "cta": "Añadir a Calendario",
     "action": "ADD_TO_CALENDAR(SALE_START)",
@@ -49,14 +49,15 @@
       "title": "¡Todos INITIAL_COUNT han estado creado!",
       "body": "",
       "ps": "",
-      "cta": "Buy Pre-Owned",
+      "cta": "Compra en el Mercado",
       "action": "GO_TO_PARAS"
     }
   },
   "extraSections": [
     {
-      "text": "# Introducing\n# NEAR Misfits (Gen 0)\n\n10,000 brave souls set out into the vast unknown to explore the Metaverse... Only 1,923 survived.\n\nThese Misfits are part of a Decentralised Special Operations crew from all over the world and all walks of life. A group of humans rising to the challenge of their times, coming together to build the Metaverse: challenge the status quo, push the boundaries of what is possible, build and contribute to enabling technology.",
-      "image": "learn.webp"
+      "className": "optional-section-class-name-for-styling",
+      "text": "# Introducing Cool NFT Project\n\nThis is a longer description of the project. About a paragraph long. Some [filler text](https://placehodler.shapelabs.co/) to demonstrate: Token standard surrendered some burned mnemonic phrase until some hot wallet because blockchain detected many pre-mine. It based on many automated token generation event, and when Tether formed some trustless in the FUD, Dogecoin slept on lots of anti-money laundering of many stale block!",
+      "image": "example.png"
     }
   ]
 }

@@ -23,7 +23,7 @@
 .nft > div:first-child {
   --aspect-ratio: 1 / 1;
   background-color: var(--gray-1);
-  border-radius: var(--br-small);
+  border-radius: var(--br-base);
   padding-bottom: calc(var(--aspect-ratio, 1 / 1) * 100%);
   background-repeat: no-repeat;
   background-position: center;
