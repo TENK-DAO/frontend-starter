@@ -19,3 +19,8 @@
   height: var(--fs-heading-1);
   width: var(--fs-heading-1);
 }
+
+.actions {
+  display: flex;
+  gap: var(--spacing-m);
+}
