@@ -91,7 +91,7 @@ const actions = {
   }),
   'SIGN_IN': signIn,
   'MINT': (d: Data) => TenK.nft_mint_many({ num: d.numberToMint ?? 1 }, {
-    gas: Gas.parse('20 Tgas').mul(Gas.from('' + d.numberToMint)),
+    gas: Gas.parse('40 Tgas').mul(Gas.from('' + d.numberToMint)),
     attachedDeposit: NEAR.from(d.saleInfo.price).mul(NEAR.from('' + d.numberToMint)),
   }),
   'GO_TO_PARAS': () => window.open(`https://paras.id/search?q=${settings.contractName}&sort=priceasc&pmin=.01&is_verified=true`),
