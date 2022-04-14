@@ -2,6 +2,7 @@ import React from 'react'
 import type { ExpandedHeroTree } from '../../../lib/locales'
 import { act, can, fill } from '../../../lib/locales/runtimeUtils'
 import { wallet } from "../../near"
+import Slider from '../slider'
 import Section from '../section'
 import Markdown from "../markdown"
 import useHeroStatuses from '../../hooks/useHeroStatuses'
@@ -54,12 +55,14 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
           {hero.setNumber && (
             <p className={css.setNumber}>
               <label htmlFor="numberToMint">{hero.setNumber}</label>
-              <input
-                max={Math.min(tenkData.remainingAllowance ?? tenkData.mintRateLimit, tenkData.mintRateLimit)}
+              <Slider
+                max={Math.min(
+                  tenkData.remainingAllowance ?? tenkData.mintRateLimit,
+                  tenkData.mintRateLimit
+                )}
                 min={1}
-                onChange={e => setNumberToMint(parseInt(e.target.value))}
-                value={numberToMint}
-                type="number"
+                onValueChange={([v]) => setNumberToMint(v)}
+                value={[numberToMint]}
               />
             </p>
           )}
