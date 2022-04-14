@@ -8,20 +8,9 @@
   padding: var(--spacing-l);
 }
 
-.social,
 .title {
   display: flex;
   align-items: center;
-}
-
-.social {
-  gap: var(--spacing-s);
-}
-
-.social svg {
-  height: var(--spacing-m);
-  width: var(--spacing-m);
-  vertical-align: middle;
 }
 
 .title svg,

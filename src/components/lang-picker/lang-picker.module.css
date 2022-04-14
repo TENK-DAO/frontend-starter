@@ -1,5 +1,6 @@
 .wrap {
   position: relative;
+  display: inline-block;
 }
 
 .globe {
