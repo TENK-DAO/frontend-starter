@@ -39,7 +39,7 @@
 }
 
 .reveal img {
-  border: 1em solid var(--primary);
+  border: 1em solid var(--accent);
   border-radius: var(--br-base);
   transform-style: preserve-3d;
   animation: flip 5s infinite;

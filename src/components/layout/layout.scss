@@ -7,9 +7,7 @@
 
 $white: white !default;
 $black: black !default;
-$primary: #e73b93 !default;
-$secondary: #aad055 !default;
-$tertiary: #a463b0 !default;
+$accent: #e73b93 !default;
 
 :root {
   /* Typographic Scale */
@@ -55,9 +53,7 @@ $tertiary: #a463b0 !default;
   /* TODO: move these base colors to settings.json or similar */
   --white: #{$white};
   --black: #{$black};
-  --primary: #{$primary};
-  --secondary: #{$secondary};
-  --tertiary: #{$tertiary};
+  --accent: #{$accent};
 
   --fg: var(--black);
   --bg: var(--white);
@@ -141,20 +137,20 @@ video {
 
 a,
 .link {
-  color: var(--secondary);
+  color: var(--accent);
   padding: 0;
   text-decoration: none;
+  position: relative;
 }
 a:hover,
 a:focus,
 .link:hover,
 .link:focus {
-  color: var(--primary);
   text-decoration: underline;
 }
 a:active,
 .link:active {
-  color: var(--tertiary);
+  top: 1px;
 }
 
 strong {
@@ -162,7 +158,7 @@ strong {
 }
 
 em {
-  color: var(--primary);
+  color: var(--accent);
   font-style: inherit;
   font-weight: inherit;
 }
@@ -283,11 +279,11 @@ select.error {
 }
 
 input {
-  caret-color: var(--primary);
+  caret-color: var(--accent);
 }
 
 input::selection {
-  background-color: var(--primary);
+  background-color: var(--accent);
   color: var(--bg);
 }
 

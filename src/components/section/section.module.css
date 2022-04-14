@@ -15,6 +15,6 @@
   flex: 1;
 }
 
-.section:nth-child(2n-1) .content {
+.section:nth-of-type(2n) .content {
   flex-direction: row-reverse;
 }

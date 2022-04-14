@@ -1,6 +1,6 @@
 .banner {
   align-items: center;
-  background-color: var(--secondary);
+  background-color: var(--accent);
   text-align: center;
   padding: var(--spacing-m);
   position: relative;
@@ -31,7 +31,7 @@
   left: var(--spacing-m);
 }
 .banner a:first-child:after {
-  border-right-color: var(--secondary);
+  border-right-color: var(--accent);
   left: var(--spacing-xs);
 }
 
@@ -44,6 +44,6 @@
   right: var(--spacing-m);
 }
 .banner a:last-child:after {
-  border-left-color: var(--secondary);
+  border-left-color: var(--accent);
   right: var(--spacing-xs);
 }
