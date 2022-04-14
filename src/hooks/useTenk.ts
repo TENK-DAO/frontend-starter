@@ -20,6 +20,10 @@ export interface TenkData {
   vip: boolean
 }
 
+interface ReturnedData extends TenkData {
+  stale: boolean
+}
+
 // initialize calls at root of file so that first evaluation of this file causes
 // calls to start, and subsequent imports of this file just use those same calls
 const rpcCalls = Promise.all([
@@ -57,10 +61,15 @@ export async function rpcData(): Promise<TenkData> {
   }
 }
 
-export default function useTenk() {
-  const [data, setData] = React.useState<TenkData>(staleData as unknown as TenkData)
+export default function useTenk(): ReturnedData {
+  const [data, setData] = React.useState<ReturnedData>({
+    ...staleData as unknown as TenkData,
+    stale: true
+  })
+
   React.useEffect(() => {
-    rpcData().then(setData)
+    rpcData().then(d => setData({ ...d, stale: false }))
   }, [])
+
   return data
 }
