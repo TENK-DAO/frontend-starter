@@ -93,7 +93,7 @@ function alphabeticOrder({ id: a }: DecoratedLocale, { id: b }: DecoratedLocale)
   }
 }
 
-const localesDirectory = path.join(process.cwd(), "config/i18n")
+const localesDirectory = path.resolve(process.cwd(), "config/i18n")
 
 let fileNames: string[]
 try {

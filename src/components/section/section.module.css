@@ -1,14 +1,24 @@
 .section {
   padding-bottom: var(--spacing-xl);
-  padding-top: var(--spacing-xl);
 }
 
 .content {
-  place-items: center;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-s);
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
 }
 
-.content.hasMedia {
-  display: grid;
+.content > * {
+  flex: 1;
+}
+
+@media (min-width: 450px) {
+  .content.hasMedia {
+    flex-direction: row;
+  }
+
+  .section:nth-of-type(2n) .content {
+    flex-direction: row-reverse;
+  }
 }

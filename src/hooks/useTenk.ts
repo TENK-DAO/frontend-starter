@@ -2,7 +2,7 @@ import React from "react"
 import { NftContractMetadata, SaleInfo, Token as RawToken } from "../near/contracts/tenk"
 import { TenK } from "../near/contracts"
 import { wallet } from "../near"
-import staleData from "./stale-data-from-build-time.json"
+import staleData from "../../stale-data-from-build-time.json"
 
 const account_id = wallet.getAccountId()
 
@@ -13,11 +13,15 @@ type Token = RawToken & {
 export interface TenkData {
   contractMetadata?: NftContractMetadata
   remainingAllowance?: number
-  mintRateLimit?: number
+  mintRateLimit: number
   nfts: Token[]
   saleInfo: SaleInfo
   tokensLeft?: number
   vip: boolean
+}
+
+interface ReturnedData extends TenkData {
+  stale: boolean
 }
 
 // initialize calls at root of file so that first evaluation of this file causes
@@ -53,14 +57,19 @@ export async function rpcData(): Promise<TenkData> {
     nfts: nfts?.map(nft => ({ ...nft,
       media: new URL(nft.metadata?.media ?? '', contractMetadata.base_uri ?? '').href
     })) ?? [],
-    mintRateLimit: mintRateLimit ?? undefined,
+    mintRateLimit: mintRateLimit ?? 10,
   }
 }
 
-export default function useTenk() {
-  const [data, setData] = React.useState<TenkData>(staleData as unknown as TenkData)
+export default function useTenk(): ReturnedData {
+  const [data, setData] = React.useState<ReturnedData>({
+    ...staleData as unknown as TenkData,
+    stale: true
+  })
+
   React.useEffect(() => {
-    rpcData().then(setData)
+    rpcData().then(d => setData({ ...d, stale: false }))
   }, [])
+
   return data
 }

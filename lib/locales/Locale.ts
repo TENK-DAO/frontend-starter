@@ -51,6 +51,7 @@ export interface SectionI18n {
   video?: string
   backgroundImage?: string
   backgroundColor?: string
+  className?: string
 }
 
 export default interface Locale {

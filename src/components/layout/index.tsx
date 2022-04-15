@@ -1,19 +1,20 @@
 import * as React from "react"
-import { navigate } from "gatsby"
-
 import Banner from "../banner"
 import Nav from "../nav"
+import Footer from "../footer"
 import "./layout.scss"
-import useLocales from "../../hooks/useLocales"
+import * as css from "./layout.module.css"
 
-const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
-  const { locales, locale } = useLocales()
+const Layout: React.FC<{ style?: React.CSSProperties }> = ({ style, children }) => {
   return (
-    <>
-      <Banner />
-      <Nav />
-      {children}
-    </>
+    <div style={style} className={css.wrap}>
+      <div>
+        <Banner />
+        <Nav />
+        {children}
+      </div>
+      <Footer />
+    </div>
   )
 }
 

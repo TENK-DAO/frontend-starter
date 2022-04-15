@@ -1,5 +1,6 @@
 .wrap {
   position: relative;
+  display: inline-block;
 }
 
 .globe {
@@ -11,14 +12,16 @@
   flex-direction: column;
   justify-content: space-around;
 }
+
 .globe svg {
-  height: 1em;
-  width: 1em;
+  height: var(--spacing-m);
+  width: var(--spacing-m);
 }
 
 .select {
   border: 1px solid transparent;
-  padding-left: var(--spacing-l);
+  padding-left: calc(4px + var(--spacing-l));
+  text-align: center;
 }
 .select:hover,
 .select:focus {

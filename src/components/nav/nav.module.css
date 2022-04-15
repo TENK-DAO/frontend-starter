@@ -3,25 +3,18 @@
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-s) var(--spacing-m);
+  gap: var(--spacing-m);
   justify-content: space-between;
   padding: var(--spacing-l);
 }
 
-.social,
+.nav > * {
+  flex: 1 1 auto;
+}
+
 .title {
   display: flex;
   align-items: center;
-}
-
-.social {
-  gap: var(--spacing-s);
-}
-
-.social svg {
-  height: var(--spacing-m);
-  width: var(--spacing-m);
-  vertical-align: middle;
 }
 
 .title svg,
@@ -29,4 +22,11 @@
   display: inline-block;
   height: var(--fs-heading-1);
   width: var(--fs-heading-1);
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-m);
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }

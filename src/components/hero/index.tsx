@@ -2,6 +2,7 @@ import React from 'react'
 import type { ExpandedHeroTree } from '../../../lib/locales'
 import { act, can, fill } from '../../../lib/locales/runtimeUtils'
 import { wallet } from "../../near"
+import Slider from '../slider'
 import Section from '../section'
 import Markdown from "../markdown"
 import useHeroStatuses from '../../hooks/useHeroStatuses'
@@ -43,31 +44,40 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
         autoPlay: true,
       }}
     >
-      <Markdown children={fill(hero.title, data)} components={{ p: 'h1' }} />
-      <Markdown children={fill(hero.body, data)} />
-      {hero.ps && <Markdown children={fill(hero.ps, data)} />}
-      {can(hero.action, data) && (
-        <form onSubmit={e => {
-          e.preventDefault()
-          act(hero.action, { ...data, numberToMint })
-        }}>
-          {hero.setNumber && (
-            <p className={css.setNumber}>
-              <label htmlFor="numberToMint">{hero.setNumber}</label>
-              <input
-                max={Math.min(tenkData.remainingAllowance ?? tenkData.mintRateLimit, tenkData.mintRateLimit)}
-                min={1}
-                onChange={e => setNumberToMint(parseInt(e.target.value))}
-                value={numberToMint}
-                type="number"
-              />
-            </p>
-          )}
-          <button className={css.cta}>
-            {fill(hero.cta, { ...data, numberToMint })}
-          </button>
-        </form>
-      )}
+      <div className={css.content}>
+        {can(hero.action, data) && (
+          <form onSubmit={e => {
+            e.preventDefault()
+            act(hero.action, { ...data, numberToMint })
+          }}>
+            {hero.setNumber && (
+              <>
+                <label className={css.label} htmlFor="numberToMint">
+                  {hero.setNumber}
+                </label>
+                <Slider
+                  max={Math.min(
+                    tenkData.remainingAllowance ?? tenkData.mintRateLimit,
+                    tenkData.mintRateLimit
+                  )}
+                  min={1}
+                  name="numberToMint"
+                  onValueChange={([v]) => setNumberToMint(v)}
+                  value={[numberToMint]}
+                />
+              </>
+            )}
+            <button className={css.cta}>
+              {fill(hero.cta, { ...data, numberToMint })}
+            </button>
+          </form>
+        )}
+        <div>
+          <Markdown children={fill(hero.title, data)} components={{ p: 'h1' }} />
+          <Markdown children={fill(hero.body, data)} />
+          {hero.ps && <Markdown children={fill(hero.ps, data)} />}
+        </div>
+      </div>
     </Section>
   )
 }

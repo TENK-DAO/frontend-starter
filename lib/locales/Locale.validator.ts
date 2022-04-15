@@ -75,6 +75,9 @@ export const LocaleSchema = {
         backgroundImage: {
           type: "string",
         },
+        className: {
+          type: "string",
+        },
         image: {
           type: "string",
         },
