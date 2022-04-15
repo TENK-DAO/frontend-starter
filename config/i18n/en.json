@@ -37,7 +37,8 @@
       }
     },
     "saleOpen": {
-      "ps": "Minting Has Begun! Misfits remaining: REMAINING_COUNT",
+      "title": "Minting has begun!",
+      "ps": "Misfits remaining: REMAINING_COUNT",
       "setNumber": "Number to mint",
       "cta": "Mint for MINT_PRICE",
       "action": "MINT",

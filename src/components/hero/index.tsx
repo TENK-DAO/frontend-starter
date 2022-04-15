@@ -44,33 +44,40 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
         autoPlay: true,
       }}
     >
-      <Markdown children={fill(hero.title, data)} components={{ p: 'h1' }} />
-      <Markdown children={fill(hero.body, data)} />
-      {hero.ps && <Markdown children={fill(hero.ps, data)} />}
-      {can(hero.action, data) && (
-        <form onSubmit={e => {
-          e.preventDefault()
-          act(hero.action, { ...data, numberToMint })
-        }}>
-          {hero.setNumber && (
-            <p className={css.setNumber}>
-              <label htmlFor="numberToMint">{hero.setNumber}</label>
-              <Slider
-                max={Math.min(
-                  tenkData.remainingAllowance ?? tenkData.mintRateLimit,
-                  tenkData.mintRateLimit
-                )}
-                min={1}
-                onValueChange={([v]) => setNumberToMint(v)}
-                value={[numberToMint]}
-              />
-            </p>
-          )}
-          <button className={css.cta}>
-            {fill(hero.cta, { ...data, numberToMint })}
-          </button>
-        </form>
-      )}
+      <div className={css.content}>
+        {can(hero.action, data) && (
+          <form onSubmit={e => {
+            e.preventDefault()
+            act(hero.action, { ...data, numberToMint })
+          }}>
+            {hero.setNumber && (
+              <>
+                <label className={css.label} htmlFor="numberToMint">
+                  {hero.setNumber}
+                </label>
+                <Slider
+                  max={Math.min(
+                    tenkData.remainingAllowance ?? tenkData.mintRateLimit,
+                    tenkData.mintRateLimit
+                  )}
+                  min={1}
+                  name="numberToMint"
+                  onValueChange={([v]) => setNumberToMint(v)}
+                  value={[numberToMint]}
+                />
+              </>
+            )}
+            <button className={css.cta}>
+              {fill(hero.cta, { ...data, numberToMint })}
+            </button>
+          </form>
+        )}
+        <div>
+          <Markdown children={fill(hero.title, data)} components={{ p: 'h1' }} />
+          <Markdown children={fill(hero.body, data)} />
+          {hero.ps && <Markdown children={fill(hero.ps, data)} />}
+        </div>
+      </div>
     </Section>
   )
 }

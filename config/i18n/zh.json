@@ -37,6 +37,7 @@
       }
     },
     "saleOpen": {
+      "title": "铸币开始了！",
       "ps": "公开销售已启动!",
       "setNumber": "购买数量",
       "cta": "支付金额: MINT_PRICE",

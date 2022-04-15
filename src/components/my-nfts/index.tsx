@@ -19,7 +19,7 @@ const MyNFTs: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   return (
     <Lightbox
       mainSrc={nfts[photoIndex].media}
-      imageTitle={nfts[photoIndex].metadata?.title}
+      imageTitle={`#${nfts[photoIndex].metadata?.title}`}
       imageCaption={nfts[photoIndex].metadata?.description}
       nextLabel={locale.nextNFT}
       prevLabel={locale.prevNFT}

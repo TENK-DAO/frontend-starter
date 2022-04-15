@@ -3,9 +3,13 @@
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-s) var(--spacing-m);
+  gap: var(--spacing-m);
   justify-content: space-between;
   padding: var(--spacing-l);
+}
+
+.nav > * {
+  flex: 1 1 auto;
 }
 
 .title {
@@ -23,4 +27,6 @@
 .actions {
   display: flex;
   gap: var(--spacing-m);
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }

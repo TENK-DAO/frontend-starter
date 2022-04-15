@@ -1,7 +1,31 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+}
+
+.content p:last-child {
+  margin-bottom: 0;
+}
+.content h1 {
+  margin-top: var(--spacing-l);
+}
+
+@media (min-width: 450px) {
+  .content {
+    flex-direction: column-reverse;
+  }
+  .content h1 {
+    margin-top: 0;
+  }
+}
+
 .cta {
+  margin-top: var(--spacing-m);
   width: 100%;
 }
 
-.setNumber label {
+.label {
   display: block;
+  font-weight: var(--fw-bold);
 }

@@ -4,17 +4,21 @@
 
 .content {
   align-items: flex-start;
-  gap: var(--spacing-m);
-}
-
-.content.hasMedia {
   display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
 }
 
 .content > * {
   flex: 1;
 }
 
-.section:nth-of-type(2n) .content {
-  flex-direction: row-reverse;
+@media (min-width: 450px) {
+  .content.hasMedia {
+    flex-direction: row;
+  }
+
+  .section:nth-of-type(2n) .content {
+    flex-direction: row-reverse;
+  }
 }
