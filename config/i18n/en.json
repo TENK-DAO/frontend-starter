@@ -14,8 +14,8 @@
   "zoomOut": "Zoom Out",
   "hero": {
     "video": "pexels-olya-kobruseva-5236593.mp4",
-    "title": "Cool NFT Project",
-    "body": "This is a one-line description of the project.",
+    "title": "Tagline Goes Here",
+    "body": "A one-line description goes here.",
     "ps": "NFTs drop at SALE_START!",
     "cta": "Add to Calendar",
     "action": "ADD_TO_CALENDAR(SALE_START)",
@@ -24,13 +24,15 @@
         "ps": "* Minting starts at: SALE_START\n\n* Pre-mint starts at: PRESALE_START\n\nGet in on the pre-mint! [Join our Discord](https://discord.com/invite/UY9Xf2k) and request an invite."
       },
       "vip": {
-        "ps": "Welcome, CURRENT_USER! Pre-mint starts at PRESALE_START",
+        "title": "Welcome, CURRENT_USER!",
+        "ps": "Pre-mint starts at PRESALE_START",
         "action": "ADD_TO_CALENDAR(PRESALE_START)"
       }
     },
     "presale": {
       "vip": {
-        "ps": "Welcome, CURRENT_USER! Pre-mint started. Public minting starts at SALE_START.\n\nYour remaining pre-mint allowance: MINT_LIMIT",
+        "title": "Pre-mint started!",
+        "ps": "Public minting starts at SALE_START.\n\nYour remaining pre-mint allowance: MINT_LIMIT",
         "setNumber": "Number to mint",
         "cta": "Mint for MINT_PRICE",
         "action": "MINT"

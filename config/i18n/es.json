@@ -14,8 +14,8 @@
   "zoomOut": "Disminuir el zoom",
   "hero": {
     "video": "pexels-olya-kobruseva-5236593.mp4",
-    "title": "Cool NFT Project",
-    "body": "Esta es una descripción de una línea del proyecto.",
+    "title": "El Eslogan Va Aquí",
+    "body": "Una descripción de una línea va aquí.",
     "ps": "¡Puedes crear tu primero a las SALE_START!",
     "cta": "Añadir a Calendario",
     "action": "ADD_TO_CALENDAR(SALE_START)",
@@ -24,13 +24,15 @@
         "ps": "* Crear tu primero: SALE_START\n\n* Si estás en el listo \"VIP\": PRESALE_START\n\nQuedate un/a VIP! [Joino nuestro Discord](https://discord.com/invite/UY9Xf2k)."
       },
       "vip": {
-        "ps": "¡Bienvenid@, CURRENT_USER! Puedes crear un Misfito a las PRESALE_START",
+        "title": "¡Bienvenid@, CURRENT_USER!",
+        "ps": "Puedes crear un NFT a las PRESALE_START",
         "action": "ADD_TO_CALENDAR(PRESALE_START)"
       }
     },
     "presale": {
       "vip": {
-        "ps": "¡Bienvenid@, CURRENT_USER! Los VIPs puedes mint ahora. El mint publico empezar a las SALE_START.\n\nTu VIP asignación restante: MINT_LIMIT",
+        "title": "La creación temprano ha comenzado!",
+        "ps": "El creación publico empezar a las SALE_START.\n\nTu VIP asignación restante: MINT_LIMIT",
         "setNumber": "Crear quantidad de",
         "cta": "Crear para MINT_PRICE",
         "action": "MINT"

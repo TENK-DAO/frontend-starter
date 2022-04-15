@@ -1,7 +1,7 @@
 {
   "viewIn": "中文查看",
   "langPicker": "中文",
-  "title": "Misfits",
+  "title": "酷NFT项目",
   "description": "NEAR生态上首个头像类NFT",
   "calendarEvent": "立即铸造!",
   "connectWallet": "使用 NEAR 登录",
@@ -14,8 +14,8 @@
   "zoomOut": "缩小",
   "hero": {
     "video": "pexels-olya-kobruseva-5236593.mp4",
-    "title": "酷NFT项目",
-    "body": "这是对该项目的单行描述。",
+    "title": "标语在这里",
+    "body": "一行描述在这里",
     "ps": "首发日期 SALE_START!",
     "cta": "添加到日历",
     "action": "ADD_TO_CALENDAR(SALE_START)",
@@ -24,13 +24,15 @@
         "ps": "* 首发单价: SALE_START\n\n* 预售单价: PRESALE_START\n\n加入预售! [加入社区 Discord](https://discord.com/invite/UY9Xf2k) 参与白名单活动"
       },
       "vip": {
-        "ps": "欢迎, CURRENT_USER! 预售单价： PRESALE_START",
+        "title": "欢迎, CURRENT_USER!",
+        "ps": "预售单价： PRESALE_START",
         "action": "ADD_TO_CALENDAR(PRESALE_START)"
       }
     },
     "presale": {
       "vip": {
-        "ps": "欢迎, CURRENT_USER! 白名单预售正在进行中. 公开销售时间为 SALE_START.\n\n 剩余购买额度: MINT_LIMIT",
+        "title": "早期创作已经开始",
+        "ps": "公开销售时间为 SALE_START.\n\n 剩余购买额度: MINT_LIMIT",
         "setNumber": "购买数量",
         "cta": "支付金额: MINT_PRICE",
         "action": "MINT"
