@@ -2,7 +2,7 @@ import React from "react"
 import { NftContractMetadata, SaleInfo, Token as RawToken } from "../near/contracts/tenk"
 import { TenK } from "../near/contracts"
 import { wallet } from "../near"
-import staleData from "./stale-data-from-build-time.json"
+import staleData from "../../stale-data-from-build-time.json"
 
 const account_id = wallet.getAccountId()
 
