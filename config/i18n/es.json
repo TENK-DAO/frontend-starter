@@ -40,7 +40,7 @@
     },
     "saleOpen": {
       "title": "Minting has begun!",
-      "ps": "Misfitos que quedan: REMAINING_COUNT",
+      "ps": "NFTs que quedan: REMAINING_COUNT",
       "setNumber": "Crear quantidad de",
       "cta": "Crear para MINT_PRICE",
       "action": "MINT",
