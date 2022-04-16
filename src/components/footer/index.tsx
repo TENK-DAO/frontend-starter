@@ -1,5 +1,6 @@
 import settings from "../../../config/settings.json"
 import React from "react"
+import { StaticImage } from "gatsby-plugin-image"
 import * as css from "./footer.module.css"
 import Image from "../image"
 import LangPicker from "../lang-picker"
@@ -18,6 +19,18 @@ export default function Footer() {
         ))}
       </div>
       <LangPicker />
+      <p>
+        Launching Partners: <a href="https://tenk.dev/">TenK DAO</a>
+      </p>
+      <p>
+        <a href="https://tenk.dev/">
+          <StaticImage
+            src="../../../config/images/tenk_logo_circle.png"
+            alt="TenK Logo"
+            width={75}
+          />
+        </a>
+      </p>
     </footer>
   )
 }
