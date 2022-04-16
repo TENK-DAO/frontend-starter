@@ -8,6 +8,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Markdown from "../components/markdown"
 import type { DecoratedLocale } from "../../lib/locales"
+import useTenk from "../hooks/useTenk"
 
 type PageContext = {
   locale: DecoratedLocale
@@ -16,11 +17,17 @@ type PageContext = {
 const Landing: React.FC<PageProps<{}, PageContext>> = ({ location, pageContext: { locale } }) => {
   const params = new URLSearchParams(location.search)
   const transactionHashes = params.get('transactionHashes') ?? undefined
+  const { contractMetadata } = useTenk()
 
   return (
     <>
       <Layout style={{ filter: transactionHashes && 'blur(4px)' }}>
-        <Seo lang={locale.id} title={locale.title} description={locale.description} />
+        <Seo
+          lang={locale.id}
+          title={locale.title}
+          description={locale.description}
+          favicon={contractMetadata?.icon}
+        />
         <Hero heroTree={locale.hero} />
         {locale.extraSections?.map((section, i) => (
           <Section key={i} {...section}>

@@ -24,9 +24,10 @@ interface Props {
   lang: string
   title: string
   meta?: MetaTag[]
+  favicon?: string
 }
 
-function Seo({ description, lang, meta = [], title }: Props) {
+function Seo({ description, lang, meta = [], title, favicon }: Props) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -46,6 +47,11 @@ function Seo({ description, lang, meta = [], title }: Props) {
         lang,
       }}
       title={title}
+      link={
+        favicon
+          ? [{ href: favicon, rel: 'icon', type: 'image/png' }]
+          : undefined
+      }
       meta={[
         {
           name: `description`,
