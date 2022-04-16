@@ -3,8 +3,11 @@ import React from "react"
 import * as css from "./footer.module.css"
 import Image from "../image"
 import LangPicker from "../lang-picker"
+import useLocales from "../../hooks/useLocales"
 
-export default function Nav() {
+export default function Footer() {
+  const { locale } = useLocales()
+  if (!locale) return null
   return (
     <footer className={`${css.footer} container`}>
       <div className={css.social}>
