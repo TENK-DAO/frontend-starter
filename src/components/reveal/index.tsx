@@ -1,11 +1,15 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { wallet } from "../../near"
+import { Token } from "../../near/contracts/tenk"
 import useTenk from '../../hooks/useTenk'
 import * as css from "./reveal.module.css"
 
-const Reveal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+const Reveal: React.FC<{
+  onClose: () => void,
+  tokens?: Token[],
+}> = ({ onClose, tokens }) => {
   const currentUser = wallet.getAccountId()
-  const { stale, nfts } = useTenk()
+  const { contractMetadata, stale, nfts } = useTenk()
 
   const onKeyPress = useMemo(() => (e: KeyboardEvent) => {
     if (e.key === 'Escape') onClose()
@@ -26,7 +30,8 @@ const Reveal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
   if (!currentUser || !nfts.length) return null
 
-  const nft = nfts[nfts.length - 1]
+  // TODO: support multiple tokens
+  const nft = tokens?.[0] ?? nfts[nfts.length - 1]
 
   return (
     <div className={css.reveal}>
@@ -38,7 +43,12 @@ const Reveal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       <figure>
         <img
           alt={nft.metadata?.title}
-          src={nft.media}
+          src={
+            new URL(
+              nft.metadata?.media ?? '',
+              contractMetadata?.base_uri ?? ''
+            ).href
+          }
         />
         <figcaption>
           #{nft.token_id}
