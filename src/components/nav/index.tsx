@@ -38,7 +38,7 @@ export default function Nav() {
                 className={`link ${css.button}`}
                 onClick={() => setShowNFTs(true)}
               >
-                My NFTs
+                {locale.myNFTs}
               </button>
             )}
             {currentUser ? (
