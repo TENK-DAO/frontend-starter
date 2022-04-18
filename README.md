@@ -27,7 +27,7 @@ Install [Virtual Studio Code][VSCode] (often called VS Code) if you don't have i
 
 You only need to edit files in the [`config`](./config/) folder:
 
-* `colors.scss`: This is a [Sass] file used by the site to customize your colors. If you install the recommended Sass extension for VS Code, you will see color squares next to each value.
+* `styles.scss`: This is a [Sass] file used by the site to customize your colors. If you install the recommended Sass extension for VS Code, you will see color squares next to each value.
 * `settings.json`: This contains non-internationalized data for your site, including the address of your smart contract.
 * `images/`: The images in this folder are referenced later by your internationalization data.
 * `i18n/`: Your internationalization data! (There are 18 letters between the "i" and "n" in "internationalization".) There's a JSON file for each language you want to include. These will become routes on your site: `example.com/en`, `example.com/es`, etc. JSON is a finicky specification, throwing errors if you forget quotes or include trailing commas. VS Code will yell at you about these problems, which saves you from needing to restart your Gatsby server to notice them. And yes, when you make changes to these files, you'll need to restart your development Gatsby server to see them. For more info about the shape of these files, see the readme [in the `i18n` folder](./config/i18n/).

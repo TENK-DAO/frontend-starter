@@ -28,7 +28,7 @@ const IndexPage = () => {
   }, [])
 
   return (
-    <Layout>
+    <Layout style={{ justifyContent: 'space-around', textAlign: 'center' }}>
       {locales.map(locale => (
         <p key={locale.id}>
           <Link to={`/${locale.id}/`}>{locale.viewIn}</Link>

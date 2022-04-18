@@ -8,7 +8,22 @@
   margin-bottom: 0;
 }
 .content h1 {
+  font-weight: var(--fw-black);
+  font-size: 4.5rem;
+  line-height: 0.6;
   margin-top: var(--spacing-l);
+}
+.content h1 small {
+  font-size: 3rem;
+}
+.content h2 {
+  color: var(--accent);
+  margin-top: var(--spacing-m);
+  margin-bottom: calc(-1 * var(--spacing-m));
+}
+.lead,
+.remaining {
+  color: var(--gray-6);
 }
 
 @media (min-width: 450px) {
@@ -21,11 +36,20 @@
 }
 
 .cta {
-  margin-top: var(--spacing-m);
+  margin-top: var(--spacing-s);
   width: 100%;
+}
+
+.labelWrap {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs) var(--spacing-m);
+  justify-content: space-between;
 }
 
 .label {
   display: block;
+  flex: 1 1 auto;
   font-weight: var(--fw-bold);
 }

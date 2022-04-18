@@ -1,27 +1,34 @@
 /* This is a CSS Module; see https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/ */
-.nav {
+.bg {
+  background-color: var(--gray-1);
+  padding: var(--spacing-m) 0;
+  margin-bottom: var(--spacing-l);
+}
+
+.content {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-m);
   justify-content: space-between;
-  padding: var(--spacing-l);
 }
 
-.nav > * {
+.content > * {
   flex: 1 1 auto;
 }
 
-.title {
+.social {
   display: flex;
-  align-items: center;
+  gap: var(--spacing-s);
 }
 
-.title svg,
-.title img {
-  display: inline-block;
-  height: var(--fs-heading-1);
-  width: var(--fs-heading-1);
+.social svg {
+  height: var(--spacing-xl);
+  width: var(--spacing-xl);
+  vertical-align: middle;
+}
+.social svg path {
+  fill: var(--accent);
 }
 
 .actions {
@@ -29,4 +36,9 @@
   gap: var(--spacing-m);
   flex-wrap: wrap;
   justify-content: flex-end;
+}
+
+.button {
+  font-size: var(--spacing-l);
+  font-weight: var(--fw-black);
 }

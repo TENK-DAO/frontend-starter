@@ -1,8 +1,8 @@
 .root {
   align-items: center;
   display: flex;
-  padding-bottom: var(--spacing-l);
-  padding-top: var(--spacing-l);
+  padding-bottom: var(--spacing-xl);
+  padding-top: var(--spacing-xl);
   position: relative;
   touch-action: none;
   user-select: none;

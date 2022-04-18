@@ -21,6 +21,8 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
 
   if (!locale) return null
 
+  const [titleWord1, ...restOfTitle] = locale.title!.split(' ')
+
   const data = {
     ...tenkData,
     currentUser,
@@ -52,9 +54,14 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
           }}>
             {hero.setNumber && (
               <>
-                <label className={css.label} htmlFor="numberToMint">
-                  {hero.setNumber}
-                </label>
+                <div className={css.labelWrap}>
+                  <label className={css.label} htmlFor="numberToMint">
+                    {hero.setNumber}
+                  </label>
+                  <div className={css.remaining}>
+                    {fill(hero.remaining, data)}
+                  </div>
+                </div>
                 <Slider
                   max={Math.min(
                     tenkData.remainingAllowance ?? tenkData.mintRateLimit,
@@ -73,8 +80,14 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
           </form>
         )}
         <div>
-          <Markdown children={fill(hero.title, data)} components={{ p: 'h1' }} />
-          <Markdown children={fill(hero.body, data)} />
+          <h1>
+            <div>{titleWord1}</div>
+            <small>{restOfTitle.join(' ')}</small>
+          </h1>
+          <Markdown children={fill(hero.title, data)} components={{ p: 'h2' }} />
+          <div className={css.lead}>
+            <Markdown children={fill(hero.body, data)} />
+          </div>
           {hero.ps && <Markdown children={fill(hero.ps, data)} />}
         </div>
       </div>

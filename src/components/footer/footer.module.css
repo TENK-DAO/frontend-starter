@@ -1,18 +1,10 @@
 /* This is a CSS Module; see https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/ */
 .footer {
-  padding-bottom: var(--spacing-l);
-  text-align: center;
-}
-
-.social {
+  align-items: center;
   display: flex;
-  gap: var(--spacing-s);
-  justify-content: center;
-  margin-bottom: var(--spacing-m);
-}
-
-.social svg {
-  height: var(--spacing-m);
-  width: var(--spacing-m);
-  vertical-align: middle;
+  flex-wrap: wrap;
+  gap: var(--spacing-m);
+  justify-content: space-between;
+  padding-bottom: var(--spacing-l);
+  width: 100%;
 }

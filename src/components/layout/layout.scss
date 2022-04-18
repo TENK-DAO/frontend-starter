@@ -1,9 +1,6 @@
 @import "./a11y.css";
 @import "./atcb.css";
-@import "@fontsource/montserrat/400.css"; /* Weight 400 */
-@import "@fontsource/montserrat/600.css";
-@import "@fontsource/montserrat/700.css";
-@import "../../../config/colors.scss";
+@import "../../../config/styles.scss";
 
 $white: white !default;
 $black: black !default;
@@ -20,13 +17,13 @@ $accent: #e73b93 !default;
   }
 
   /* Font Family */
-  --sans: Montserrat, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  --sans: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   --monospace: "Source Code Pro", monospace;
 
   /* Font Weights */
   --fw-regular: 400;
   --fw-bold: 600;
-  --fw-black: 700;
+  --fw-black: 900;
 
   /* Line Heights */
   --lh-headings: 1.1;
@@ -123,7 +120,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: var(--fw-black);
+  font-weight: var(--fw-bold);
   margin: 0;
   line-height: var(--lh-headings);
 }

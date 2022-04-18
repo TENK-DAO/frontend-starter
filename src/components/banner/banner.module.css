@@ -29,6 +29,7 @@
 .banner a:first-child {
   border-right-color: var(--fg);
   left: var(--spacing-m);
+  top: 50%;
 }
 .banner a:first-child:after {
   border-right-color: var(--accent);
@@ -42,6 +43,7 @@
 .banner a:last-child {
   border-left-color: var(--fg);
   right: var(--spacing-m);
+  top: 50%;
 }
 .banner a:last-child:after {
   border-left-color: var(--accent);

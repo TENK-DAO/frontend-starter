@@ -1,8 +1,6 @@
-import settings from "../../../config/settings.json"
 import React from "react"
 import { StaticImage } from "gatsby-plugin-image"
 import * as css from "./footer.module.css"
-import Image from "../image"
 import LangPicker from "../lang-picker"
 import useLocales from "../../hooks/useLocales"
 
@@ -11,26 +9,17 @@ export default function Footer() {
   if (!locale) return null
   return (
     <footer className={`${css.footer} container`}>
-      <div className={css.social}>
-        {settings.social.map(({ href, img, alt }) => (
-          <a href={href} target="_blank" rel="noopener noreferrer" title={alt} key={alt}>
-            <Image src={img} alt={alt} />
-          </a>
-        ))}
-      </div>
-      <LangPicker />
-      <p>
-        Launching Partners: <a href="https://tenk.dev/">TenK DAO</a>
-      </p>
-      <p>
+      <div style={{ display: 'flex', gap: 'var(--spacing-m)', alignItems: 'center' }}>
+        <span>Launching Partners: <a href="https://tenk.dev/">TenK DAO</a></span>
         <a href="https://tenk.dev/">
           <StaticImage
-            src="../../../config/images/tenk_logo_circle.png"
+            src="../../../config/images/tenk-logo.png"
             alt="TenK Logo"
-            width={75}
+            height={40}
           />
         </a>
-      </p>
+      </div>
+      <LangPicker />
     </footer>
   )
 }
