@@ -5,7 +5,6 @@
   "version": "0.1.0",
   "author": "Chad Ostrowski <chad@ahalabs.dev>",
   "dependencies": {
-    "@fontsource/montserrat": "^4.5.4",
     "@radix-ui/react-dropdown-menu": "0.1.6",
     "@radix-ui/react-slider": "^0.1.4",
     "add-to-calendar-button": "1.7.8",
@@ -15,14 +14,16 @@
     "gbimage-bridge": "^0.2.1",
     "near-api-js": "AhaLabs/near-api-js#1.0.1",
     "near-units": "^0.1.9",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "react-helmet": "^6.1.0",
     "react-image-lightbox": "^5.1.4",
     "react-markdown": "^8.0.0"
   },
   "devDependencies": {
     "@types/bn.js": "^5.1.0",
+    "@types/react": "17",
+    "@types/react-dom": "17",
     "@types/react-helmet": "^6.1.5",
     "gatsby": "^4.12.1",
     "gatsby-plugin-dts-css-modules": "^2.2.0",

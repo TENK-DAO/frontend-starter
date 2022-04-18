@@ -13,10 +13,11 @@
   "zoomIn": "放大",
   "zoomOut": "缩小",
   "hero": {
-    "video": "pexels-olya-kobruseva-5236593.mp4",
+    "image": "hero.jpg",
     "title": "标语在这里",
     "body": "一行描述在这里",
     "ps": "首发日期 SALE_START!",
+    "remaining": "剩余NFT：REMAINING_COUNT",
     "cta": "添加到日历",
     "action": "ADD_TO_CALENDAR(SALE_START)",
     "saleClosed": {
@@ -40,7 +41,7 @@
     },
     "saleOpen": {
       "title": "铸币开始了！",
-      "ps": "公开销售已启动!",
+      "ps": "",
       "setNumber": "购买数量",
       "cta": "支付金额: MINT_PRICE",
       "action": "MINT",
@@ -58,7 +59,7 @@
   },
   "extraSections": [
     {
-      "className": "optional-section-class-name-for-styling",
+      "className": "this-class-is-set-in-i18n-files",
       "text": "# Introducing Cool NFT Project\n\nThis is a longer description of the project. About a paragraph long. Some [filler text](https://placehodler.shapelabs.co/) to demonstrate: Token standard surrendered some burned mnemonic phrase until some hot wallet because blockchain detected many pre-mine. It based on many automated token generation event, and when Tether formed some trustless in the FUD, Dogecoin slept on lots of anti-money laundering of many stale block!",
       "image": "example.png"
     }

@@ -16,6 +16,7 @@ export const requiredHeroFields = [
   'body',
   'cta',
   'action',
+  'remaining',
 ] as const
 
 export const optionalHeroFields = [

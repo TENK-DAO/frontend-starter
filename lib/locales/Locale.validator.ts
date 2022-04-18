@@ -53,6 +53,9 @@ export const LocaleSchema = {
         ps: {
           type: "string",
         },
+        remaining: {
+          type: "string",
+        },
         setNumber: {
           type: "string",
         },
@@ -157,6 +160,9 @@ export const LocaleSchema = {
             ps: {
               type: "string",
             },
+            remaining: {
+              type: "string",
+            },
             setNumber: {
               type: "string",
             },
@@ -224,6 +230,9 @@ export const LocaleSchema = {
             ps: {
               type: "string",
             },
+            remaining: {
+              type: "string",
+            },
             setNumber: {
               type: "string",
             },
@@ -279,6 +288,9 @@ export const LocaleSchema = {
             ps: {
               type: "string",
             },
+            remaining: {
+              type: "string",
+            },
             setNumber: {
               type: "string",
             },
@@ -331,6 +343,9 @@ export const LocaleSchema = {
             ps: {
               type: "string",
             },
+            remaining: {
+              type: "string",
+            },
             setNumber: {
               type: "string",
             },
@@ -351,6 +366,9 @@ export const LocaleSchema = {
             },
           },
           type: "object",
+        },
+        remaining: {
+          type: "string",
         },
         setNumber: {
           type: "string",

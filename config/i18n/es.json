@@ -13,10 +13,11 @@
   "zoomIn": "Dar un golpe de zoom",
   "zoomOut": "Disminuir el zoom",
   "hero": {
-    "video": "pexels-olya-kobruseva-5236593.mp4",
+    "image": "hero.jpg",
     "title": "El Eslogan Va Aquí",
     "body": "Una descripción de una línea va aquí.",
     "ps": "¡Puedes crear tu primero a las SALE_START!",
+    "remaining": "NFTs que quedan: REMAINING_COUNT",
     "cta": "Añadir a Calendario",
     "action": "ADD_TO_CALENDAR(SALE_START)",
     "saleClosed": {
@@ -40,7 +41,7 @@
     },
     "saleOpen": {
       "title": "Minting has begun!",
-      "ps": "NFTs que quedan: REMAINING_COUNT",
+      "ps": "",
       "setNumber": "Crear quantidad de",
       "cta": "Crear para MINT_PRICE",
       "action": "MINT",
@@ -58,7 +59,7 @@
   },
   "extraSections": [
     {
-      "className": "optional-section-class-name-for-styling",
+      "className": "this-class-is-set-in-i18n-files",
       "text": "# Introducing Cool NFT Project\n\nThis is a longer description of the project. About a paragraph long. Some [filler text](https://placehodler.shapelabs.co/) to demonstrate: Token standard surrendered some burned mnemonic phrase until some hot wallet because blockchain detected many pre-mine. It based on many automated token generation event, and when Tether formed some trustless in the FUD, Dogecoin slept on lots of anti-money laundering of many stale block!",
       "image": "example.png"
     }

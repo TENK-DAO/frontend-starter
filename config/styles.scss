@@ -1,0 +1,25 @@
+/**
+ * Make sure these look good in light mode and dark mode!
+ * If you omit any values, defaults will be used.
+ */
+$white: #fdfdfd;
+$black: #262626;
+$accent: #e73b93;
+
+/**
+ * You can add any other styles below
+ */
+.this-class-is-set-in-i18n-files p {
+  color: $accent;
+}
+
+.this-class-is-set-in-i18n-files a {
+  border-bottom: 1px solid $accent;
+  border-radius: var(--br-base) var(--br-base) 0 0;
+}
+
+.this-class-is-set-in-i18n-files a:focus,
+.this-class-is-set-in-i18n-files a:hover {
+  background-color: adjust-color($accent, $alpha: -0.9);
+  text-decoration: none;
+}
