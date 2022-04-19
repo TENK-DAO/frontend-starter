@@ -21,8 +21,6 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
 
   if (!locale) return null
 
-  const [titleWord1, ...restOfTitle] = locale.title!.split(' ')
-
   const data = {
     ...tenkData,
     currentUser,
@@ -80,10 +78,7 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
           </form>
         )}
         <div>
-          <h1>
-            <div>{titleWord1}</div>
-            <small>{restOfTitle.join(' ')}</small>
-          </h1>
+          <h1>{locale.title}</h1>
           <Markdown children={fill(hero.title, data)} components={{ p: 'h2' }} />
           <div className={css.lead}>
             <Markdown children={fill(hero.body, data)} />

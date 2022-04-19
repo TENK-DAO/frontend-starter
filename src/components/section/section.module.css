@@ -15,7 +15,7 @@
   width: 100%;
 }
 
-@media (min-width: 450px) {
+@media (min-width: 500px) {
   .content.hasMedia {
     flex-direction: row;
   }
