@@ -9,24 +9,22 @@
 }
 .content h1 {
   font-weight: var(--fw-black);
-  font-size: 4.5rem;
-  line-height: 0.6;
+  font-size: 4rem;
+  line-height: 0.9;
   margin-top: var(--spacing-l);
-}
-.content h1 small {
-  font-size: 3rem;
 }
 .content h2 {
   color: var(--accent);
   margin-top: var(--spacing-m);
   margin-bottom: calc(-1 * var(--spacing-m));
 }
+
 .lead,
 .remaining {
   color: var(--gray-6);
 }
 
-@media (min-width: 450px) {
+@media (min-width: 500px) {
   .content {
     flex-direction: column-reverse;
   }

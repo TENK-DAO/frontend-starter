@@ -13,7 +13,9 @@ const Reveal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
   useEffect(() => {
     document.addEventListener('keyup', onKeyPress)
+    document.addEventListener('click', onClose)
     return function onUnmount() {
+      document.removeEventListener('click', onClose)
       document.removeEventListener('keyup', onKeyPress)
     }
   }, [])
