@@ -1,0 +1,83 @@
+.myNfts {
+  background-color: rgba(0, 0, 0, 0.7);
+  bottom: 0;
+  color: var(--white);
+  filter: invert(blur(4px));
+  left: 0;
+  overflow: scroll;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  padding-top: var(--spacing-m);
+}
+
+.myNfts header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.close {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--white);
+  font-size: 3em;
+  line-height: 1;
+  padding: 0;
+}
+
+.close:focus,
+.close:hover {
+  background-color: transparent;
+  color: var(--accent);
+}
+
+.grid {
+  display: grid;
+  gap: var(--spacing-m);
+  grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
+  margin: var(--spacing-m) 0;
+}
+
+.nft {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  transition: transform 75ms;
+  transform: scale(100%);
+}
+
+.nft:hover,
+.nft:focus {
+  box-shadow: none;
+  transform: scale(105%);
+  background-color: transparent;
+}
+
+.nft footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.highlight {
+  color: var(--accent);
+  font-weight: var(--fw-bold);
+}
+
+.nft>div:first-child {
+  --aspect-ratio: 1 / 1;
+  background-color: var(--gray-1);
+  border-radius: var(--br-small);
+  padding-bottom: calc(var(--aspect-ratio, 1 / 1) * 100%);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
