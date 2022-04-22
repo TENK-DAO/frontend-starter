@@ -33,6 +33,7 @@
     "gatsby-plugin-image": "^2.5.2",
     "gatsby-plugin-manifest": "^4.5.2",
     "gatsby-plugin-offline": "^5.5.2",
+    "gatsby-plugin-portal": "^1.0.7",
     "gatsby-plugin-react-helmet": "^5.5.0",
     "gatsby-plugin-sass": "^5.7.0",
     "gatsby-plugin-sharp": "^4.5.2",

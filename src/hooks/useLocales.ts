@@ -33,6 +33,7 @@ export default function useLocales(): { locales: Locale[]; locale?: Locale } {
               calendarEvent
               connectWallet
               signOut
+              new
               myNFTs
               nextNFT
               prevNFT

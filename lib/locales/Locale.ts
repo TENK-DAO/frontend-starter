@@ -63,6 +63,7 @@ export default interface Locale {
   calendarEvent: string
   connectWallet: string
   signOut: string
+  new: string
   myNFTs: string
   nextNFT: string
   prevNFT: string

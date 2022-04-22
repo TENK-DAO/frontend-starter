@@ -397,6 +397,9 @@ export const LocaleSchema = {
     signOut: {
       type: "string",
     },
+    new: {
+      type: "string",
+    },
     title: {
       type: "string",
     },
@@ -421,6 +424,7 @@ export const LocaleSchema = {
     "nextNFT",
     "prevNFT",
     "signOut",
+    "new",
     "title",
     "viewIn",
     "zoomIn",
