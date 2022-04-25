@@ -25,6 +25,7 @@
     "@types/react": "17",
     "@types/react-dom": "17",
     "@types/react-helmet": "^6.1.5",
+    "create-validator-ts": "^3.0.1",
     "gatsby": "^4.12.1",
     "gatsby-plugin-dts-css-modules": "^2.2.0",
     "gatsby-plugin-extract-schema": "^0.2.1",
@@ -43,8 +44,7 @@
     "gatsby-transformer-sharp": "^4.5.0",
     "node-sass": "6",
     "prettier": "^2.5.1",
-    "typescript": "^4.5.4",
-    "typescript-json-validator": "^2.4.2"
+    "typescript": "^4.5.4"
   },
   "keywords": [
     "gatsby"
