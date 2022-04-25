@@ -17,6 +17,32 @@ type Data = TenkData & {
   userStatus: typeof userStatuses[number]
 }
 
+function formatNumber(
+  num: number | string,
+
+  /**
+   * `undefined` will default to browser's locale (may not work correctly in Node during build)
+   */
+  locale?: string,
+) {
+
+  return new Intl.NumberFormat(locale, {
+    maximumSignificantDigits: 3,
+  }).format(Number(num))
+}
+
+function formatCurrency(
+  num: number | string,
+  currency: string = 'NEAR',
+
+  /**
+   * `undefined` will default to browser's locale (may not work correctly in Node during build)
+   */
+  locale?: string,
+) {
+  return `${formatNumber(num, locale)} ${currency}`
+}
+
 function formatDate(
   d: Timestamp | Date,
 
@@ -40,10 +66,12 @@ const replacers = {
   PRESALE_START: (d: Data) => formatDate(d.saleInfo.presale_start),
   SALE_START: (d: Data) => formatDate(d.saleInfo.sale_start),
   MINT_LIMIT: (d: Data) => d.remainingAllowance ?? 0,
-  MINT_PRICE: (d: Data) => NEAR.from(d.saleInfo.price).mul(NEAR.from('' + (d.numberToMint ?? 1))).toHuman(),
+  MINT_PRICE: (d: Data) => formatCurrency(
+    NEAR.from(d.saleInfo.price).mul(NEAR.from('' + (d.numberToMint ?? 1))).toHuman().split(' ')[0]
+  ),
   MINT_RATE_LIMIT: (d: Data) => d.mintRateLimit,
-  INITIAL_COUNT: (d: Data) => d.saleInfo.token_final_supply,
-  REMAINING_COUNT: (d: Data) => d.tokensLeft,
+  INITIAL_COUNT: (d: Data) => formatNumber(d.saleInfo.token_final_supply),
+  REMAINING_COUNT: (d: Data) => formatNumber(d.tokensLeft),
 } as const
 
 export const placeholderStrings = Object.keys(replacers)
@@ -110,7 +138,12 @@ export function can(action: Action, data: Data): boolean {
         data.remainingAllowance !== undefined &&
         data.remainingAllowance > 0
       ) ||
-      (data.saleStatus === 'saleOpen')
+      (data.saleStatus === 'saleOpen' && (
+        // users are added to the whitelist as they mint during saleOpen;
+        // undefined means they haven't minted yet
+        data.remainingAllowance === undefined ||
+        data.remainingAllowance > 0
+      ))
     )
   }
   return true

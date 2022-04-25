@@ -1,9 +1,11 @@
+// This file specifies the exact shape of data required in the locales files
+// located in `config/locales/*.json`
+//
+// We then use `create-validator-ts` to generate a JSON validator based on
+// these types, which lives in `./Locale.validator.ts`
+
 /**
- * This file specifies the exact shape of data required in the locales files
- * located in `config/locales/*.json`
- *
- * We then use `typescript-json-validator` to generate a JSON validator based on
- * these types, which lives in `./Locale.validator.ts`
+ * Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/
  */
 type Markdown = string
 
@@ -53,9 +55,14 @@ export interface SectionI18n {
   backgroundImage?: string
   backgroundColor?: string
   className?: string
+  blocks?: {
+    image?: string
+    text?: string
+    linkTo?: string
+  }[]
 }
 
-export default interface Locale {
+export interface Locale {
   viewIn: string
   langPicker: string
   title: string

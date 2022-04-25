@@ -15,6 +15,9 @@
   width: 100%;
 }
 
+.section:nth-of-type(n+2) .content>*:first-child {
+  flex: 2 1;
+}
 @media (min-width: 500px) {
   .content.hasMedia {
     flex-direction: row;

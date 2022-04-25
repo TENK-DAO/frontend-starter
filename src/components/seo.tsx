@@ -25,9 +25,17 @@ interface Props {
   title: string
   meta?: MetaTag[]
   favicon?: string
+  image?: string
 }
 
-function Seo({ description, lang, meta = [], title, favicon }: Props) {
+function Seo({
+  description,
+  lang,
+  meta = [],
+  title,
+  favicon,
+  image,
+}: Props) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -70,12 +78,16 @@ function Seo({ description, lang, meta = [], title, favicon }: Props) {
           content: description,
         },
         {
+          property: `og:image`,
+          content: image || ``,
+        },
+        {
           property: `og:type`,
           content: `website`,
         },
         {
           name: `twitter:card`,
-          content: `summary`,
+          content: `summary_large_image`,
         },
         {
           name: `twitter:creator`,
@@ -89,6 +101,10 @@ function Seo({ description, lang, meta = [], title, favicon }: Props) {
           name: `twitter:description`,
           content: description,
         },
+        {
+          name: `twitter:image`,
+          content: image || ``,
+        }
       ].concat(meta)}
     />
   )

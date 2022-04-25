@@ -1,16 +1,15 @@
 import fs from "fs"
 import path from "path"
 import { execSync } from "child_process"
-import { requiredHeroFields, optionalHeroFields, saleStatuses, userStatuses } from "./Locale"
-import type Locale from "./Locale"
+import { Locale, requiredHeroFields, optionalHeroFields, saleStatuses, userStatuses } from "./Locale"
 import { placeholderStrings } from './runtimeUtils'
 import type { Hero, RawHeroTree } from "./Locale"
 
 // re-create `Locale.validator.ts` based of current contents of `Locale.ts`
-execSync(`yarn typescript-json-validator --noExtraProps ${__dirname}/Locale.ts Locale`)
+execSync(`yarn create-validator-ts --skipTypeCheck ${__dirname}/Locale.ts`)
 
 // now that we re-created the file we can import the latest version
-const validate: (x: unknown) => Locale = require('./Locale.validator').default
+const validate: (x: unknown) => Locale = require('./Locale.validator').validateLocale
 
 class LocaleError extends Error {}
 

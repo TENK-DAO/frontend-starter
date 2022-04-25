@@ -16,7 +16,7 @@ export interface TenkData {
   mintRateLimit: number
   nfts: Token[]
   saleInfo: SaleInfo
-  tokensLeft?: number
+  tokensLeft: number
   vip: boolean
 }
 
