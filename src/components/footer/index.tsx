@@ -9,8 +9,9 @@ export default function Footer() {
   if (!locale) return null
   return (
     <footer className={`${css.footer} container`}>
-      <div style={{ display: 'flex', gap: 'var(--spacing-m)', alignItems: 'center' }}>
-        <span>Launching Partners: <a href="https://tenk.dev/">TenK DAO</a></span>
+      <LangPicker />
+      <div className={css.launchPartner}>
+        <span>Launching Partner: <a href="https://tenk.dev/">TenK DAO</a></span>
         <a href="https://tenk.dev/">
           <StaticImage
             src="../../../config/images/tenk-logo.png"
@@ -19,7 +20,6 @@ export default function Footer() {
           />
         </a>
       </div>
-      <LangPicker />
     </footer>
   )
 }

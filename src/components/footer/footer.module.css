@@ -2,9 +2,22 @@
 .footer {
   align-items: center;
   display: flex;
+  flex-direction: row-reverse;
   flex-wrap: wrap;
   gap: var(--spacing-m);
   justify-content: space-between;
   padding-bottom: var(--spacing-l);
   width: 100%;
+}
+
+.launchPartner {
+  align-items: center; 
+  display: flex;
+  gap: var(--spacing-m);
+}
+
+/* When launchPartner is first child, there is only one language to choose from */
+.launchPartner:first-child {
+  width: 100%;
+  justify-content: center;
 }
