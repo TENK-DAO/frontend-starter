@@ -22,7 +22,11 @@ export default function ({ src, ...props }: ImageProps) {
       return <div dangerouslySetInnerHTML={{ __html: svg.svg.content }} />
     }
     // SVGs that can/should not be inlined
-    return <img src={svg.svg?.dataURI ?? undefined} alt={props.alt} />
+    return (
+      <div className="image">
+        <img src={svg.svg?.dataURI ?? undefined} alt={props.alt} />
+      </div>
+    )
   }
 
   const imageData = image.childImageSharp?.gatsbyImageData
@@ -33,6 +37,9 @@ export default function ({ src, ...props }: ImageProps) {
     )
   }
 
-  return <img src={image.publicURL ?? undefined} {...props} />
-
+  return (
+    <div className="image">
+      <img src={image.publicURL ?? undefined} {...props} />
+    </div>
+  )
 }
