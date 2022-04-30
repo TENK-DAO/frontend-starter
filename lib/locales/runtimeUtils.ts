@@ -13,6 +13,8 @@ type Data = TenkData & {
   currentUser: string
   locale: Locale
   numberToMint?: number
+  nearMint?:number
+  chedMint?:number
   saleStatus: typeof saleStatuses[number]
   userStatus: typeof userStatuses[number]
 }
@@ -34,6 +36,18 @@ function formatNumber(
 function formatCurrency(
   num: number | string,
   currency: string = 'NEAR',
+
+  /**
+   * `undefined` will default to browser's locale (may not work correctly in Node during build)
+   */
+  locale?: string,
+) {
+  return `${formatNumber(num, locale)} ${currency}`
+}
+
+function formatCurrency1(
+  num: number | string,
+  currency: string = 'Cheddar',
 
   /**
    * `undefined` will default to browser's locale (may not work correctly in Node during build)
@@ -66,9 +80,11 @@ const replacers = {
   PRESALE_START: (d: Data) => formatDate(d.saleInfo.presale_start),
   SALE_START: (d: Data) => formatDate(d.saleInfo.sale_start),
   MINT_LIMIT: (d: Data) => d.remainingAllowance ?? 0,
-  MINT_PRICE: (d: Data) => formatCurrency(
+  MINT_PRICE: (d: Data) => (d.nearMint == 1) ? (formatCurrency(
     NEAR.from(d.saleInfo.price).mul(NEAR.from('' + (d.numberToMint ?? 1))).toHuman().split(' ')[0]
-  ),
+  )):(formatCurrency1(
+    NEAR.from(3).mul(NEAR.from('' + (d.numberToMint ?? 1))).toHuman().split(' ')[0]
+  )),
   MINT_RATE_LIMIT: (d: Data) => d.mintRateLimit,
   INITIAL_COUNT: (d: Data) => formatNumber(d.saleInfo.token_final_supply),
   REMAINING_COUNT: (d: Data) => formatNumber(d.tokensLeft),
@@ -81,6 +97,7 @@ export type PlaceholderString = keyof typeof replacers
 const placeholderRegex = new RegExp(`(${placeholderStrings.join('|')})`, 'gm')
 
 export function fill(text: string, data: Data): string {
+  console.log(data);
   return text.replace(placeholderRegex, (match) => {
     return String(replacers[match as PlaceholderString](data))
   })
@@ -119,6 +136,14 @@ const actions = {
   }),
   'SIGN_IN': signIn,
   'MINT': (d: Data) => TenK.nft_mint_many({ num: d.numberToMint ?? 1 }, {
+    gas: Gas.parse('40 Tgas').mul(Gas.from('' + d.numberToMint)),
+    attachedDeposit: NEAR.from(d.saleInfo.price).mul(NEAR.from('' + d.numberToMint)),
+  }),
+  'MintForNear': (d: Data) => TenK.nft_mint_many({ num: d.numberToMint ?? 1 }, {
+    gas: Gas.parse('40 Tgas').mul(Gas.from('' + d.numberToMint)),
+    attachedDeposit: NEAR.from(d.saleInfo.price).mul(NEAR.from('' + d.numberToMint)),
+  }),
+  'MintForChed': (d: Data) => TenK.nft_mint_many({ num: d.numberToMint ?? 1 }, {
     gas: Gas.parse('40 Tgas').mul(Gas.from('' + d.numberToMint)),
     attachedDeposit: NEAR.from(d.saleInfo.price).mul(NEAR.from('' + d.numberToMint)),
   }),
