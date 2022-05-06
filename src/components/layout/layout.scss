@@ -6,6 +6,7 @@
 $white: white !default;
 $black: black !default;
 $accent: #e73b93 !default;
+$accent: adjust-color($accent, $hue: 90deg) !default;
 
 :root {
   /* Typographic Scale */
@@ -52,6 +53,7 @@ $accent: #e73b93 !default;
   --white: #{$white};
   --black: #{$black};
   --accent: #{$accent};
+  --secondary: #{$secondary};
 
   --fg: var(--black);
   --bg: var(--white);
@@ -185,7 +187,7 @@ select {
 
 button,
 .button {
-  background-color: var(--fg);
+  background: linear-gradient(to right, var(--secondary), var(--accent) 66%);
   border-radius: var(--br-base);
   border: none;
   color: var(--bg);

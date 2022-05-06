@@ -41,8 +41,17 @@
   margin: var(--spacing-m) 0;
 }
 
+.myNfts button {
+  background: transparent;
+}
+
+.myNfts button:hover,
+.myNfts button:focus {
+  box-shadow: none;
+  background: transparent;
+}
+
 .nft {
-  background-color: transparent;
   color: inherit;
   padding: 0;
   margin: 0;
@@ -57,9 +66,7 @@
 
 .nft:hover,
 .nft:focus {
-  box-shadow: none;
   transform: scale(105%);
-  background-color: transparent;
 }
 
 .nft footer {

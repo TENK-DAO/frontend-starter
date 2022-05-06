@@ -8,6 +8,7 @@
 import * as React from "react"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+import settings from "../../config/settings.json"
 
 type MetaTag =
   | {
@@ -79,7 +80,7 @@ function Seo({
         },
         {
           property: `og:image`,
-          content: image || ``,
+          content: !image ? '' : new URL(settings.siteUrl, image).href,
         },
         {
           property: `og:type`,
@@ -103,7 +104,7 @@ function Seo({
         },
         {
           name: `twitter:image`,
-          content: image || ``,
+          content: !image ? '' : new URL(settings.siteUrl, image).href,
         }
       ].concat(meta)}
     />
