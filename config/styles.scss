@@ -5,10 +5,10 @@
 $white: #fdfdfd;
 $black: #262626;
 $accent: #e73b93;
+$secondary: adjust-color($accent, $hue: 90deg);
 
-/**
- * You can add any other styles below
- */
 .this-class-is-set-in-i18n-files h1 {
-  color: $accent;
+  /**
+    * You could add other styles like this
+    */
 }

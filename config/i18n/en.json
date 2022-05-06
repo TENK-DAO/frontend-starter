@@ -18,7 +18,7 @@
     "title": "NFTs drop at SALE_START!",
     "body": "Tagline goes here.",
     "ps": "Want early access? Sign in.",
-    "remaining": "NFTs remaining: REMAINING_COUNT",
+    "remaining": "REMAINING_COUNT / INITIAL_COUNT left",
     "cta": "Add to Calendar",
     "action": "ADD_TO_CALENDAR(SALE_START)",
     "saleClosed": {
