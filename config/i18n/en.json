@@ -17,11 +17,11 @@
     "video": "3d_toys_playground.mp4",
     "title": "NFTs drop at SALE_START!",
     "body": "Tagline goes here.",
-    "ps": "Want early access? Sign in.",
     "remaining": "REMAINING_COUNT / INITIAL_COUNT left",
     "cta": "Add to Calendar",
     "action": "ADD_TO_CALENDAR(SALE_START)",
     "saleClosed": {
+      "ps": "Want early access? Sign in.",
       "signedIn": {
         "ps": "Pre-mint start: PRESALE_START\n\nJoin the whitelist! [Join our Discord](https://discord.com/invite/UY9Xf2k) and request an invite."
       },
@@ -32,6 +32,7 @@
       }
     },
     "presale": {
+      "ps": "Pre-mint started!\n\nGet in on it! [Join our Discord](https://discord.com/invite/UY9Xf2k) and request an invite.",
       "vip": {
         "title": "Pre-mint started!",
         "body": "Public minting starts at SALE_START",
