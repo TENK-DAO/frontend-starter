@@ -80,7 +80,7 @@ function Seo({
         },
         {
           property: `og:image`,
-          content: !image ? '' : new URL(settings.siteUrl, image).href,
+          content: !image ? '' : new URL(image, settings.siteUrl).href,
         },
         {
           property: `og:type`,
@@ -104,7 +104,7 @@ function Seo({
         },
         {
           name: `twitter:image`,
-          content: !image ? '' : new URL(settings.siteUrl, image).href,
+          content: !image ? '' : new URL(image, settings.siteUrl).href,
         }
       ].concat(meta)}
     />
