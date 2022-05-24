@@ -18,6 +18,7 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
   const { saleStatus, userStatus } = useHeroStatuses()
   const [numberToMint, setNumberToMint] = React.useState(1)
   const hero = heroTree[saleStatus][userStatus]
+  console.log(heroTree + "\n" + saleStatus)
 
   if (!locale) return null
 
@@ -27,6 +28,16 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
     locale,
     saleStatus,
     userStatus,
+  }
+  
+  const mintForNear = function () {
+    console.log("NEAR")
+    act("MintForNear", { ...data, numberToMint})
+  }
+
+  const mintForCheddar = function() {
+      console.log("Cheddar")
+      act("MintForChed", { ...data, numberToMint}) 
   }
 
   return (
@@ -45,10 +56,10 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
       }}
     >
       <div className={css.content}>
-        {can(hero.action, data) && (
+        {can("MintForNear", data) && (
           <form onSubmit={e => {
             e.preventDefault()
-            act(hero.action, { ...data, numberToMint })
+           // act(hero.action, { ...data, numberToMint })
           }}>
             {hero.setNumber && (
               <>
@@ -72,9 +83,15 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
                 />
               </>
             )}
-            <button className={css.cta}>
+            
+            <button onClick={mintForNear} className={css.cta}>
               {fill(hero.cta, { ...data, numberToMint })}
             </button>
+
+            <button onClick={mintForCheddar} className={css.cta}>
+              {fill("Mint for CHED", { ...data, numberToMint })}
+            </button>
+
           </form>
         )}
         <div>

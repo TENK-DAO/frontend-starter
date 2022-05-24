@@ -318,6 +318,7 @@ export class Contract {
     return transactions.functionCall("start_sale", args, options?.gas ?? DEFAULT_FUNCTION_CALL_GAS, options?.attachedDeposit ?? new BN(0))
   }
   async nft_mint_many(args: {
+    with_cheddar: boolean,
     num: number,
   }, options?: ChangeMethodOptions): Promise<Token[]> {
     return providers.getTransactionLastResult(await this.nft_mint_manyRaw(args, options));

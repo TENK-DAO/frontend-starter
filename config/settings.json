@@ -1,7 +1,8 @@
 {
   "author": "@TenKBay",
   "siteUrl": "https://tenkbay.com",
-  "contractName": "v2.tenk.testnet",
+  "contractName": "nft.cheddar.testnet",
+  "ftcontractName": "token-v3.cheddar.testnet",
   "social": [
     {
       "href": "https://discord.com/invite/UY9Xf2k",
