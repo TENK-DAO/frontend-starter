@@ -1,22 +1,23 @@
 {
   "viewIn": "View in English",
   "langPicker": "English",
-  "title": "Cool NFT Project",
-  "description": "This is the minting page for Cool NFT Project",
+  "title": "Cheddar PowerUp GEN 0",
+  "description": "PowerUp DEFI with the Cheddy PowerUp NFT.",
   "calendarEvent": "Go Mint an NFT!",
   "connectWallet": "Login with NEAR",
   "signOut": "Sign Out",
   "new": "New!",
   "myNFTs": "My NFTs",
+  "myNFTsDesc": "Click the image or # below to view full version.",
   "nextNFT": "Next NFT",
   "prevNFT": "Previous NFT",
   "close": "Close",
   "zoomIn": "Zoom In",
   "zoomOut": "Zoom Out",
   "hero": {
-    "video": "3d_toys_playground.mp4",
+    "image": "Cheddar-Power-Up-Preview.gif",
     "title": "NFTs drop at SALE_START!",
-    "body": "Tagline goes here.",
+    "body": "PowerUp DEFI with Cheddy!",
     "ps": "Want early access? Sign in.",
     "remaining": "NFTs remaining: REMAINING_COUNT",
     "cta": "Add to Calendar",
@@ -36,7 +37,7 @@
         "title": "Pre-mint started!",
         "body": "Public minting starts at SALE_START",
         "ps": "Your remaining pre-mint allowance: MINT_LIMIT",
-        "setNumber": "Number to mint",
+        "setNumber": "LIMIT 1 PER USER",
         "cta": "Mint for MINT_PRICE",
         "action": "MINT"
       }
@@ -44,7 +45,7 @@
     "saleOpen": {
       "title": "Minting has begun!",
       "ps": "",
-      "setNumber": "Number to mint",
+      "setNumber": "LIMIT 1 PER USER",
       "cta": "Mint for MINT_PRICE",
       "action": "MINT",
       "signedOut": {
@@ -62,8 +63,8 @@
   "extraSections": [
     {
       "className": "this-class-is-set-in-i18n-files",
-      "text": "# Introducing Cool NFT Project\n\nThis is a longer description of the project. About a paragraph long. Some [filler text](https://placehodler.shapelabs.co/) to demonstrate: Token standard surrendered some burned mnemonic phrase until some wallet because blockchain detected many pre-mine. It based on many automated token generation event, and when Tether formed some trustless in the FUD, Dogecoin slept on lots of anti-money laundering of many stale block!\n\nSolidity limited lots of reinvested distributed denial of service attack! ICO specialises in lots of lightning fast private chain since Zilliqa surrendered few reinvested cryptocurrency, however, because someone limited few provably fiat until the vanity address, Augur stuck many burned pre-mine. They sharded many technical analysis, or NFT specialises in the FOMO in few wash trade.",
-      "image": "example.png"
+      "text": "The Cheddar PowerUp&nbsp;⚡️ &nbsp;featuring Cheddy!\n\nBOOST your DEFI experience on Cheddar and beyond!\n\n▶️&nbsp;555 GEN 0 (55 to Cheddar DAO)\n\n▶️&nbsp;Stake & Boost Farm Yields\n\n▶️&nbsp;Partner NFT Staking Pools\n\n▶️&nbsp;5 Cheddy 1/1's included in 5555",
+      "image": "1of1.png"
     }
   ]
 }

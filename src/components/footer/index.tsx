@@ -11,14 +11,7 @@ export default function Footer() {
     <footer className={`${css.footer} container`}>
       <LangPicker />
       <div className={css.launchPartner}>
-        <span>Launching Partner: <a href="https://tenk.dev/">TenK DAO</a></span>
-        <a href="https://tenk.dev/">
-          <StaticImage
-            src="../../../config/images/tenk-logo.png"
-            alt="TenK Logo"
-            height={40}
-          />
-        </a>
+        <span>A <a href="https://tenk.dev/">TenK</a> Contract & UI Fork, powered by 🧀</span>
       </div>
     </footer>
   )

@@ -56,11 +56,21 @@ export class ftContract {
 
   constructor(public account: Account, public readonly contractId: string){}
 
+  async ft_balance_of(accountId:string) : Promise<U128String> {
+    return this.view("ft_balance_of",{account_id:accountId })
+  }
+
+  /// Checks to see if an account is registered.
+  async storageBalance(accountId: AccountId): Promise<[U128String, U128String]> {
+    return this.account.viewFunction(this.contractId , "storage_balance_of", { account_id: accountId });
+  }
+
   async storage_deposit(args: {
     account_id: AccountId,
   }, options?: ChangeMethodOptions): Promise<string> {
     return providers.getTransactionLastResult(await this.storage_depositRaw(args, options));
   }
+
   storage_depositRaw(args: {
     account_id: AccountId
   }, options?: ChangeMethodOptions): Promise<providers.FinalExecutionOutcome> {

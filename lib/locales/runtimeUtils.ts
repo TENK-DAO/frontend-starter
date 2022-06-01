@@ -9,7 +9,7 @@ import { atcb_action as addToCalendar } from 'add-to-calendar-button'
 import settings from '../../config/settings.json'
 import { signIn, wallet, near} from '../../src/near'
 import { TenK } from '../../src/near/contracts'
-//import { FT } from '../../src/near/contracts'
+import { FT } from '../../src/near/contracts'
 import { TenkData } from "../../src/hooks/useTenk"
 import { saleStatuses, userStatuses } from './Locale'
 import { Locale } from '../../src/hooks/useLocales'
@@ -221,8 +221,8 @@ export async function act(action: ActionE, data: Data): void {
               with_cheddar: true,
               num: data.numberToMint ?? 1
             },
-            amount: new BN(utils.format.parseNearAmount('0.2')),
-            gas: new BN('100000000000000')
+            gas: Gas.parse('40 Tgas').mul(Gas.from('' + data.numberToMint)),
+            amount: NEAR.from("150000000000000000000000").mul(NEAR.from('' + data.numberToMint)),
           }
         ]
       });
@@ -242,7 +242,10 @@ export async function act(action: ActionE, data: Data): void {
           }
         ]
       });
-     
+
+      let isAccountRegistered = (await FT.storageBalance(present_account_id)) != null;
+
+      if(!isAccountRegistered) {
       transactions.unshift({
         receiverId: settings.ftcontractName,
         functionCalls: [
@@ -256,6 +259,7 @@ export async function act(action: ActionE, data: Data): void {
           }
         ]
       });
+      }
 
       const currentTransactions = await Promise.all(
         transactions.map((t, i) => {

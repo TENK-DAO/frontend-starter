@@ -2,10 +2,11 @@
 @import "./atcb.css";
 @import "../../../config/styles.scss";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
 
 $white: white !default;
 $black: black !default;
-$accent: #e73b93 !default;
+$accent: #FCA602 !default;
 
 :root {
   /* Typographic Scale */
@@ -18,7 +19,7 @@ $accent: #e73b93 !default;
   }
 
   /* Font Family */
-  --sans: Montserrat, sans-serif;
+  --sans: Bubblegum Sans, sans-serif;
   --monospace: "Source Code Pro", monospace;
 
   /* Font Weights */

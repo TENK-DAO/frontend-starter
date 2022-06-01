@@ -35,6 +35,7 @@ export default function useLocales(): { locales: Locale[]; locale?: Locale } {
               signOut
               new
               myNFTs
+              myNFTsDesc
               nextNFT
               prevNFT
               close

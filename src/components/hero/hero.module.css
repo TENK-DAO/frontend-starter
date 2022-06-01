@@ -9,7 +9,7 @@
 }
 .content h1 {
   font-weight: var(--fw-black);
-  font-size: 4rem;
+  font-size: 3.5rem;
   line-height: 0.9;
   margin-top: var(--spacing-l);
 }

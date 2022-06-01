@@ -72,10 +72,7 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
                   </div>
                 </div>
                 <Slider
-                  max={Math.min(
-                    tenkData.remainingAllowance ?? tenkData.mintRateLimit,
-                    tenkData.mintRateLimit
-                  )}
+                  max={1}
                   min={1}
                   name="numberToMint"
                   onValueChange={([v]) => setNumberToMint(v)}

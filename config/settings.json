@@ -1,16 +1,17 @@
 {
-  "author": "@TenKBay",
-  "siteUrl": "https://tenkbay.com",
+  "author": "@CheddarFi",
+  "siteUrl": "https://cheddar.farm",
   "contractName": "nft.cheddar.testnet",
+  "image": "cheddy-new-logo.jpg",
   "ftcontractName": "token-v3.cheddar.testnet",
   "social": [
     {
-      "href": "https://discord.com/invite/UY9Xf2k",
+      "href": "https://discord.com/invite/XVBxDBqP2v",
       "img":  "discord.svg",
       "alt": "Discord"
     },
     {
-      "href": "https://twitter.com/TenKBay",
+      "href": "https://twitter.com/CheddarFi",
       "img":  "twitter.svg",
       "alt": "Twitter"
     }
