@@ -18,7 +18,9 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
   const { saleStatus, userStatus } = useHeroStatuses()
   const [numberToMint, setNumberToMint] = React.useState(1)
   const hero = heroTree[saleStatus][userStatus]
-  console.log(heroTree + "\n" + saleStatus)
+ // console.log(heroTree + "\n" + saleStatus)
+
+ console.log(hero);
 
   if (!locale) return null
 
@@ -80,14 +82,16 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
                 />
               </>
             )}
-            
+            console.log(hero)
             <button onClick={mintForNear} className={css.cta}>
               {fill(hero.cta, { ...data, numberToMint })}
             </button>
 
             <button onClick={mintForCheddar} className={css.cta}>
-              {fill("Mint for CHED", { ...data, numberToMint })}
+              {fill(hero.ctaCheddar, { ...data, numberToMint })}
             </button>
+            <p style={{textAlign:"center"}}>* Storage Deposit of 0.15 NEAR  Required<br/>Swap <a href="https://app.ref.finance/#token.cheddar.near%7Cwrap.near" target="_blank">🧀</a> on <a href="https://app.ref.finance/#token.cheddar.near%7Cwrap.near" target="_blank">↔️  Ref Finance</a></p>
+            <p style={{textAlign:"center"}}></p>
 
           </form>
         )}

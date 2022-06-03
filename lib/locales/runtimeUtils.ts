@@ -82,6 +82,8 @@ function formatNumber(
   locale?: string,
 ) {
 
+  console.log(num)
+
   return new Intl.NumberFormat(locale, {
     maximumSignificantDigits: 3,
   }).format(Number(num))
@@ -89,7 +91,7 @@ function formatNumber(
 
 function formatCurrency(
   num: number | string,
-  currency: string = 'NEAR',
+  currency: string = 'NEAR *',
 
   /**
    * `undefined` will default to browser's locale (may not work correctly in Node during build)
@@ -101,14 +103,15 @@ function formatCurrency(
 
 function formatCheddar(
   num: number | string,
-  currency: string = 'CHEDDAR',
+  currency: string = 'CHEDDAR *',
 
   /**
    * `undefined` will default to browser's locale (may not work correctly in Node during build)
    */
   locale?: string,
 ) {
-  return `${formatNumber(num, locale)} ${currency}`
+
+  return `${formatNumber(num.replace(/\,/g,''), locale)} ${currency}`
 }
 
 
@@ -138,11 +141,16 @@ const replacers = {
   MINT_PRICE: (d: Data) => formatCurrency(
     NEAR.from(d.saleInfo.price).mul(NEAR.from('' + (d.numberToMint ?? 1))).toHuman().split(' ')[0]
   ),
+  MINT_CHEDDAR_PRICE: (d: Data) => formatCheddar(
+    NEAR.from(d.totalCost).mul(NEAR.from('' + (d.numberToMint ?? 1))).toHuman().split(' ')[0]
+  ),
   MINT_CHED: (d: Data) => {},
   MINT_RATE_LIMIT: (d: Data) => d.mintRateLimit,
   INITIAL_COUNT: (d: Data) => formatNumber(d.saleInfo.token_final_supply),
   REMAINING_COUNT: (d: Data) => formatNumber(d.tokensLeft),
 } as const
+
+
 
 export const placeholderStrings = Object.keys(replacers)
 
@@ -151,6 +159,7 @@ export type PlaceholderString = keyof typeof replacers
 const placeholderRegex = new RegExp(`(${placeholderStrings.join('|')})`, 'gm')
 
 export function fill(text: string, data: Data): string {
+  console.log(data)
   return text.replace(placeholderRegex, (match) => {
     return String(replacers[match as PlaceholderString](data))
   })
@@ -243,23 +252,23 @@ export async function act(action: ActionE, data: Data): void {
         ]
       });
 
-      let isAccountRegistered = (await FT.storageBalance(present_account_id)) != null;
+      // let isAccountRegistered = (await FT.storageBalance(present_account_id)) != null;
 
-      if(!isAccountRegistered) {
-      transactions.unshift({
-        receiverId: settings.ftcontractName,
-        functionCalls: [
-          {
-            methodName: 'storage_deposit',
-            args: {
-              account_id: present_account_id
-            },
-            amount: new BN(utils.format.parseNearAmount('0.2')),
-            gas: new BN('100000000000000')
-          }
-        ]
-      });
-      }
+      // if(!isAccountRegistered) {
+      // transactions.unshift({
+      //   receiverId: settings.ftcontractName,
+      //   functionCalls: [
+      //     {
+      //       methodName: 'storage_deposit',
+      //       args: {
+      //         account_id: present_account_id
+      //       },
+      //       amount: new BN(utils.format.parseNearAmount('0.2')),
+      //       gas: new BN('100000000000000')
+      //     }
+      //   ]
+      // });
+      // }
 
       const currentTransactions = await Promise.all(
         transactions.map((t, i) => {

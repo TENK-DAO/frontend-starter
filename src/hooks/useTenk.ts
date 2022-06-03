@@ -34,6 +34,7 @@ const rpcCalls = Promise.all([
   !account_id ? undefined : TenK.remaining_allowance({ account_id }),
   !account_id ? undefined : TenK.nft_tokens_for_owner({ account_id }),
   !account_id ? undefined : TenK.mint_rate_limit({ account_id }),
+  !account_id ? undefined : TenK.total_cost({num: 1, minter: account_id, with_cheddar: true }),
 ])
 
 // Export utility to get data in object form, rather than array form.
@@ -46,7 +47,8 @@ export async function rpcData(): Promise<TenkData> {
     vip,
     remainingAllowance,
     nfts,
-    mintRateLimit
+    mintRateLimit,
+    totalCost
   ] = await rpcCalls
   return {
     saleInfo,
@@ -58,6 +60,7 @@ export async function rpcData(): Promise<TenkData> {
       media: new URL(nft.metadata?.media ?? '', contractMetadata.base_uri ?? '').href
     })) ?? [],
     mintRateLimit: mintRateLimit ?? 10,
+    totalCost: totalCost ?? 2500,
   }
 }
 

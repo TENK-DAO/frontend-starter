@@ -21,6 +21,7 @@
     "ps": "Want early access? Sign in.",
     "remaining": "NFTs remaining: REMAINING_COUNT",
     "cta": "Add to Calendar",
+    "ctaCheddar": "Add to Calendar",
     "action": "ADD_TO_CALENDAR(SALE_START)",
     "saleClosed": {
       "signedIn": {
@@ -39,14 +40,16 @@
         "ps": "Your remaining pre-mint allowance: MINT_LIMIT",
         "setNumber": "LIMIT 1 PER USER",
         "cta": "Mint for MINT_PRICE",
+        "ctaCheddar": "Mint for MINT_CHEDDAR_PRICE",
         "action": "MINT"
       }
     },
     "saleOpen": {
-      "title": "Minting has begun!",
+      "title": "MINT is ON! Save 30% with $Cheddar",
       "ps": "",
       "setNumber": "LIMIT 1 PER USER",
       "cta": "Mint for MINT_PRICE",
+      "ctaCheddar": "Mint for MINT_CHEDDAR_PRICE",
       "action": "MINT",
       "signedOut": {
         "action": "SIGN_IN"
@@ -57,13 +60,14 @@
       "body": "The NFTs have all been created",
       "ps": "",
       "cta": "Buy on Marketplace",
+      "ctaCheddar": "Mint for MINT_CHEDDAR_PRICE",
       "action": "GO_TO_PARAS"
     }
   },
   "extraSections": [
     {
       "className": "this-class-is-set-in-i18n-files",
-      "text": "The Cheddar PowerUp&nbsp;⚡️ &nbsp;featuring Cheddy!\n\nBOOST your DEFI experience on Cheddar and beyond!\n\n▶️&nbsp;555 GEN 0 (55 to Cheddar DAO)\n\n▶️&nbsp;Stake & Boost Farm Yields\n\n▶️&nbsp;Partner NFT Staking Pools\n\n▶️&nbsp;5 Cheddy 1/1's included in 5555",
+      "text": "The Cheddar PowerUp&nbsp;⚡️ &nbsp;featuring Cheddy Cheezy!\n\nBOOST your DEFI experience on Cheddar and beyond!\n\n▶️&nbsp;555 GEN 0 (55 to Cheddar DAO)\n\n▶️&nbsp;Stake & Boost Farm Yields\n\n▶️&nbsp;Partner NFT Staking Pools\n\n▶️&nbsp;5 Cheddy 1/1's included in 5555",
       "image": "1of1.png"
     }
   ]

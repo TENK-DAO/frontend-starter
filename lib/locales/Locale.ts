@@ -17,6 +17,7 @@ export const requiredHeroFields = [
   'title',
   'body',
   'cta',
+  'ctaCheddar',
   'action',
   'remaining',
 ] as const

@@ -554,6 +554,7 @@ export class Contract {
   total_cost(args: {
     num: number,
     minter: AccountId,
+    with_cheddar: boolean
   }, options?: ViewFunctionOptions): Promise<U128> {
     return this.account.viewFunction(this.contractId, "total_cost", args, options);
   }

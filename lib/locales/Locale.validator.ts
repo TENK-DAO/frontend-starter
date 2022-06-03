@@ -41,6 +41,10 @@ export const SCHEMA = {
                     "type": "string",
                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                 },
+                "ctaCheddar": {
+                    "type": "string",
+                    "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                },
                 "action": {
                     "type": "string",
                     "enum": [
@@ -60,6 +64,7 @@ export const SCHEMA = {
                 "action",
                 "body",
                 "cta",
+                "ctaCheddar",
                 "remaining",
                 "title"
             ]
@@ -84,6 +89,10 @@ export const SCHEMA = {
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
                                 "cta": {
+                                    "type": "string",
+                                    "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                                },
+                               "ctaCheddar": {
                                     "type": "string",
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
@@ -137,6 +146,10 @@ export const SCHEMA = {
                                     "type": "string",
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
+                                "ctaCheddar": {
+                                    "type": "string",
+                                    "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                                },
                                 "action": {
                                     "type": "string",
                                     "enum": [
@@ -187,6 +200,10 @@ export const SCHEMA = {
                                     "type": "string",
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
+                                "ctaCheddar": {
+                                    "type": "string",
+                                    "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                                },
                                 "action": {
                                     "type": "string",
                                     "enum": [
@@ -231,6 +248,10 @@ export const SCHEMA = {
                             "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                         },
                         "cta": {
+                            "type": "string",
+                            "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                        },
+                        "ctaCheddar": {
                             "type": "string",
                             "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                         },
@@ -287,6 +308,10 @@ export const SCHEMA = {
                                     "type": "string",
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
+                                "ctaCheddar": {
+                                    "type": "string",
+                                    "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                                },
                                 "action": {
                                     "type": "string",
                                     "enum": [
@@ -334,6 +359,10 @@ export const SCHEMA = {
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
                                 "cta": {
+                                    "type": "string",
+                                    "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                                },
+                                "ctaCheddar": {
                                     "type": "string",
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
@@ -387,6 +416,10 @@ export const SCHEMA = {
                                     "type": "string",
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
+                                "ctaCheddar": {
+                                    "type": "string",
+                                    "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                                },
                                 "action": {
                                     "type": "string",
                                     "enum": [
@@ -433,6 +466,10 @@ export const SCHEMA = {
                         "cta": {
                             "type": "string",
                             "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                        },
+                       "ctaCheddar": {
+                                    "type": "string",
+                                    "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                         },
                         "action": {
                             "type": "string",
@@ -487,6 +524,10 @@ export const SCHEMA = {
                                     "type": "string",
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
+                                "ctaCheddar": {
+                                    "type": "string",
+                                    "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                                },
                                 "action": {
                                     "type": "string",
                                     "enum": [
@@ -534,6 +575,10 @@ export const SCHEMA = {
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
                                 "cta": {
+                                    "type": "string",
+                                    "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                                },
+                                "ctaCheddar": {
                                     "type": "string",
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
@@ -587,6 +632,10 @@ export const SCHEMA = {
                                     "type": "string",
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
+                                "ctaCheddar": {
+                                    "type": "string",
+                                    "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                                },
                                 "action": {
                                     "type": "string",
                                     "enum": [
@@ -631,6 +680,10 @@ export const SCHEMA = {
                             "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                         },
                         "cta": {
+                            "type": "string",
+                            "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                        },
+                        "ctaCheddar": {
                             "type": "string",
                             "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                         },
@@ -687,6 +740,10 @@ export const SCHEMA = {
                                     "type": "string",
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
+                                "ctaCheddar": {
+                                    "type": "string",
+                                    "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                                },
                                 "action": {
                                     "type": "string",
                                     "enum": [
@@ -734,6 +791,10 @@ export const SCHEMA = {
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
                                 "cta": {
+                                    "type": "string",
+                                    "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                                },
+                                "ctaCheddar": {
                                     "type": "string",
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
@@ -787,6 +848,10 @@ export const SCHEMA = {
                                     "type": "string",
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
+                                "ctaCheddar": {
+                                    "type": "string",
+                                    "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                                },
                                 "action": {
                                     "type": "string",
                                     "enum": [
@@ -834,6 +899,10 @@ export const SCHEMA = {
                             "type": "string",
                             "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                         },
+                        "ctaCheddar": {
+                            "type": "string",
+                            "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                        },
                         "action": {
                             "type": "string",
                             "enum": [
@@ -877,6 +946,10 @@ export const SCHEMA = {
                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                 },
                 "cta": {
+                    "type": "string",
+                    "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                },
+                "ctaCheddar": {
                     "type": "string",
                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                 },
