@@ -1,9 +1,9 @@
 {
   "author": "@CheddarFi",
   "siteUrl": "https://cheddar.farm",
-  "contractName": "nft.cheddar.testnet",
+  "contractName": "nft.cheddar.near",
   "image": "cheddy-new-logo.jpg",
-  "ftcontractName": "token-v3.cheddar.testnet",
+  "ftcontractName": "token.cheddar.near",
   "social": [
     {
       "href": "https://discord.com/invite/XVBxDBqP2v",

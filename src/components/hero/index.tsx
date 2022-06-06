@@ -20,8 +20,6 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
   const hero = heroTree[saleStatus][userStatus]
  // console.log(heroTree + "\n" + saleStatus)
 
- console.log(hero);
-
   if (!locale) return null
 
   const data = {
@@ -33,12 +31,10 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
   }
   
   const mintForNear = function () {
-    console.log("NEAR")
     act("MintForNear", { ...data, numberToMint})
   }
 
   const mintForCheddar = function() {
-      console.log("Cheddar")
       act("MintForChed", { ...data, numberToMint}) 
   }
 
@@ -82,7 +78,6 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
                 />
               </>
             )}
-            console.log(hero)
             <button onClick={mintForNear} className={css.cta}>
               {fill(hero.cta, { ...data, numberToMint })}
             </button>

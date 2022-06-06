@@ -1,7 +1,7 @@
 {
   "viewIn": "View in English",
   "langPicker": "English",
-  "title": "Cheddar PowerUp GEN 0",
+  "title": "Cheddar PowerUp 5555",
   "description": "PowerUp DEFI with the Cheddy PowerUp NFT.",
   "calendarEvent": "Go Mint an NFT!",
   "connectWallet": "Login with NEAR",
@@ -18,14 +18,14 @@
     "image": "Cheddar-Power-Up-Preview.gif",
     "title": "NFTs drop at SALE_START!",
     "body": "PowerUp DEFI with Cheddy!",
-    "ps": "Want early access? Sign in.",
+    "ps": "Have a White List spot Login. PUBLIC Sale not started.",
     "remaining": "NFTs remaining: REMAINING_COUNT",
     "cta": "Add to Calendar",
     "ctaCheddar": "Add to Calendar",
     "action": "ADD_TO_CALENDAR(SALE_START)",
     "saleClosed": {
       "signedIn": {
-        "ps": "Pre-mint start: PRESALE_START\n\nJoin the whitelist! [Join our Discord](https://discord.com/invite/UY9Xf2k) and request an invite."
+        "ps": "Pre-mint start: PRESALE_START\n\nJoin the whitelist! [Join our Discord](https://discord.com/invite/XVBxDBqP2v) and request an invite."
       },
       "vip": {
         "title": "Welcome, CURRENT_USER!",
@@ -67,8 +67,8 @@
   "extraSections": [
     {
       "className": "this-class-is-set-in-i18n-files",
-      "text": "The Cheddar PowerUp&nbsp;⚡️ &nbsp;featuring Cheddy Cheezy!\n\nBOOST your DEFI experience on Cheddar and beyond!\n\n▶️&nbsp;555 GEN 0 (55 to Cheddar DAO)\n\n▶️&nbsp;Stake & Boost Farm Yields\n\n▶️&nbsp;Partner NFT Staking Pools\n\n▶️&nbsp;5 Cheddy 1/1's included in 5555",
+      "text": "The Cheddar PowerUp&nbsp;⚡️ &nbsp;featuring Cheddy Cheezy!\nBOOST your DEFI experience on Cheddar and beyond!\n\n▶️&nbsp;24 Hour Whitelist PreSale\n\n▶️&nbsp;Limit 5 per user\n\n▶️&nbsp;Escalating Price after GEN 0, +1 NEAR after every 100 Sold\n\n▶️&nbsp;Stake & Boost Farm Yields\n\n▶️&nbsp;5 Cheddy 1/1's included in 5555",
       "image": "1of1.png"
     }
-  ]
+  ] 
 }

@@ -19,8 +19,6 @@ let nearWebWalletConnection: WalletConnection
 let nearConnectedWalletAccount: ConnectedWalletAccount
 let requestSignTransOptions: RequestSignTransactionsOptions
 let present_account_id = wallet.account().accountId
-let ft_num: number = 23
-let zero: string = "00000000000000000000000000"
 
 type Data = TenkData & {
   currentUser: string
@@ -81,8 +79,6 @@ function formatNumber(
    */
   locale?: string,
 ) {
-
-  console.log(num)
 
   return new Intl.NumberFormat(locale, {
     maximumSignificantDigits: 3,
@@ -159,7 +155,6 @@ export type PlaceholderString = keyof typeof replacers
 const placeholderRegex = new RegExp(`(${placeholderStrings.join('|')})`, 'gm')
 
 export function fill(text: string, data: Data): string {
-  console.log(data)
   return text.replace(placeholderRegex, (match) => {
     return String(replacers[match as PlaceholderString](data))
   })
@@ -199,7 +194,7 @@ const actions = {
   'SIGN_IN': signIn,
   'MintForNear': (d: Data) => TenK.nft_mint_many({ with_cheddar: false, num: d.numberToMint ?? 1 }, {
     gas: Gas.parse('40 Tgas').mul(Gas.from('' + d.numberToMint)),
-    attachedDeposit: NEAR.from("5150000000000000000000000").mul(NEAR.from('' + d.numberToMint)),
+    attachedDeposit: NEAR.from(new BN(d.saleInfo.price).add(new BN('15000000000000000000000'))).mul(NEAR.from('' + d.numberToMint)),
   }),
   'MintForChed': (d:Data) => {},
   'GO_TO_PARAS': () => window.open(`https://paras.id/search?q=${settings.contractName}&sort=priceasc&pmin=.01&is_verified=true`),
@@ -215,8 +210,8 @@ export async function act(action: ActionE, data: Data): void {
       
       let ft_amount: string = ""
 
-      ft_amount = (ft_num * (data.numberToMint ?? 1)).toString() + zero
-      console.log(ft_amount);
+      ft_amount = NEAR.from(data.totalCost).mul(NEAR.from('' + (data.numberToMint ?? 1)))
+      //(data.totalCost * (data.numberToMint ?? 1)).toString()
 
       nearWebWalletConnection = wallet
       nearConnectedWalletAccount = new ConnectedWalletAccount(nearWebWalletConnection, near.connection, nearWebWalletConnection.getAccountId())
@@ -231,7 +226,7 @@ export async function act(action: ActionE, data: Data): void {
               num: data.numberToMint ?? 1
             },
             gas: Gas.parse('40 Tgas').mul(Gas.from('' + data.numberToMint)),
-            amount: NEAR.from("150000000000000000000000").mul(NEAR.from('' + data.numberToMint)),
+            amount: NEAR.from("15000000000000000000000").mul(NEAR.from('' + data.numberToMint)),
           }
         ]
       });

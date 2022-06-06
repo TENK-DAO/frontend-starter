@@ -92,7 +92,7 @@ export const SCHEMA = {
                                     "type": "string",
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
-                               "ctaCheddar": {
+                                "ctaCheddar": {
                                     "type": "string",
                                     "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                                 },
@@ -467,9 +467,9 @@ export const SCHEMA = {
                             "type": "string",
                             "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                         },
-                       "ctaCheddar": {
-                                    "type": "string",
-                                    "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
+                        "ctaCheddar": {
+                            "type": "string",
+                            "description": "Commonmark-formatted markdown. @see https://remarkjs.github.io/react-markdown/"
                         },
                         "action": {
                             "type": "string",

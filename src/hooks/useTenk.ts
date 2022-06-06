@@ -60,7 +60,7 @@ export async function rpcData(): Promise<TenkData> {
       media: new URL(nft.metadata?.media ?? '', contractMetadata.base_uri ?? '').href
     })) ?? [],
     mintRateLimit: mintRateLimit ?? 10,
-    totalCost: totalCost ?? 2500,
+    totalCost: totalCost ?? 5555,
   }
 }
 
