@@ -79,6 +79,17 @@
   font-weight: var(--fw-bold);
 }
 
+.chip {
+  color: var(--white);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.5em 0.5em 0.5em;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(19.5px);
+  -webkit-backdrop-filter: blur(19.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
 .nft>div:first-child {
   --aspect-ratio: 1 / 1;
   background-color: var(--gray-1);

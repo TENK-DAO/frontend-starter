@@ -60,6 +60,7 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
                     {fill(hero.remaining, data)}
                   </div>
                 </div>
+                {tenkData.mintRateLimit > 1 && (
                 <Slider
                   max={Math.min(
                     tenkData.remainingAllowance ?? tenkData.mintRateLimit,
@@ -70,6 +71,7 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
                   onValueChange={([v]) => setNumberToMint(v)}
                   value={[numberToMint]}
                 />
+                )}
               </>
             )}
             <button className={css.cta}>
