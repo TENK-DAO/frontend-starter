@@ -1,5 +1,5 @@
 {
-  "author": "@TenKBay",
+  "author": "@TenkDAO",
   "siteUrl": "https://tenk-dao.github.io/frontend-starter",
   "contractName": "v2.tenk.testnet",
   "image": "tenk-logo.png",
@@ -10,7 +10,7 @@
       "alt": "Discord"
     },
     {
-      "href": "https://twitter.com/TenKBay",
+      "href": "https://twitter.com/TenkDAO",
       "img":  "twitter.svg",
       "alt": "Twitter"
     }

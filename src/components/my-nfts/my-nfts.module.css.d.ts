@@ -4,3 +4,4 @@ export const close: string;
 export const grid: string;
 export const nft: string;
 export const highlight: string;
+export const chip: string;
