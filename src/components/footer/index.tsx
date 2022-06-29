@@ -11,11 +11,11 @@ export default function Footer() {
     <footer className={`${css.footer} container`}>
       <LangPicker />
       <div className={css.launchPartner}>
-        <span>Powered By <a href="https://tenk.dev/">TenK DAO</a></span>
+        <span>Powered By <a href="https://tenk.dev/">TENK DAO</a></span>
         <a href="https://tenk.dev/">
           <StaticImage
             src="../../../config/images/tenk-logo.png"
-            alt="TenK Logo"
+            alt="TENK Logo"
             height={40}
           />
         </a>
