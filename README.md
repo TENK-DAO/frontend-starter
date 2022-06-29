@@ -1,16 +1,16 @@
-# TenK NFT Launch Landing Page Template
+# TENK NFT Launch Landing Page Template
 
-Welcome to your new TenK NFT Launch Landing Page! This codebase gives you everything you need to make a simple-but-powerful landing page for your NFT project with near-zero custom code. Out-of-the-box, you get:
+Welcome to your new TENK NFT Launch Landing Page! This codebase gives you everything you need to make a simple-but-powerful landing page for your NFT project with near-zero custom code. Out-of-the-box, you get:
 
 * Super fast page loads using a Static Site Generator called [Gatsby].
-* Internationalization: offer your website in multiple languages for the global NFT market. If you need help translating your page, contact [the TenK team][TenK].
+* Internationalization: offer your website in multiple languages for the global NFT market. If you need help translating your page, contact [the TENK DAO team][TENK DAO].
 * Good SEO and social media sharing support.
 * Simple customization via the handful of files in the [`config`](./config/) folder.
 
 If you need even more customization, you can rest easy knowing that the whole site uses fully-typed TypeScript and a well-considered React architecture with few extensions or add-ons.
 
   [Gatsby]: https://www.gatsbyjs.com
-  [TenK]: https://tenkbay.com/
+  [TENK DAO]: https://tenkbay.com/
 
 # Run it
 
@@ -56,7 +56,7 @@ This last one is interesting. Reading through it, you'll see that it creates a n
 
 The contents of this last file almost look too simple! The import statements take up about as many lines as the main export. At this point you're about ready to go explore the code directly, option-clicking into various files to figure out what they do. Before you do, it's worth knowing about just a few more interesting bits:
 
-* [`src/near`](./src/near/) contains NEAR bootstrapping logic and a TypeScript wrapper around the TenK smart contract. This is amazing! This means you can use TypeScript-powered type-ahead to see what methods are available on your contract as you write your frontend code. If you want to test certain UI states that rely on certain data being returned from your contract, you can return spoof data in `src/near/contracts/tenk.ts` (just remember to change it back without committing it to git!)
-* [`src/hooks/useTenk.ts`](./src/hooks/useTenk.ts) contains a [custom React hook](https://reactjs.org/docs/hooks-custom.html) that makes RPC calls to your TenK smart contract once at page load. All React components that use this hook then make use of this data, without requiring new RPC calls.
+* [`src/near`](./src/near/) contains NEAR bootstrapping logic and a TypeScript wrapper around the TENK smart contract. This is amazing! This means you can use TypeScript-powered type-ahead to see what methods are available on your contract as you write your frontend code. If you want to test certain UI states that rely on certain data being returned from your contract, you can return spoof data in `src/near/contracts/tenk.ts` (just remember to change it back without committing it to git!)
+* [`src/hooks/useTenk.ts`](./src/hooks/useTenk.ts) contains a [custom React hook](https://reactjs.org/docs/hooks-custom.html) that makes RPC calls to your TENK smart contract once at page load. All React components that use this hook then make use of this data, without requiring new RPC calls.
 * [`src/hooks/useLocales.ts`](./src/hooks/useLocales.ts) is another custom hook that wraps the complex Gatsby logic needed to use your internationalization data in files outside of `[locale].tsx`. Gatsby forces all data, even simple JSON files, through a Rube Goldberg-like GraphQL pipeline ([GraphQL](https://graphql.org/) is great; Gatsby's overuse of it is tiring). Luckily, this project has automatic TypeScript typing on these GraphQL queries, improving the situation slightly. Note that the locales returned by `useLocales` differ slightly from the ones passed to `[locale].tsx`: they **do not contain `hero` or `extraSections` fields**. (This is due to a limitation of the `gatsby-transformer-json` plugin, which expects all JSON files to have exactly matching fields, while the locale format used by this project is more flexible.)
 * [`src/pages/index.tsx`](./src/pages/index.tsx) is the index page of the site. You'll see that it just lists all available locales, and then uses the [`useEffect` React hook](https://reactjs.org/docs/hooks-effect.html) to automatically redirect users to their current locale, if found.
