@@ -5,8 +5,12 @@
   "version": "0.1.0",
   "author": "Chad Ostrowski <chad@ahalabs.dev>",
   "dependencies": {
+    "@radix-ui/colors": "^0.1.8",
+    "@radix-ui/react-dialog": "^0.1.7",
     "@radix-ui/react-dropdown-menu": "0.1.6",
+    "@radix-ui/react-icons": "^1.1.1",
     "@radix-ui/react-slider": "^0.1.4",
+    "@stitches/react": "^1.2.8",
     "add-to-calendar-button": "1.7.8",
     "bn.js": "^5.2.0",
     "gatsby-background-image": "^1.6.0",

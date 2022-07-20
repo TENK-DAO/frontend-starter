@@ -9,10 +9,15 @@ import useHeroStatuses from "../../hooks/useHeroStatuses"
 import useTenk from "../../hooks/useTenk"
 import useLocales from "../../hooks/useLocales"
 import * as css from "./hero.module.css"
+import ConnectModal from "../connectModal"
 
 const currentUser = wallet.getAccountId()
 
-const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
+const Hero: React.FC<{
+  heroTree: ExpandedHeroTree
+  showConnectModal: boolean
+  setShowConnectModal: React.Dispatch<React.SetStateAction<boolean>>
+}> = ({ heroTree, showConnectModal, setShowConnectModal }) => {
   const { locale } = useLocales()
   const tenkData = useTenk()
   const { saleStatus, userStatus } = useHeroStatuses()
@@ -32,13 +37,21 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
   }
 
   const mintForNear = function () {
-    console.log("NEAR")
-    act("MintForNear", { ...data, numberToMint })
+    if (userStatus === "signedOut") {
+      setShowConnectModal(true)
+    } else {
+      console.log("NEAR")
+      act("MintForNear", { ...data, numberToMint })
+    }
   }
 
   const mintForCheddar = function () {
-    console.log("Cheddar")
-    act("MintForChed", { ...data, numberToMint })
+    if (userStatus === "signedOut") {
+      setShowConnectModal(true)
+    } else {
+      console.log("Cheddar")
+      act("MintForChed", { ...data, numberToMint })
+    }
   }
 
   return (
@@ -104,6 +117,10 @@ const Hero: React.FC<{ heroTree: ExpandedHeroTree }> = ({ heroTree }) => {
           {hero.ps && <Markdown children={fill(hero.ps, data)} />}
         </div>
       </div>
+      <ConnectModal
+        showConnectModal={showConnectModal}
+        setShowConnectModal={setShowConnectModal}
+      />
     </Section>
   )
 }

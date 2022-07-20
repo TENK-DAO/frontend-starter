@@ -42,3 +42,31 @@
   font-size: var(--spacing-l);
   font-weight: var(--fw-black);
 }
+
+.button-animation {
+  animation: animationKeyFrames 3s ease-in-out;
+}
+
+@keyframes animationKeyFrames {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  16% {
+    transform: scale(0.9) rotate(0deg);
+  }
+  33% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(0.9) rotate(0deg);
+  }
+  66% {
+    transform: scale(1) rotate(0deg);
+  }
+  83% {
+    transform: scale(0.9) rotate(0deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}

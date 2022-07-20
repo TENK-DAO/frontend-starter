@@ -1,5 +1,5 @@
 import settings from "../../../config/settings.json"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { signIn, wallet } from "../../near"
 import * as css from "./nav.module.css"
 import useLocales from "../../hooks/useLocales"
@@ -13,13 +13,32 @@ function signOut() {
   window.location.replace(window.location.origin + window.location.pathname)
 }
 
-export default function Nav() {
+type Props = {
+  showConnectModal: boolean
+}
+
+export default function Nav({ showConnectModal }: Props) {
   const currentUser = wallet.getAccountId()
   const { locale } = useLocales()
   const { nfts } = useTenk()
   const [showNFTs, setShowNFTs] = useState(false)
+  const [firstRender, setFirstRender] = useState(true)
+  const [buttonClass, setButtonClass] = useState("secondary")
 
   if (!locale) return null
+
+  const handleOnAnimationEnd = () => {
+    setButtonClass("secondary")
+  }
+
+  useEffect(() => {
+    if (showConnectModal) {
+      setFirstRender(false)
+    }
+    if (!showConnectModal && !firstRender) {
+      setButtonClass(`secondary ${css.buttonAnimation}`)
+    }
+  }, [showConnectModal])
 
   return (
     <>
@@ -27,7 +46,13 @@ export default function Nav() {
         <div className={`container ${css.content}`}>
           <div className={css.social}>
             {settings.social.map(({ href, img, alt }) => (
-              <a href={href} target="_blank" rel="noopener noreferrer" title={alt} key={alt}>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={alt}
+                key={alt}
+              >
                 <Image src={img} alt={alt} />
               </a>
             ))}
@@ -50,7 +75,13 @@ export default function Nav() {
                 />
               </span>
             ) : (
-              <button className="secondary" onClick={signIn}>{locale.connectWallet}</button>
+              <button
+                onAnimationEnd={handleOnAnimationEnd}
+                className={buttonClass}
+                onClick={signIn}
+              >
+                {locale.connectWallet}
+              </button>
             )}
           </div>
         </div>

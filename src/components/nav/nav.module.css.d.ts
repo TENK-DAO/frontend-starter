@@ -4,3 +4,5 @@ export const content: string;
 export const social: string;
 export const actions: string;
 export const button: string;
+export const buttonAnimation: string;
+export const animationKeyFrames: string;
