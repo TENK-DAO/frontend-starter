@@ -17,6 +17,7 @@ import useTenk from "../hooks/useTenk"
 import useImageData from "../hooks/useImageData"
 import useHeroStatuses from "../hooks/useHeroStatuses"
 import { Token } from "../near/contracts/tenk"
+import ErrorModal from "../components/errorModal"
 
 type PageContext = {
   locale: DecoratedLocale
@@ -45,6 +46,7 @@ const Landing: React.FC<PageProps<{}, PageContext>> = ({
   pageContext: { locale },
 }) => {
   const [showConnectModal, setShowConnectModal] = useState(false)
+  const [error, setError] = useState("")
   const tenkData = useTenk()
   const image = { publicURL: undefined } //const { image } = useImageData(settings.image)
 
@@ -66,6 +68,16 @@ const Landing: React.FC<PageProps<{}, PageContext>> = ({
     if (!transactionHashes) return
     getTokenIDsForTxHash(transactionHashes).then(setTokensMinted)
   }, [transactionHashes])
+
+  useEffect(() => {
+    if (params.get("errorCode")) {
+      for (var pair of params.entries()) {
+        console.log(pair[0] + ", " + pair[1])
+      }
+
+      setError(params.get("errorCode") ?? "")
+    }
+  }, [])
 
   return (
     <>
@@ -119,6 +131,7 @@ const Landing: React.FC<PageProps<{}, PageContext>> = ({
           highlight={tokensMinted}
         />
       )}
+      <ErrorModal error={error} setError={setError} />
     </>
   )
 }
