@@ -4,7 +4,7 @@ import { PageProps, navigate } from "gatsby"
 import * as naj from "near-api-js"
 import { near, wallet } from "../near"
 
-import { fill } from '../../lib/locales/runtimeUtils'
+import { fill } from "../../lib/locales/runtimeUtils"
 import Hero from "../components/hero"
 import MyNFTs from "../components/my-nfts"
 import Section from "../components/section"
@@ -15,18 +15,21 @@ import Image from "../components/image"
 import type { DecoratedLocale } from "../../lib/locales"
 import useTenk from "../hooks/useTenk"
 import useImageData from "../hooks/useImageData"
-import useHeroStatuses from '../hooks/useHeroStatuses'
+import useHeroStatuses from "../hooks/useHeroStatuses"
 import { Token } from "../near/contracts/tenk"
+import ErrorModal from "../components/errorModal"
 
 type PageContext = {
   locale: DecoratedLocale
 }
 
 function hasSuccessValue(obj: {}): obj is { SuccessValue: string } {
-  return 'SuccessValue' in obj
+  return "SuccessValue" in obj
 }
 
-async function getTokenIDsForTxHash(txHash: string): Promise<string[] | undefined> {
+async function getTokenIDsForTxHash(
+  txHash: string
+): Promise<string[] | undefined> {
   const rpc = new naj.providers.JsonRpcProvider(near.config.nodeUrl)
   const tx = await rpc.txStatus(txHash, wallet.getAccountId())
   if (!hasSuccessValue(tx.status)) return undefined
@@ -38,13 +41,18 @@ async function getTokenIDsForTxHash(txHash: string): Promise<string[] | undefine
 
 const currentUser = wallet.getAccountId()
 
-const Landing: React.FC<PageProps<{}, PageContext>> = ({ location, pageContext: { locale } }) => {
-
+const Landing: React.FC<PageProps<{}, PageContext>> = ({
+  location,
+  pageContext: { locale },
+}) => {
+  const [showConnectModal, setShowConnectModal] = useState(false)
+  const [error, setError] = useState("")
   const tenkData = useTenk()
-  const { image } = useImageData(settings.image)
+  const image = { publicURL: undefined } //const { image } = useImageData(settings.image)
 
   const params = new URLSearchParams(location.search)
-  const transactionHashes = params.get('transactionHashes') ?? undefined
+
+  const transactionHashes = params.get("transactionHashes") ?? undefined
   const [tokensMinted, setTokensMinted] = useState<string[]>()
   const { saleStatus, userStatus } = useHeroStatuses()
 
@@ -55,15 +63,28 @@ const Landing: React.FC<PageProps<{}, PageContext>> = ({ location, pageContext: 
     saleStatus,
     userStatus,
   }
-  
+
   useEffect(() => {
     if (!transactionHashes) return
     getTokenIDsForTxHash(transactionHashes).then(setTokensMinted)
   }, [transactionHashes])
 
+  useEffect(() => {
+    if (params.get("errorCode")) {
+      for (var pair of params.entries()) {
+        console.log(pair[0] + ", " + pair[1])
+      }
+
+      setError(params.get("errorCode") ?? "")
+    }
+  }, [])
+
   return (
     <>
-      <Layout style={{ filter: transactionHashes && 'blur(4px)' }}>
+      <Layout
+        style={{ filter: transactionHashes && "blur(4px)" }}
+        showConnectModal={showConnectModal}
+      >
         <Seo
           lang={locale.id}
           title={locale.title}
@@ -71,15 +92,19 @@ const Landing: React.FC<PageProps<{}, PageContext>> = ({ location, pageContext: 
           favicon={tenkData.contractMetadata?.icon}
           image={image?.publicURL ?? undefined}
         />
-        <Hero heroTree={locale.hero} />
+        <Hero
+          heroTree={locale.hero}
+          showConnectModal={showConnectModal}
+          setShowConnectModal={setShowConnectModal}
+        />
         {locale.extraSections?.map((section, i) => (
           <Section key={i} {...section}>
             <Markdown children={fill(section.text, data)} />
             {section.blocks && (
               <div className="grid">
                 {section.blocks.map(({ linkTo, text, image }, j) => {
-                  const El = linkTo ? 'a' : 'div'
-                  const props = linkTo && { href: linkTo, target: '_blank' }
+                  const El = linkTo ? "a" : "div"
+                  const props = linkTo && { href: linkTo, target: "_blank" }
                   return (
                     <El key={j} {...props}>
                       {image && (
@@ -106,6 +131,7 @@ const Landing: React.FC<PageProps<{}, PageContext>> = ({ location, pageContext: 
           highlight={tokensMinted}
         />
       )}
+      <ErrorModal error={error} setError={setError} />
     </>
   )
 }
