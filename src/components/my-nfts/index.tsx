@@ -1,19 +1,20 @@
 import React, { useEffect, useMemo, useRef, useState } from "react"
-import { createPortal } from 'react-dom'
-import Lightbox from 'react-image-lightbox';
+import { createPortal } from "react-dom"
+import Lightbox from "react-image-lightbox"
 import { wallet } from "../../near"
-import useLocales from '../../hooks/useLocales'
-import useTenk from '../../hooks/useTenk'
-import * as css from './my-nfts.module.css'
-import 'react-image-lightbox/style.css';
+import useLocales from "../../hooks/useLocales"
+import useTenk from "../../hooks/useTenk"
+import * as css from "./my-nfts.module.css"
+import "react-image-lightbox/style.css"
 
-const portalRoot: undefined | HTMLElement = typeof document !== 'undefined'
-  ? document.getElementById("portal")!
-  : undefined
+const portalRoot: undefined | HTMLElement =
+  typeof document !== "undefined"
+    ? document.getElementById("portal")!
+    : undefined
 
 const MyNFTs: React.FC<{
-  highlight?: string[],
-  onClose: () => void,
+  highlight?: string[]
+  onClose: () => void
 }> = ({ highlight, onClose }) => {
   const currentUser = wallet.getAccountId()
   const { locale } = useLocales()
@@ -23,23 +24,31 @@ const MyNFTs: React.FC<{
   const portalElement = useRef(document.createElement("div"))
   const containerElement = useRef<HTMLDivElement>(null)
 
-  const onClick = useMemo(() => function onCloseRaw(this: Document, event: MouseEvent) {
-    if (!lightboxOpen && event.target && !containerElement.current?.contains(event.target as Node)) {
-      onClose()
-    }
-  }, [lightboxOpen, onClose])
+  const onClick = useMemo(
+    () =>
+      function onCloseRaw(this: Document, event: MouseEvent) {
+        if (
+          !lightboxOpen &&
+          event.target &&
+          !containerElement.current?.contains(event.target as Node)
+        ) {
+          onClose()
+        }
+      },
+    [lightboxOpen, onClose]
+  )
 
   useEffect(() => {
     portalRoot?.appendChild(portalElement.current)
-    const bgContent: HTMLDivElement = document.querySelector('#___gatsby')!
-    bgContent.style.filter = 'blur(4px)'
-    bgContent.style.overflow = 'hidden'
-    document.addEventListener('click', onClick)
+    const bgContent: HTMLDivElement = document.querySelector("#___gatsby")!
+    bgContent.style.filter = "blur(4px)"
+    bgContent.style.overflow = "hidden"
+    document.addEventListener("click", onClick)
     return function onUnmount() {
-      bgContent.style.filter = ''
-      bgContent.style.overflow = ''
+      bgContent.style.filter = ""
+      bgContent.style.overflow = ""
       portalRoot?.removeChild(portalElement.current)
-      document.removeEventListener('click', onClick)
+      document.removeEventListener("click", onClick)
     }
   }, [onClick, portalRoot])
 
@@ -52,9 +61,13 @@ const MyNFTs: React.FC<{
   ) {
     return null
   }
-
-  const nextSrc = nfts.length > 1 ? nfts[(photoIndex + 1) % nfts.length].media : undefined
-  const prevSrc = nfts.length > 1 ? nfts[(photoIndex + nfts.length - 1) % nfts.length].media : undefined
+  console.log(nfts)
+  const nextSrc =
+    nfts.length > 1 ? nfts[(photoIndex + 1) % nfts.length].media : undefined
+  const prevSrc =
+    nfts.length > 1
+      ? nfts[(photoIndex + nfts.length - 1) % nfts.length].media
+      : undefined
 
   return createPortal(
     <>
@@ -68,23 +81,32 @@ const MyNFTs: React.FC<{
           </header>
           <div className={css.grid} ref={containerElement}>
             {nfts.map((nft, index) => (
-              <button
-                key={nft.token_id}
-                className={css.nft}
-                onClick={() => {
-                  setPhotoIndex(index)
-                  setLightboxOpen(true)
-                }}
-              >
-                <div style={{ backgroundImage: `url("${nft.media}")` }} />
-                <span className="visually-hidden">{nft.metadata?.description}</span>
-                <footer>
-                  <span>#{nft.token_id}</span>
-                  {highlight?.includes(nft.token_id) && (
-                    <span className={css.highlight}>{locale.new}</span>
-                  )}
-                </footer>
-              </button>
+              <div className={css.nftWrapper}>
+                <button
+                  key={nft.token_id}
+                  className={css.nft}
+                  onClick={() => {
+                    setPhotoIndex(index)
+                    setLightboxOpen(true)
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "100%",
+                      backgroundImage: `url("${nft.media}")`,
+                    }}
+                  />
+                  <span className="visually-hidden">
+                    {nft.metadata?.description}
+                  </span>
+                  <footer>
+                    <span>{nft.token_id}</span>
+                    {highlight?.includes(nft.token_id) && (
+                      <span className={css.highlight}>{locale.new}</span>
+                    )}
+                  </footer>
+                </button>
+              </div>
             ))}
           </div>
         </div>

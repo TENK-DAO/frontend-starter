@@ -3,4 +3,5 @@ export const myNfts: string;
 export const close: string;
 export const grid: string;
 export const nft: string;
+export const nftWrapper: string;
 export const highlight: string;

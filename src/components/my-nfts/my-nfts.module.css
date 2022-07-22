@@ -50,6 +50,20 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.nft-wrapper {
+  background-color: #777;
+  color: inherit;
+  padding: 10px;
+  margin: 0;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   text-align: left;
   transition: transform 75ms;
   transform: scale(100%);
@@ -58,7 +72,7 @@
 .nft:hover,
 .nft:focus {
   box-shadow: none;
-  transform: scale(105%);
+  transform: scale(1.05);
   background-color: transparent;
 }
 
@@ -72,7 +86,7 @@
   font-weight: var(--fw-bold);
 }
 
-.nft>div:first-child {
+.nft > div:first-child {
   --aspect-ratio: 1 / 1;
   background-color: var(--gray-1);
   border-radius: var(--br-small);
