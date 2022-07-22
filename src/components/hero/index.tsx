@@ -1,8 +1,7 @@
-import React from "react"
+import React, { useState } from "react"
 import type { ExpandedHeroTree } from "../../../lib/locales"
 import { act, can, fill } from "../../../lib/locales/runtimeUtils"
 import { wallet } from "../../near"
-import Slider from "../slider"
 import Section from "../section"
 import Markdown from "../markdown"
 import useHeroStatuses from "../../hooks/useHeroStatuses"
@@ -10,6 +9,7 @@ import useTenk from "../../hooks/useTenk"
 import useLocales from "../../hooks/useLocales"
 import * as css from "./hero.module.css"
 import ConnectModal from "../connectModal"
+import Spinner from "../spinner"
 
 const currentUser = wallet.getAccountId()
 
@@ -24,6 +24,7 @@ const Hero: React.FC<{
   const [numberToMint, setNumberToMint] = React.useState(1)
   const [nearMint, setNearMint] = React.useState(1)
   const [chedMint, setChedMint] = React.useState(3)
+  const [showSpinner, setShowSpinner] = useState(false)
   const hero = heroTree[saleStatus][userStatus]
 
   if (!locale) return null
@@ -41,6 +42,7 @@ const Hero: React.FC<{
       setShowConnectModal(true)
     } else {
       console.log("NEAR")
+      setShowSpinner(true)
       act("MintForNear", { ...data, numberToMint })
     }
   }
@@ -50,6 +52,7 @@ const Hero: React.FC<{
       setShowConnectModal(true)
     } else {
       console.log("Cheddar")
+      setShowSpinner(true)
       act("MintForChed", { ...data, numberToMint })
     }
   }
@@ -121,6 +124,7 @@ const Hero: React.FC<{
         showConnectModal={showConnectModal}
         setShowConnectModal={setShowConnectModal}
       />
+      {showSpinner && <Spinner />}
     </Section>
   )
 }

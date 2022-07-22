@@ -1,0 +1,18 @@
+.cheddarSpinner {
+  width: 70px !important;
+  margin: auto;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-duration: 0.8s;
+  animation-name: spinner-loading;
+  z-index: -1;
+}
+
+@keyframes spinner-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}

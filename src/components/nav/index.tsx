@@ -7,6 +7,7 @@ import useTenk from "../../hooks/useTenk"
 import Dropdown from "../../components/dropdown"
 import MyNFTs from "../../components/my-nfts"
 import Image from "../image"
+import Spinner from "../spinner"
 
 function signOut() {
   wallet.signOut()
@@ -24,6 +25,7 @@ export default function Nav({ showConnectModal }: Props) {
   const [showNFTs, setShowNFTs] = useState(false)
   const [firstRender, setFirstRender] = useState(true)
   const [buttonClass, setButtonClass] = useState("secondary")
+  const [showSpinner, setShowSpinner] = useState(false)
 
   if (!locale) return null
 
@@ -39,6 +41,11 @@ export default function Nav({ showConnectModal }: Props) {
       setButtonClass(`secondary ${css.buttonAnimation}`)
     }
   }, [showConnectModal])
+
+  const handleSignIn = () => {
+    setShowSpinner(true)
+    signIn()
+  }
 
   return (
     <>
@@ -78,7 +85,7 @@ export default function Nav({ showConnectModal }: Props) {
               <button
                 onAnimationEnd={handleOnAnimationEnd}
                 className={buttonClass}
-                onClick={signIn}
+                onClick={handleSignIn}
               >
                 {locale.connectWallet}
               </button>
@@ -87,6 +94,7 @@ export default function Nav({ showConnectModal }: Props) {
         </div>
       </nav>
       {showNFTs && <MyNFTs onClose={() => setShowNFTs(false)} />}
+      {showSpinner && <Spinner />}
     </>
   )
 }

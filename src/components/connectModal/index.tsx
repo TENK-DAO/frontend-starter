@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import { styled, keyframes } from "@stitches/react"
 import { violet, blackA, mauve, green } from "@radix-ui/colors"
 import { Cross2Icon } from "@radix-ui/react-icons"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { signIn } from "../../near"
+import Spinner from "../spinner"
 
 const overlayShow = keyframes({
   "0%": { opacity: 0 },
@@ -92,36 +93,48 @@ type Props = {
 }
 
 const ConnectModal = ({ showConnectModal, setShowConnectModal }: Props) => {
+  const [showSpinner, setShowSpinner] = useState(false)
+
   const handleClose = () => {
     setShowConnectModal(false)
   }
 
+  const handleSignIn = () => {
+    setShowSpinner(true)
+    signIn()
+  }
+
   return (
-    <Dialog open={showConnectModal}>
-      <DialogContent>
-        <StyledOverlay />
-        <StyledContent>
-          <DialogTitle>Error</DialogTitle>
-          <DialogDescription>
-            To mint a NFT you must first connect your wallet.
-          </DialogDescription>
-          <Flex css={{ marginTop: 25, justifyContent: "flex-end" }}>
-            <button
-              className="secondary"
-              onClick={signIn}
-              style={{ marginRight: "10px" }}
-            >
-              Login with NEAR
-            </button>
-            <DialogClose asChild>
-              <button className="dark" onClick={handleClose}>
-                Close
-              </button>
-            </DialogClose>
-          </Flex>
-        </StyledContent>
-      </DialogContent>
-    </Dialog>
+    <>
+      {showSpinner && <Spinner />}
+      <Dialog open={showConnectModal}>
+        <DialogContent>
+          <StyledOverlay />
+          {!showSpinner && (
+            <StyledContent>
+              <DialogTitle>Error</DialogTitle>
+              <DialogDescription>
+                To mint a NFT you must first connect your wallet.
+              </DialogDescription>
+              <Flex css={{ marginTop: 25, justifyContent: "flex-end" }}>
+                <button
+                  className="secondary"
+                  onClick={handleSignIn}
+                  style={{ marginRight: "10px" }}
+                >
+                  Login with NEAR
+                </button>
+                <DialogClose asChild>
+                  <button className="dark" onClick={handleClose}>
+                    Close
+                  </button>
+                </DialogClose>
+              </Flex>
+            </StyledContent>
+          )}
+        </DialogContent>
+      </Dialog>
+    </>
   )
 }
 
