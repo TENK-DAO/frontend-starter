@@ -10,6 +10,7 @@ import useLocales from "../../hooks/useLocales"
 import * as css from "./hero.module.css"
 import ConnectModal from "../connectModal"
 import Spinner from "../spinner"
+import { NEAR } from "near-units"
 
 const currentUser = wallet.getAccountId()
 

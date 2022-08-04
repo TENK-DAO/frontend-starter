@@ -1,5 +1,9 @@
 import React from "react"
-import { NftContractMetadata, SaleInfo, Token as RawToken } from "../near/contracts/tenk"
+import {
+  NftContractMetadata,
+  SaleInfo,
+  Token as RawToken,
+} from "../near/contracts/tenk"
 import { TenK } from "../near/contracts"
 import { wallet } from "../near"
 import staleData from "../../stale-data-from-build-time.json"
@@ -22,6 +26,7 @@ export interface TenkData {
 
 interface ReturnedData extends TenkData {
   stale: boolean
+  price_cheddar_near: number
 }
 
 // initialize calls at root of file so that first evaluation of this file causes
@@ -46,7 +51,7 @@ export async function rpcData(): Promise<TenkData> {
     vip,
     remainingAllowance,
     nfts,
-    mintRateLimit
+    mintRateLimit,
   ] = await rpcCalls
   return {
     saleInfo,
@@ -54,21 +59,59 @@ export async function rpcData(): Promise<TenkData> {
     tokensLeft,
     vip: vip ?? false,
     remainingAllowance: remainingAllowance ?? undefined,
-    nfts: nfts?.map(nft => ({ ...nft,
-      media: new URL(nft.metadata?.media ?? '', contractMetadata.base_uri ?? '').href
-    })) ?? [],
+    nfts:
+      nfts?.map(nft => ({
+        ...nft,
+        media: new URL(
+          nft.metadata?.media ?? "",
+          contractMetadata.base_uri ?? ""
+        ).href,
+      })) ?? [],
     mintRateLimit: mintRateLimit ?? 10,
   }
 }
 
+const axios = require("axios")
+
+const cheddarNearPrice = async () => {
+  const url = "https://api.stats.ref.finance/api/top-tokens"
+  const returns = await axios.get(url)
+  const prices = returns.data
+
+  let price_near = 0
+  let price_cheddar = 0
+  let price_cheddar_near = 0
+  if (prices) {
+    for (let i = 0; i < prices.length; i++) {
+      const price = prices[i]
+      if (price.symbol == "wNEAR") {
+        price_near = price.price
+      } else if (price.symbol == "Cheddar") {
+        price_cheddar = price.price
+      }
+    }
+
+    if (price_near > 0 && price_cheddar > 0) {
+      price_cheddar_near =
+        Math.round(price_near / price_cheddar) * Math.pow(10, 3)
+    }
+  }
+  return price_cheddar_near
+}
+
 export default function useTenk(): ReturnedData {
   const [data, setData] = React.useState<ReturnedData>({
-    ...staleData as unknown as TenkData,
-    stale: true
+    ...(staleData as unknown as TenkData),
+    stale: true,
+    price_cheddar_near: 0,
   })
 
   React.useEffect(() => {
-    rpcData().then(d => setData({ ...d, stale: false }))
+    rpcData().then(d =>
+      cheddarNearPrice().then(resp =>
+        setData({ ...d, stale: false, price_cheddar_near: resp })
+      )
+    )
   }, [])
 
   return data

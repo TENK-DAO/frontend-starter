@@ -17,6 +17,7 @@ type Data = TenkData & {
   chedMint?: number
   saleStatus: typeof saleStatuses[number]
   userStatus: typeof userStatuses[number]
+  price_cheddar_near: number
 }
 
 function formatNumber(
@@ -87,12 +88,7 @@ const replacers = {
             .toHuman()
             .split(" ")[0]
         )
-      : formatCurrency1(
-          NEAR.from(3)
-            .mul(NEAR.from("" + (d.numberToMint ?? 1)))
-            .toHuman()
-            .split(" ")[0]
-        ),
+      : formatCurrency1(d.price_cheddar_near),
   MINT_RATE_LIMIT: (d: Data) => d.mintRateLimit,
   INITIAL_COUNT: (d: Data) => formatNumber(d.saleInfo.token_final_supply),
   REMAINING_COUNT: (d: Data) => formatNumber(d.tokensLeft),
