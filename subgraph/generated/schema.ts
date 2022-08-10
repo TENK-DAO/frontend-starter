@@ -11,52 +11,1066 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class ExampleEntity extends Entity {
-  constructor(id: string) {
+export class Account extends Entity {
+  constructor(id: Bytes) {
     super();
-    this.set("id", Value.fromString(id));
+    this.set("id", Value.fromBytes(id));
   }
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save ExampleEntity entity without an ID");
+    assert(id != null, "Cannot save Account entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.STRING,
-        `Entities of type ExampleEntity must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        id.kind == ValueKind.BYTES,
+        `Entities of type Account must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("ExampleEntity", id.toString(), this);
+      store.set("Account", id.toBytes().toHexString(), this);
     }
   }
 
-  static load(id: string): ExampleEntity | null {
-    return changetype<ExampleEntity | null>(store.get("ExampleEntity", id));
+  static load(id: Bytes): Account | null {
+    return changetype<Account | null>(store.get("Account", id.toHexString()));
   }
 
-  get id(): string {
+  get id(): Bytes {
     let value = this.get("id");
-    return value!.toString();
-  }
-
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
-  }
-
-  get block(): Bytes {
-    let value = this.get("block");
     return value!.toBytes();
   }
 
-  set block(value: Bytes) {
-    this.set("block", Value.fromBytes(value));
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
   }
 
-  get count(): BigInt {
-    let value = this.get("count");
+  get signerId(): string {
+    let value = this.get("signerId");
+    return value!.toString();
+  }
+
+  set signerId(value: string) {
+    this.set("signerId", Value.fromString(value));
+  }
+
+  get tokens(): Array<Bytes> {
+    let value = this.get("tokens");
+    return value!.toBytesArray();
+  }
+
+  set tokens(value: Array<Bytes>) {
+    this.set("tokens", Value.fromBytesArray(value));
+  }
+
+  get sent(): Array<Bytes> {
+    let value = this.get("sent");
+    return value!.toBytesArray();
+  }
+
+  set sent(value: Array<Bytes>) {
+    this.set("sent", Value.fromBytesArray(value));
+  }
+
+  get received(): Array<Bytes> {
+    let value = this.get("received");
+    return value!.toBytesArray();
+  }
+
+  set received(value: Array<Bytes>) {
+    this.set("received", Value.fromBytesArray(value));
+  }
+
+  get total_owned(): BigInt {
+    let value = this.get("total_owned");
     return value!.toBigInt();
   }
 
-  set count(value: BigInt) {
-    this.set("count", Value.fromBigInt(value));
+  set total_owned(value: BigInt) {
+    this.set("total_owned", Value.fromBigInt(value));
+  }
+
+  get total_minted(): BigInt {
+    let value = this.get("total_minted");
+    return value!.toBigInt();
+  }
+
+  set total_minted(value: BigInt) {
+    this.set("total_minted", Value.fromBigInt(value));
+  }
+
+  get total_burned(): BigInt {
+    let value = this.get("total_burned");
+    return value!.toBigInt();
+  }
+
+  set total_burned(value: BigInt) {
+    this.set("total_burned", Value.fromBigInt(value));
+  }
+
+  get total_transferred(): BigInt {
+    let value = this.get("total_transferred");
+    return value!.toBigInt();
+  }
+
+  set total_transferred(value: BigInt) {
+    this.set("total_transferred", Value.fromBigInt(value));
+  }
+
+  get last_updated(): string {
+    let value = this.get("last_updated");
+    return value!.toString();
+  }
+
+  set last_updated(value: string) {
+    this.set("last_updated", Value.fromString(value));
+  }
+}
+
+export class Token extends Entity {
+  constructor(id: Bytes) {
+    super();
+    this.set("id", Value.fromBytes(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Token entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.BYTES,
+        `Entities of type Token must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Token", id.toBytes().toHexString(), this);
+    }
+  }
+
+  static load(id: Bytes): Token | null {
+    return changetype<Token | null>(store.get("Token", id.toHexString()));
+  }
+
+  get id(): Bytes {
+    let value = this.get("id");
+    return value!.toBytes();
+  }
+
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
+  }
+
+  get standard(): string {
+    let value = this.get("standard");
+    return value!.toString();
+  }
+
+  set standard(value: string) {
+    this.set("standard", Value.fromString(value));
+  }
+
+  get version(): string {
+    let value = this.get("version");
+    return value!.toString();
+  }
+
+  set version(value: string) {
+    this.set("version", Value.fromString(value));
+  }
+
+  get event(): string {
+    let value = this.get("event");
+    return value!.toString();
+  }
+
+  set event(value: string) {
+    this.set("event", Value.fromString(value));
+  }
+
+  get owner(): Bytes {
+    let value = this.get("owner");
+    return value!.toBytes();
+  }
+
+  set owner(value: Bytes) {
+    this.set("owner", Value.fromBytes(value));
+  }
+
+  get ownerId(): string {
+    let value = this.get("ownerId");
+    return value!.toString();
+  }
+
+  set ownerId(value: string) {
+    this.set("ownerId", Value.fromString(value));
+  }
+
+  get prev_owner(): Bytes | null {
+    let value = this.get("prev_owner");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set prev_owner(value: Bytes | null) {
+    if (!value) {
+      this.unset("prev_owner");
+    } else {
+      this.set("prev_owner", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get prev_ownerId(): string | null {
+    let value = this.get("prev_ownerId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set prev_ownerId(value: string | null) {
+    if (!value) {
+      this.unset("prev_ownerId");
+    } else {
+      this.set("prev_ownerId", Value.fromString(<string>value));
+    }
+  }
+
+  get tokenId(): string | null {
+    let value = this.get("tokenId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set tokenId(value: string | null) {
+    if (!value) {
+      this.unset("tokenId");
+    } else {
+      this.set("tokenId", Value.fromString(<string>value));
+    }
+  }
+
+  get metadata(): string | null {
+    let value = this.get("metadata");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set metadata(value: string | null) {
+    if (!value) {
+      this.unset("metadata");
+    } else {
+      this.set("metadata", Value.fromString(<string>value));
+    }
+  }
+
+  get image(): string | null {
+    let value = this.get("image");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set image(value: string | null) {
+    if (!value) {
+      this.unset("image");
+    } else {
+      this.set("image", Value.fromString(<string>value));
+    }
+  }
+
+  get total_transfers(): BigInt {
+    let value = this.get("total_transfers");
+    return value!.toBigInt();
+  }
+
+  set total_transfers(value: BigInt) {
+    this.set("total_transfers", Value.fromBigInt(value));
+  }
+
+  get transfers(): Array<Bytes> {
+    let value = this.get("transfers");
+    return value!.toBytesArray();
+  }
+
+  set transfers(value: Array<Bytes>) {
+    this.set("transfers", Value.fromBytesArray(value));
+  }
+
+  get mints(): Array<Bytes> {
+    let value = this.get("mints");
+    return value!.toBytesArray();
+  }
+
+  set mints(value: Array<Bytes>) {
+    this.set("mints", Value.fromBytesArray(value));
+  }
+
+  get mintedBy(): string {
+    let value = this.get("mintedBy");
+    return value!.toString();
+  }
+
+  set mintedBy(value: string) {
+    this.set("mintedBy", Value.fromString(value));
+  }
+
+  get original_minter(): Bytes {
+    let value = this.get("original_minter");
+    return value!.toBytes();
+  }
+
+  set original_minter(value: Bytes) {
+    this.set("original_minter", Value.fromBytes(value));
+  }
+
+  get minted_timestamp(): string {
+    let value = this.get("minted_timestamp");
+    return value!.toString();
+  }
+
+  set minted_timestamp(value: string) {
+    this.set("minted_timestamp", Value.fromString(value));
+  }
+
+  get minted_blockHeight(): string {
+    let value = this.get("minted_blockHeight");
+    return value!.toString();
+  }
+
+  set minted_blockHeight(value: string) {
+    this.set("minted_blockHeight", Value.fromString(value));
+  }
+
+  get mintedByLinkdrop(): string {
+    let value = this.get("mintedByLinkdrop");
+    return value!.toString();
+  }
+
+  set mintedByLinkdrop(value: string) {
+    this.set("mintedByLinkdrop", Value.fromString(value));
+  }
+
+  get burned(): string {
+    let value = this.get("burned");
+    return value!.toString();
+  }
+
+  set burned(value: string) {
+    this.set("burned", Value.fromString(value));
+  }
+
+  get burnedBy(): string | null {
+    let value = this.get("burnedBy");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set burnedBy(value: string | null) {
+    if (!value) {
+      this.unset("burnedBy");
+    } else {
+      this.set("burnedBy", Value.fromString(<string>value));
+    }
+  }
+
+  get prev_sale_price(): BigInt | null {
+    let value = this.get("prev_sale_price");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set prev_sale_price(value: BigInt | null) {
+    if (!value) {
+      this.unset("prev_sale_price");
+    } else {
+      this.set("prev_sale_price", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
+  get contract(): Bytes {
+    let value = this.get("contract");
+    return value!.toBytes();
+  }
+
+  set contract(value: Bytes) {
+    this.set("contract", Value.fromBytes(value));
+  }
+}
+
+export class Contract extends Entity {
+  constructor(id: Bytes) {
+    super();
+    this.set("id", Value.fromBytes(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Contract entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.BYTES,
+        `Entities of type Contract must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Contract", id.toBytes().toHexString(), this);
+    }
+  }
+
+  static load(id: Bytes): Contract | null {
+    return changetype<Contract | null>(store.get("Contract", id.toHexString()));
+  }
+
+  get id(): Bytes {
+    let value = this.get("id");
+    return value!.toBytes();
+  }
+
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
+  }
+
+  get name(): string {
+    let value = this.get("name");
+    return value!.toString();
+  }
+
+  set name(value: string) {
+    this.set("name", Value.fromString(value));
+  }
+
+  get symbol(): string {
+    let value = this.get("symbol");
+    return value!.toString();
+  }
+
+  set symbol(value: string) {
+    this.set("symbol", Value.fromString(value));
+  }
+
+  get base_uri(): string {
+    let value = this.get("base_uri");
+    return value!.toString();
+  }
+
+  set base_uri(value: string) {
+    this.set("base_uri", Value.fromString(value));
+  }
+
+  get media_uri(): string {
+    let value = this.get("media_uri");
+    return value!.toString();
+  }
+
+  set media_uri(value: string) {
+    this.set("media_uri", Value.fromString(value));
+  }
+
+  get nfts(): Array<Bytes> {
+    let value = this.get("nfts");
+    return value!.toBytesArray();
+  }
+
+  set nfts(value: Array<Bytes>) {
+    this.set("nfts", Value.fromBytesArray(value));
+  }
+
+  get copies(): BigInt {
+    let value = this.get("copies");
+    return value!.toBigInt();
+  }
+
+  set copies(value: BigInt) {
+    this.set("copies", Value.fromBigInt(value));
+  }
+
+  get total_minted(): BigInt {
+    let value = this.get("total_minted");
+    return value!.toBigInt();
+  }
+
+  set total_minted(value: BigInt) {
+    this.set("total_minted", Value.fromBigInt(value));
+  }
+
+  get total_burned(): BigInt {
+    let value = this.get("total_burned");
+    return value!.toBigInt();
+  }
+
+  set total_burned(value: BigInt) {
+    this.set("total_burned", Value.fromBigInt(value));
+  }
+
+  get original_minters(): Array<Bytes> {
+    let value = this.get("original_minters");
+    return value!.toBytesArray();
+  }
+
+  set original_minters(value: Array<Bytes>) {
+    this.set("original_minters", Value.fromBytesArray(value));
+  }
+}
+
+export class Transfer extends Entity {
+  constructor(id: Bytes) {
+    super();
+    this.set("id", Value.fromBytes(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Transfer entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.BYTES,
+        `Entities of type Transfer must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Transfer", id.toBytes().toHexString(), this);
+    }
+  }
+
+  static load(id: Bytes): Transfer | null {
+    return changetype<Transfer | null>(store.get("Transfer", id.toHexString()));
+  }
+
+  get id(): Bytes {
+    let value = this.get("id");
+    return value!.toBytes();
+  }
+
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
+  }
+
+  get standard(): string {
+    let value = this.get("standard");
+    return value!.toString();
+  }
+
+  set standard(value: string) {
+    this.set("standard", Value.fromString(value));
+  }
+
+  get version(): string {
+    let value = this.get("version");
+    return value!.toString();
+  }
+
+  set version(value: string) {
+    this.set("version", Value.fromString(value));
+  }
+
+  get event(): string {
+    let value = this.get("event");
+    return value!.toString();
+  }
+
+  set event(value: string) {
+    this.set("event", Value.fromString(value));
+  }
+
+  get methodName(): string {
+    let value = this.get("methodName");
+    return value!.toString();
+  }
+
+  set methodName(value: string) {
+    this.set("methodName", Value.fromString(value));
+  }
+
+  get from(): Bytes {
+    let value = this.get("from");
+    return value!.toBytes();
+  }
+
+  set from(value: Bytes) {
+    this.set("from", Value.fromBytes(value));
+  }
+
+  get to(): Bytes {
+    let value = this.get("to");
+    return value!.toBytes();
+  }
+
+  set to(value: Bytes) {
+    this.set("to", Value.fromBytes(value));
+  }
+
+  get old_ownerId(): string | null {
+    let value = this.get("old_ownerId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set old_ownerId(value: string | null) {
+    if (!value) {
+      this.unset("old_ownerId");
+    } else {
+      this.set("old_ownerId", Value.fromString(<string>value));
+    }
+  }
+
+  get new_ownerId(): string | null {
+    let value = this.get("new_ownerId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set new_ownerId(value: string | null) {
+    if (!value) {
+      this.unset("new_ownerId");
+    } else {
+      this.set("new_ownerId", Value.fromString(<string>value));
+    }
+  }
+
+  get tokenId(): string | null {
+    let value = this.get("tokenId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set tokenId(value: string | null) {
+    if (!value) {
+      this.unset("tokenId");
+    } else {
+      this.set("tokenId", Value.fromString(<string>value));
+    }
+  }
+
+  get authorizedId(): string | null {
+    let value = this.get("authorizedId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set authorizedId(value: string | null) {
+    if (!value) {
+      this.unset("authorizedId");
+    } else {
+      this.set("authorizedId", Value.fromString(<string>value));
+    }
+  }
+
+  get nft(): Bytes {
+    let value = this.get("nft");
+    return value!.toBytes();
+  }
+
+  set nft(value: Bytes) {
+    this.set("nft", Value.fromBytes(value));
+  }
+
+  get idx(): string {
+    let value = this.get("idx");
+    return value!.toString();
+  }
+
+  set idx(value: string) {
+    this.set("idx", Value.fromString(value));
+  }
+
+  get is_marketSale(): string {
+    let value = this.get("is_marketSale");
+    return value!.toString();
+  }
+
+  set is_marketSale(value: string) {
+    this.set("is_marketSale", Value.fromString(value));
+  }
+
+  get timestamp(): string {
+    let value = this.get("timestamp");
+    return value!.toString();
+  }
+
+  set timestamp(value: string) {
+    this.set("timestamp", Value.fromString(value));
+  }
+
+  get blockHash(): string | null {
+    let value = this.get("blockHash");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set blockHash(value: string | null) {
+    if (!value) {
+      this.unset("blockHash");
+    } else {
+      this.set("blockHash", Value.fromString(<string>value));
+    }
+  }
+
+  get blockHeight(): string | null {
+    let value = this.get("blockHeight");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set blockHeight(value: string | null) {
+    if (!value) {
+      this.unset("blockHeight");
+    } else {
+      this.set("blockHeight", Value.fromString(<string>value));
+    }
+  }
+}
+
+export class Mint extends Entity {
+  constructor(id: Bytes) {
+    super();
+    this.set("id", Value.fromBytes(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Mint entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.BYTES,
+        `Entities of type Mint must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Mint", id.toBytes().toHexString(), this);
+    }
+  }
+
+  static load(id: Bytes): Mint | null {
+    return changetype<Mint | null>(store.get("Mint", id.toHexString()));
+  }
+
+  get id(): Bytes {
+    let value = this.get("id");
+    return value!.toBytes();
+  }
+
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
+  }
+
+  get standard(): string {
+    let value = this.get("standard");
+    return value!.toString();
+  }
+
+  set standard(value: string) {
+    this.set("standard", Value.fromString(value));
+  }
+
+  get version(): string {
+    let value = this.get("version");
+    return value!.toString();
+  }
+
+  set version(value: string) {
+    this.set("version", Value.fromString(value));
+  }
+
+  get event(): string {
+    let value = this.get("event");
+    return value!.toString();
+  }
+
+  set event(value: string) {
+    this.set("event", Value.fromString(value));
+  }
+
+  get tokenId(): string {
+    let value = this.get("tokenId");
+    return value!.toString();
+  }
+
+  set tokenId(value: string) {
+    this.set("tokenId", Value.fromString(value));
+  }
+
+  get ownerId(): string | null {
+    let value = this.get("ownerId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set ownerId(value: string | null) {
+    if (!value) {
+      this.unset("ownerId");
+    } else {
+      this.set("ownerId", Value.fromString(<string>value));
+    }
+  }
+
+  get owner(): Bytes {
+    let value = this.get("owner");
+    return value!.toBytes();
+  }
+
+  set owner(value: Bytes) {
+    this.set("owner", Value.fromBytes(value));
+  }
+
+  get contract(): Bytes {
+    let value = this.get("contract");
+    return value!.toBytes();
+  }
+
+  set contract(value: Bytes) {
+    this.set("contract", Value.fromBytes(value));
+  }
+
+  get nft(): Bytes {
+    let value = this.get("nft");
+    return value!.toBytes();
+  }
+
+  set nft(value: Bytes) {
+    this.set("nft", Value.fromBytes(value));
+  }
+
+  get idx(): string {
+    let value = this.get("idx");
+    return value!.toString();
+  }
+
+  set idx(value: string) {
+    this.set("idx", Value.fromString(value));
+  }
+
+  get timestamp(): string {
+    let value = this.get("timestamp");
+    return value!.toString();
+  }
+
+  set timestamp(value: string) {
+    this.set("timestamp", Value.fromString(value));
+  }
+
+  get blockHash(): string | null {
+    let value = this.get("blockHash");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set blockHash(value: string | null) {
+    if (!value) {
+      this.unset("blockHash");
+    } else {
+      this.set("blockHash", Value.fromString(<string>value));
+    }
+  }
+
+  get blockHeight(): string | null {
+    let value = this.get("blockHeight");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set blockHeight(value: string | null) {
+    if (!value) {
+      this.unset("blockHeight");
+    } else {
+      this.set("blockHeight", Value.fromString(<string>value));
+    }
+  }
+}
+
+export class Burn extends Entity {
+  constructor(id: Bytes) {
+    super();
+    this.set("id", Value.fromBytes(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Burn entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.BYTES,
+        `Entities of type Burn must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Burn", id.toBytes().toHexString(), this);
+    }
+  }
+
+  static load(id: Bytes): Burn | null {
+    return changetype<Burn | null>(store.get("Burn", id.toHexString()));
+  }
+
+  get id(): Bytes {
+    let value = this.get("id");
+    return value!.toBytes();
+  }
+
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
+  }
+
+  get standard(): string {
+    let value = this.get("standard");
+    return value!.toString();
+  }
+
+  set standard(value: string) {
+    this.set("standard", Value.fromString(value));
+  }
+
+  get version(): string {
+    let value = this.get("version");
+    return value!.toString();
+  }
+
+  set version(value: string) {
+    this.set("version", Value.fromString(value));
+  }
+
+  get event(): string {
+    let value = this.get("event");
+    return value!.toString();
+  }
+
+  set event(value: string) {
+    this.set("event", Value.fromString(value));
+  }
+
+  get tokenId(): string {
+    let value = this.get("tokenId");
+    return value!.toString();
+  }
+
+  set tokenId(value: string) {
+    this.set("tokenId", Value.fromString(value));
+  }
+
+  get ownerId(): string | null {
+    let value = this.get("ownerId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set ownerId(value: string | null) {
+    if (!value) {
+      this.unset("ownerId");
+    } else {
+      this.set("ownerId", Value.fromString(<string>value));
+    }
+  }
+
+  get owner(): Bytes {
+    let value = this.get("owner");
+    return value!.toBytes();
+  }
+
+  set owner(value: Bytes) {
+    this.set("owner", Value.fromBytes(value));
+  }
+
+  get contract(): Bytes {
+    let value = this.get("contract");
+    return value!.toBytes();
+  }
+
+  set contract(value: Bytes) {
+    this.set("contract", Value.fromBytes(value));
+  }
+
+  get nft(): Bytes {
+    let value = this.get("nft");
+    return value!.toBytes();
+  }
+
+  set nft(value: Bytes) {
+    this.set("nft", Value.fromBytes(value));
+  }
+
+  get idx(): string {
+    let value = this.get("idx");
+    return value!.toString();
+  }
+
+  set idx(value: string) {
+    this.set("idx", Value.fromString(value));
+  }
+
+  get timestamp(): string {
+    let value = this.get("timestamp");
+    return value!.toString();
+  }
+
+  set timestamp(value: string) {
+    this.set("timestamp", Value.fromString(value));
+  }
+
+  get blockHash(): string | null {
+    let value = this.get("blockHash");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set blockHash(value: string | null) {
+    if (!value) {
+      this.unset("blockHash");
+    } else {
+      this.set("blockHash", Value.fromString(<string>value));
+    }
+  }
+
+  get blockHeight(): string | null {
+    let value = this.get("blockHeight");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set blockHeight(value: string | null) {
+    if (!value) {
+      this.unset("blockHeight");
+    } else {
+      this.set("blockHeight", Value.fromString(<string>value));
+    }
   }
 }
