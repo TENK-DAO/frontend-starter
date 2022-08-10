@@ -12,9 +12,9 @@ import {
 } from "@graphprotocol/graph-ts";
 
 export class Account extends Entity {
-  constructor(id: Bytes) {
+  constructor(id: string) {
     super();
-    this.set("id", Value.fromBytes(id));
+    this.set("id", Value.fromString(id));
   }
 
   save(): void {
@@ -22,24 +22,24 @@ export class Account extends Entity {
     assert(id != null, "Cannot save Account entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.BYTES,
-        `Entities of type Account must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        id.kind == ValueKind.STRING,
+        `Entities of type Account must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("Account", id.toBytes().toHexString(), this);
+      store.set("Account", id.toString(), this);
     }
   }
 
-  static load(id: Bytes): Account | null {
-    return changetype<Account | null>(store.get("Account", id.toHexString()));
+  static load(id: string): Account | null {
+    return changetype<Account | null>(store.get("Account", id));
   }
 
-  get id(): Bytes {
+  get id(): string {
     let value = this.get("id");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set id(value: Bytes) {
-    this.set("id", Value.fromBytes(value));
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
   }
 
   get signerId(): string {
@@ -51,31 +51,31 @@ export class Account extends Entity {
     this.set("signerId", Value.fromString(value));
   }
 
-  get tokens(): Array<Bytes> {
+  get tokens(): Array<string> {
     let value = this.get("tokens");
-    return value!.toBytesArray();
+    return value!.toStringArray();
   }
 
-  set tokens(value: Array<Bytes>) {
-    this.set("tokens", Value.fromBytesArray(value));
+  set tokens(value: Array<string>) {
+    this.set("tokens", Value.fromStringArray(value));
   }
 
-  get sent(): Array<Bytes> {
+  get sent(): Array<string> {
     let value = this.get("sent");
-    return value!.toBytesArray();
+    return value!.toStringArray();
   }
 
-  set sent(value: Array<Bytes>) {
-    this.set("sent", Value.fromBytesArray(value));
+  set sent(value: Array<string>) {
+    this.set("sent", Value.fromStringArray(value));
   }
 
-  get received(): Array<Bytes> {
+  get received(): Array<string> {
     let value = this.get("received");
-    return value!.toBytesArray();
+    return value!.toStringArray();
   }
 
-  set received(value: Array<Bytes>) {
-    this.set("received", Value.fromBytesArray(value));
+  set received(value: Array<string>) {
+    this.set("received", Value.fromStringArray(value));
   }
 
   get total_owned(): BigInt {
@@ -125,9 +125,9 @@ export class Account extends Entity {
 }
 
 export class Token extends Entity {
-  constructor(id: Bytes) {
+  constructor(id: string) {
     super();
-    this.set("id", Value.fromBytes(id));
+    this.set("id", Value.fromString(id));
   }
 
   save(): void {
@@ -135,24 +135,24 @@ export class Token extends Entity {
     assert(id != null, "Cannot save Token entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.BYTES,
-        `Entities of type Token must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        id.kind == ValueKind.STRING,
+        `Entities of type Token must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("Token", id.toBytes().toHexString(), this);
+      store.set("Token", id.toString(), this);
     }
   }
 
-  static load(id: Bytes): Token | null {
-    return changetype<Token | null>(store.get("Token", id.toHexString()));
+  static load(id: string): Token | null {
+    return changetype<Token | null>(store.get("Token", id));
   }
 
-  get id(): Bytes {
+  get id(): string {
     let value = this.get("id");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set id(value: Bytes) {
-    this.set("id", Value.fromBytes(value));
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
   }
 
   get standard(): string {
@@ -182,13 +182,13 @@ export class Token extends Entity {
     this.set("event", Value.fromString(value));
   }
 
-  get owner(): Bytes {
+  get owner(): string {
     let value = this.get("owner");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set owner(value: Bytes) {
-    this.set("owner", Value.fromBytes(value));
+  set owner(value: string) {
+    this.set("owner", Value.fromString(value));
   }
 
   get ownerId(): string {
@@ -200,20 +200,20 @@ export class Token extends Entity {
     this.set("ownerId", Value.fromString(value));
   }
 
-  get prev_owner(): Bytes | null {
+  get prev_owner(): string | null {
     let value = this.get("prev_owner");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBytes();
+      return value.toString();
     }
   }
 
-  set prev_owner(value: Bytes | null) {
+  set prev_owner(value: string | null) {
     if (!value) {
       this.unset("prev_owner");
     } else {
-      this.set("prev_owner", Value.fromBytes(<Bytes>value));
+      this.set("prev_owner", Value.fromString(<string>value));
     }
   }
 
@@ -294,22 +294,22 @@ export class Token extends Entity {
     this.set("total_transfers", Value.fromBigInt(value));
   }
 
-  get transfers(): Array<Bytes> {
+  get transfers(): Array<string> {
     let value = this.get("transfers");
-    return value!.toBytesArray();
+    return value!.toStringArray();
   }
 
-  set transfers(value: Array<Bytes>) {
-    this.set("transfers", Value.fromBytesArray(value));
+  set transfers(value: Array<string>) {
+    this.set("transfers", Value.fromStringArray(value));
   }
 
-  get mints(): Array<Bytes> {
+  get mints(): Array<string> {
     let value = this.get("mints");
-    return value!.toBytesArray();
+    return value!.toStringArray();
   }
 
-  set mints(value: Array<Bytes>) {
-    this.set("mints", Value.fromBytesArray(value));
+  set mints(value: Array<string>) {
+    this.set("mints", Value.fromStringArray(value));
   }
 
   get mintedBy(): string {
@@ -321,13 +321,13 @@ export class Token extends Entity {
     this.set("mintedBy", Value.fromString(value));
   }
 
-  get original_minter(): Bytes {
+  get original_minter(): string {
     let value = this.get("original_minter");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set original_minter(value: Bytes) {
-    this.set("original_minter", Value.fromBytes(value));
+  set original_minter(value: string) {
+    this.set("original_minter", Value.fromString(value));
   }
 
   get minted_timestamp(): string {
@@ -400,20 +400,20 @@ export class Token extends Entity {
     }
   }
 
-  get contract(): Bytes {
+  get contract(): string {
     let value = this.get("contract");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set contract(value: Bytes) {
-    this.set("contract", Value.fromBytes(value));
+  set contract(value: string) {
+    this.set("contract", Value.fromString(value));
   }
 }
 
 export class Contract extends Entity {
-  constructor(id: Bytes) {
+  constructor(id: string) {
     super();
-    this.set("id", Value.fromBytes(id));
+    this.set("id", Value.fromString(id));
   }
 
   save(): void {
@@ -421,24 +421,24 @@ export class Contract extends Entity {
     assert(id != null, "Cannot save Contract entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.BYTES,
-        `Entities of type Contract must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        id.kind == ValueKind.STRING,
+        `Entities of type Contract must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("Contract", id.toBytes().toHexString(), this);
+      store.set("Contract", id.toString(), this);
     }
   }
 
-  static load(id: Bytes): Contract | null {
-    return changetype<Contract | null>(store.get("Contract", id.toHexString()));
+  static load(id: string): Contract | null {
+    return changetype<Contract | null>(store.get("Contract", id));
   }
 
-  get id(): Bytes {
+  get id(): string {
     let value = this.get("id");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set id(value: Bytes) {
-    this.set("id", Value.fromBytes(value));
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
   }
 
   get name(): string {
@@ -477,13 +477,13 @@ export class Contract extends Entity {
     this.set("media_uri", Value.fromString(value));
   }
 
-  get nfts(): Array<Bytes> {
+  get nfts(): Array<string> {
     let value = this.get("nfts");
-    return value!.toBytesArray();
+    return value!.toStringArray();
   }
 
-  set nfts(value: Array<Bytes>) {
-    this.set("nfts", Value.fromBytesArray(value));
+  set nfts(value: Array<string>) {
+    this.set("nfts", Value.fromStringArray(value));
   }
 
   get copies(): BigInt {
@@ -513,20 +513,20 @@ export class Contract extends Entity {
     this.set("total_burned", Value.fromBigInt(value));
   }
 
-  get original_minters(): Array<Bytes> {
+  get original_minters(): Array<string> {
     let value = this.get("original_minters");
-    return value!.toBytesArray();
+    return value!.toStringArray();
   }
 
-  set original_minters(value: Array<Bytes>) {
-    this.set("original_minters", Value.fromBytesArray(value));
+  set original_minters(value: Array<string>) {
+    this.set("original_minters", Value.fromStringArray(value));
   }
 }
 
 export class Transfer extends Entity {
-  constructor(id: Bytes) {
+  constructor(id: string) {
     super();
-    this.set("id", Value.fromBytes(id));
+    this.set("id", Value.fromString(id));
   }
 
   save(): void {
@@ -534,24 +534,24 @@ export class Transfer extends Entity {
     assert(id != null, "Cannot save Transfer entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.BYTES,
-        `Entities of type Transfer must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        id.kind == ValueKind.STRING,
+        `Entities of type Transfer must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("Transfer", id.toBytes().toHexString(), this);
+      store.set("Transfer", id.toString(), this);
     }
   }
 
-  static load(id: Bytes): Transfer | null {
-    return changetype<Transfer | null>(store.get("Transfer", id.toHexString()));
+  static load(id: string): Transfer | null {
+    return changetype<Transfer | null>(store.get("Transfer", id));
   }
 
-  get id(): Bytes {
+  get id(): string {
     let value = this.get("id");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set id(value: Bytes) {
-    this.set("id", Value.fromBytes(value));
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
   }
 
   get standard(): string {
@@ -590,22 +590,22 @@ export class Transfer extends Entity {
     this.set("methodName", Value.fromString(value));
   }
 
-  get from(): Bytes {
+  get from(): string {
     let value = this.get("from");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set from(value: Bytes) {
-    this.set("from", Value.fromBytes(value));
+  set from(value: string) {
+    this.set("from", Value.fromString(value));
   }
 
-  get to(): Bytes {
+  get to(): string {
     let value = this.get("to");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set to(value: Bytes) {
-    this.set("to", Value.fromBytes(value));
+  set to(value: string) {
+    this.set("to", Value.fromString(value));
   }
 
   get old_ownerId(): string | null {
@@ -676,13 +676,13 @@ export class Transfer extends Entity {
     }
   }
 
-  get nft(): Bytes {
+  get nft(): string {
     let value = this.get("nft");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set nft(value: Bytes) {
-    this.set("nft", Value.fromBytes(value));
+  set nft(value: string) {
+    this.set("nft", Value.fromString(value));
   }
 
   get idx(): string {
@@ -748,9 +748,9 @@ export class Transfer extends Entity {
 }
 
 export class Mint extends Entity {
-  constructor(id: Bytes) {
+  constructor(id: string) {
     super();
-    this.set("id", Value.fromBytes(id));
+    this.set("id", Value.fromString(id));
   }
 
   save(): void {
@@ -758,24 +758,24 @@ export class Mint extends Entity {
     assert(id != null, "Cannot save Mint entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.BYTES,
-        `Entities of type Mint must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        id.kind == ValueKind.STRING,
+        `Entities of type Mint must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("Mint", id.toBytes().toHexString(), this);
+      store.set("Mint", id.toString(), this);
     }
   }
 
-  static load(id: Bytes): Mint | null {
-    return changetype<Mint | null>(store.get("Mint", id.toHexString()));
+  static load(id: string): Mint | null {
+    return changetype<Mint | null>(store.get("Mint", id));
   }
 
-  get id(): Bytes {
+  get id(): string {
     let value = this.get("id");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set id(value: Bytes) {
-    this.set("id", Value.fromBytes(value));
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
   }
 
   get standard(): string {
@@ -831,31 +831,31 @@ export class Mint extends Entity {
     }
   }
 
-  get owner(): Bytes {
+  get owner(): string {
     let value = this.get("owner");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set owner(value: Bytes) {
-    this.set("owner", Value.fromBytes(value));
+  set owner(value: string) {
+    this.set("owner", Value.fromString(value));
   }
 
-  get contract(): Bytes {
+  get contract(): string {
     let value = this.get("contract");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set contract(value: Bytes) {
-    this.set("contract", Value.fromBytes(value));
+  set contract(value: string) {
+    this.set("contract", Value.fromString(value));
   }
 
-  get nft(): Bytes {
+  get nft(): string {
     let value = this.get("nft");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set nft(value: Bytes) {
-    this.set("nft", Value.fromBytes(value));
+  set nft(value: string) {
+    this.set("nft", Value.fromString(value));
   }
 
   get idx(): string {
@@ -912,9 +912,9 @@ export class Mint extends Entity {
 }
 
 export class Burn extends Entity {
-  constructor(id: Bytes) {
+  constructor(id: string) {
     super();
-    this.set("id", Value.fromBytes(id));
+    this.set("id", Value.fromString(id));
   }
 
   save(): void {
@@ -922,24 +922,24 @@ export class Burn extends Entity {
     assert(id != null, "Cannot save Burn entity without an ID");
     if (id) {
       assert(
-        id.kind == ValueKind.BYTES,
-        `Entities of type Burn must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        id.kind == ValueKind.STRING,
+        `Entities of type Burn must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("Burn", id.toBytes().toHexString(), this);
+      store.set("Burn", id.toString(), this);
     }
   }
 
-  static load(id: Bytes): Burn | null {
-    return changetype<Burn | null>(store.get("Burn", id.toHexString()));
+  static load(id: string): Burn | null {
+    return changetype<Burn | null>(store.get("Burn", id));
   }
 
-  get id(): Bytes {
+  get id(): string {
     let value = this.get("id");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set id(value: Bytes) {
-    this.set("id", Value.fromBytes(value));
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
   }
 
   get standard(): string {
@@ -995,31 +995,31 @@ export class Burn extends Entity {
     }
   }
 
-  get owner(): Bytes {
+  get owner(): string {
     let value = this.get("owner");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set owner(value: Bytes) {
-    this.set("owner", Value.fromBytes(value));
+  set owner(value: string) {
+    this.set("owner", Value.fromString(value));
   }
 
-  get contract(): Bytes {
+  get contract(): string {
     let value = this.get("contract");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set contract(value: Bytes) {
-    this.set("contract", Value.fromBytes(value));
+  set contract(value: string) {
+    this.set("contract", Value.fromString(value));
   }
 
-  get nft(): Bytes {
+  get nft(): string {
     let value = this.get("nft");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set nft(value: Bytes) {
-    this.set("nft", Value.fromBytes(value));
+  set nft(value: string) {
+    this.set("nft", Value.fromString(value));
   }
 
   get idx(): string {
