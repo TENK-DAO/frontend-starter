@@ -4,10 +4,10 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ chadoh/tenk-demo-nft",
-    "create-local": "graph create --node http://localhost:8020/ chadoh/tenk-demo-nft",
-    "remove-local": "graph remove --node http://localhost:8020/ chadoh/tenk-demo-nft",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 chadoh/tenk-demo-nft",
+    "deploy": "graph deploy --product hosted-service chadoh/tenk-demo-nft",
+    "create-local": "graph create --product hosted-service chadoh/tenk-demo-nft",
+    "remove-local": "graph remove --product hosted-service chadoh/tenk-demo-nft",
+    "deploy-local": "graph deploy --product hosted-service --ipfs http://localhost:5001 chadoh/tenk-demo-nft",
     "test": "graph test"
   },
   "dependencies": {
