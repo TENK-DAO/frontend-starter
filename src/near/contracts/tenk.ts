@@ -3,9 +3,17 @@ import {
   transactions,
   providers,
   DEFAULT_FUNCTION_CALL_GAS,
+  Near,
+  connect,
+  keyStores,
+  WalletAccount,
+  utils,
+  WalletConnection,
 } from "near-api-js"
 
 import BN from "bn.js"
+import { nearConfig } from ".."
+import { baseDecode } from "borsh"
 export interface ChangeMethodOptions {
   gas?: BN
   attachedDeposit?: BN
@@ -206,7 +214,67 @@ export interface Royalties {
 }
 
 export class Contract {
+  near: Near | undefined
+  walletAccount: WalletConnection | undefined
+
   constructor(public account: Account, public readonly contractId: string) {}
+
+  async passToWallet(
+    preTXs: Promise<transactions.Transaction>[]
+  ): Promise<void> {
+    const TXs = await Promise.all(preTXs)
+    if (!this.walletAccount) {
+      throw new Error("You have to make a transaction first")
+    }
+
+    this.walletAccount.requestSignTransactions({
+      transactions: TXs,
+      callbackUrl: window.location.href,
+    })
+  }
+
+  async makeTransaction(
+    receiverId: string,
+    actions: transactions.Action[],
+    nonceOffset = 1
+  ): Promise<transactions.Transaction> {
+    this.near = await connect(
+      Object.assign(
+        {
+          deps: {
+            keyStore: new keyStores.BrowserLocalStorageKeyStore(),
+          },
+        },
+        nearConfig
+      )
+    )
+    this.walletAccount = new WalletAccount(this.near)
+    const accountAux = this.walletAccount.account()
+    const [accessKey, block] = await Promise.all([
+      accountAux.accessKeyForTransaction(receiverId, actions),
+      this.near.connection.provider.block({ finality: "final" }),
+    ])
+
+    if (!accessKey) {
+      throw new Error(
+        `Cannot find matching key for transaction sent to ${receiverId}`
+      )
+    }
+
+    const blockHash = baseDecode(block.header.hash)
+
+    const publicKey = utils.PublicKey.from(accessKey.public_key)
+    const nonce = accessKey.access_key.nonce + nonceOffset
+
+    return transactions.createTransaction(
+      accountAux.accountId,
+      publicKey,
+      receiverId,
+      nonce,
+      actions,
+      blockHash
+    )
+  }
 
   check_key(
     args: {
@@ -279,6 +347,15 @@ export class Contract {
       "get_sale_info",
       args,
       options
+    )
+  }
+  get_cheddar_storage_balance(account_id: string): Promise<SaleInfo> {
+    return this.account.viewFunction(
+      "token-v3.cheddar.testnet",
+      "storage_balance_of",
+      {
+        account_id,
+      }
     )
   }
   cost_per_token(

@@ -26,7 +26,7 @@ export interface TenkData {
 
 interface ReturnedData extends TenkData {
   stale: boolean
-  price_cheddar_near: number
+  price_cheddar_near: string
 }
 
 // initialize calls at root of file so that first evaluation of this file causes
@@ -73,7 +73,7 @@ export async function rpcData(): Promise<TenkData> {
 
 const axios = require("axios")
 
-const cheddarNearPrice = async () => {
+const cheddarNearPrice = async (nftNearPrice: string) => {
   const url = "https://api.stats.ref.finance/api/top-tokens"
   const returns = await axios.get(url)
   const prices = returns.data
@@ -96,19 +96,24 @@ const cheddarNearPrice = async () => {
         Math.round(price_near / price_cheddar) * Math.pow(10, 3)
     }
   }
-  return price_cheddar_near
+  const nftCheddarPrice = (
+    (BigInt(nftNearPrice) * BigInt(price_cheddar_near)) /
+    BigInt(Math.pow(10, 3))
+  ).toString()
+
+  return nftCheddarPrice
 }
 
 export default function useTenk(): ReturnedData {
   const [data, setData] = React.useState<ReturnedData>({
     ...(staleData as unknown as TenkData),
     stale: true,
-    price_cheddar_near: 0,
+    price_cheddar_near: "0",
   })
 
   React.useEffect(() => {
     rpcData().then(d =>
-      cheddarNearPrice().then(resp =>
+      cheddarNearPrice(d.saleInfo.price).then(resp =>
         setData({ ...d, stale: false, price_cheddar_near: resp })
       )
     )

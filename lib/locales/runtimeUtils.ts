@@ -6,6 +6,8 @@ import { TenK } from "../../src/near/contracts"
 import { TenkData } from "../../src/hooks/useTenk"
 import { saleStatuses, userStatuses } from "./Locale"
 import { Locale } from "../../src/hooks/useLocales"
+import { transactions } from "near-api-js"
+import { BN } from "bn.js"
 
 type Timestamp = number
 
@@ -17,7 +19,7 @@ type Data = TenkData & {
   chedMint?: number
   saleStatus: typeof saleStatuses[number]
   userStatus: typeof userStatuses[number]
-  price_cheddar_near: number
+  price_cheddar_near: string
 }
 
 function formatNumber(
@@ -45,7 +47,7 @@ function formatCurrency(
   return `${formatNumber(num, locale)} ${currency}`
 }
 
-function formatCurrency1(
+function formatCurrencyCheddar(
   num: number | string,
   currency: string = "Cheddar",
 
@@ -88,7 +90,9 @@ const replacers = {
             .toHuman()
             .split(" ")[0]
         )
-      : formatCurrency1(d.price_cheddar_near),
+      : formatCurrencyCheddar(
+          (BigInt(d.price_cheddar_near) / BigInt(Math.pow(10, 24))).toString()
+        ),
   MINT_RATE_LIMIT: (d: Data) => d.mintRateLimit,
   INITIAL_COUNT: (d: Data) => formatNumber(d.saleInfo.token_final_supply),
   REMAINING_COUNT: (d: Data) => formatNumber(d.tokensLeft),
@@ -176,16 +180,49 @@ const actions = {
         ),
       }
     ),
-  MintForChed: (d: Data) =>
-    TenK.nft_mint_many(
-      { num: d.numberToMint ?? 1, with_cheddar: true },
-      {
-        gas: Gas.parse("40 Tgas").mul(Gas.from("" + d.numberToMint)),
-        attachedDeposit: NEAR.from(d.saleInfo.price).mul(
-          NEAR.from("" + d.numberToMint)
-        ),
+  MintForChed: (d: Data) => {
+    TenK.get_cheddar_storage_balance("oreos.testnet").then(resp => {
+      const cheddarActions = []
+      const tenkActions = []
+      const finalActions = []
+      if (!resp) {
+        cheddarActions.push(
+          transactions.functionCall(
+            "storage_deposit",
+            {},
+            Gas.parse("100 Tgas"),
+            new BN("1120000000000000000000")
+          )
+        )
       }
-    ),
+      cheddarActions.push(
+        transactions.functionCall(
+          "ft_transfer_call",
+          {
+            receiver_id: TenK.contractId,
+            amount: d.price_cheddar_near,
+            msg: "",
+          },
+          Gas.parse("200 Tgas"),
+          new BN("1")
+        )
+      )
+      tenkActions.push(
+        transactions.functionCall(
+          "nft_mint_many",
+          { num: d.numberToMint ?? 1, with_cheddar: true },
+
+          Gas.parse("40 Tgas").mul(Gas.from("" + d.numberToMint)),
+          new BN("1")
+        )
+      )
+      finalActions.push(
+        TenK.makeTransaction("token-v3.cheddar.testnet", cheddarActions)
+      )
+      finalActions.push(TenK.makeTransaction(TenK.contractId, tenkActions))
+      TenK.passToWallet(finalActions)
+    })
+  },
   GO_TO_PARAS: () =>
     window.open(
       `https://paras.id/search?q=${settings.contractName}&sort=priceasc&pmin=.01&is_verified=true`

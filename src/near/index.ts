@@ -8,7 +8,7 @@ import { Buffer } from "buffer"
 if (typeof window !== "undefined") window.Buffer = Buffer
 if (typeof global !== "undefined") global.Buffer = Buffer
 
-const nearConfig = /near$/.test(contractName)
+export const nearConfig = /near$/.test(contractName)
   ? {
       networkId: "mainnet",
       nodeUrl: "https://rpc.mainnet.near.org",
@@ -35,9 +35,10 @@ if (!nearConfig) {
  */
 export const near = new naj.Near({
   ...nearConfig,
-  keyStore: typeof window === "undefined"
-    ? new naj.keyStores.InMemoryKeyStore()
-    : new naj.keyStores.BrowserLocalStorageKeyStore()
+  keyStore:
+    typeof window === "undefined"
+      ? new naj.keyStores.InMemoryKeyStore()
+      : new naj.keyStores.BrowserLocalStorageKeyStore(),
 })
 
 /**
