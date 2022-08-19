@@ -1,18 +1,32 @@
-import { baseDecode } from 'borsh';
-import BN from 'bn.js';
-import { connect, Contract, keyStores, Near, WalletConnection, ConnectedWalletAccount, RequestSignTransactionsOptions, utils } from 'near-api-js'
-import { Action, createTransaction, functionCall, Transaction} from 'near-api-js/lib/transaction';
-import { PublicKey } from 'near-api-js/lib/utils'
+import { baseDecode } from "borsh"
+import BN from "bn.js"
+import {
+  connect,
+  Contract,
+  keyStores,
+  Near,
+  WalletConnection,
+  ConnectedWalletAccount,
+  RequestSignTransactionsOptions,
+  utils,
+} from "near-api-js"
+import {
+  Action,
+  createTransaction,
+  functionCall,
+  Transaction,
+} from "near-api-js/lib/transaction"
+import { PublicKey } from "near-api-js/lib/utils"
 
-import { Gas, NEAR } from 'near-units'
-import { atcb_action as addToCalendar } from 'add-to-calendar-button'
-import settings from '../../config/settings.json'
-import { signIn, wallet, near} from '../../src/near'
-import { TenK } from '../../src/near/contracts'
-import { FT } from '../../src/near/contracts'
+import { Gas, NEAR } from "near-units"
+import { atcb_action as addToCalendar } from "add-to-calendar-button"
+import settings from "../../config/settings.json"
+import { signIn, wallet, near } from "../../src/near"
+import { TenK } from "../../src/near/contracts"
+import { FT } from "../../src/near/contracts"
 import { TenkData } from "../../src/hooks/useTenk"
-import { saleStatuses, userStatuses } from './Locale'
-import { Locale } from '../../src/hooks/useLocales'
+import { saleStatuses, userStatuses } from "./Locale"
+import { Locale } from "../../src/hooks/useLocales"
 
 type Timestamp = number
 let nearWebWalletConnection: WalletConnection
@@ -33,32 +47,33 @@ async function setupTransaction({
   actions,
   nonceOffset = 1,
 }: {
-  receiverId: string;
-  actions: Action[];
-  nonceOffset?: number;
+  receiverId: string
+  actions: Action[]
+  nonceOffset?: number
 }) {
-
-
-  const localKey = await nearConnectedWalletAccount.connection.signer.getPublicKey(
-    nearConnectedWalletAccount.accountId,
-    nearConnectedWalletAccount.connection.networkId
-  );
+  const localKey =
+    await nearConnectedWalletAccount.connection.signer.getPublicKey(
+      nearConnectedWalletAccount.accountId,
+      nearConnectedWalletAccount.connection.networkId
+    )
   let accessKey = await nearConnectedWalletAccount.accessKeyForTransaction(
     receiverId,
     actions,
     localKey
-  );
+  )
   if (!accessKey) {
     throw new Error(
       `Cannot find matching key for transaction sent to ${receiverId}`
-    );
+    )
   }
 
-  const block = await nearConnectedWalletAccount.connection.provider.block({ finality: 'final' });
-  const blockHash = baseDecode(block.header.hash);
+  const block = await nearConnectedWalletAccount.connection.provider.block({
+    finality: "final",
+  })
+  const blockHash = baseDecode(block.header.hash)
 
-  const publicKey = PublicKey.from(accessKey.public_key);
-  const nonce = accessKey.access_key.nonce + nonceOffset;
+  const publicKey = PublicKey.from(accessKey.public_key)
+  const nonce = accessKey.access_key.nonce + nonceOffset
 
   return createTransaction(
     nearConnectedWalletAccount.accountId,
@@ -67,9 +82,8 @@ async function setupTransaction({
     nonce,
     actions,
     blockHash
-  );
+  )
 }
-
 
 function formatNumber(
   num: number | string,
@@ -77,39 +91,49 @@ function formatNumber(
   /**
    * `undefined` will default to browser's locale (may not work correctly in Node during build)
    */
-  locale?: string,
+  locale?: string
 ) {
-
   return new Intl.NumberFormat(locale, {
     maximumSignificantDigits: 3,
   }).format(Number(num))
 }
 
-function formatCurrency(
+function formatRemainingNumber(
   num: number | string,
-  currency: string = 'NEAR *',
 
   /**
    * `undefined` will default to browser's locale (may not work correctly in Node during build)
    */
-  locale?: string,
+  locale?: string
+) {
+  return new Intl.NumberFormat(locale, {
+    maximumSignificantDigits: 4,
+  }).format(Number(num))
+}
+
+function formatCurrency(
+  num: number | string,
+  currency: string = "NEAR *",
+
+  /**
+   * `undefined` will default to browser's locale (may not work correctly in Node during build)
+   */
+  locale?: string
 ) {
   return `${formatNumber(num, locale)} ${currency}`
 }
 
 function formatCheddar(
   num: number | string,
-  currency: string = 'CHEDDAR *',
+  currency: string = "CHEDDAR *",
 
   /**
    * `undefined` will default to browser's locale (may not work correctly in Node during build)
    */
-  locale?: string,
+  locale?: string
 ) {
-
-  return `${formatNumber(num.replace(/\,/g,''), locale)} ${currency}`
+  return `${formatNumber(num.replace(/\,/g, ""), locale)} ${currency}`
 }
-
 
 function formatDate(
   d: Timestamp | Date,
@@ -122,9 +146,9 @@ function formatDate(
 ): string {
   const date = typeof d === "number" ? new Date(d) : d
 
-  return new Intl.DateTimeFormat(locale,  {
-    dateStyle: 'short',
-    timeStyle: 'short',
+  return new Intl.DateTimeFormat(locale, {
+    dateStyle: "short",
+    timeStyle: "short",
     ...options,
   }).format(date)
 }
@@ -134,38 +158,44 @@ const replacers = {
   PRESALE_START: (d: Data) => formatDate(d.saleInfo.presale_start),
   SALE_START: (d: Data) => formatDate(d.saleInfo.sale_start),
   MINT_LIMIT: (d: Data) => d.remainingAllowance ?? 0,
-  MINT_PRICE: (d: Data) => formatCurrency(
-    NEAR.from(d.saleInfo.price).mul(NEAR.from('' + (d.numberToMint ?? 1))).toHuman().split(' ')[0]
-  ),
-  MINT_CHEDDAR_PRICE: (d: Data) => formatCheddar(
-    NEAR.from(d.totalCost).mul(NEAR.from('' + (d.numberToMint ?? 1))).toHuman().split(' ')[0]
-  ),
+  MINT_PRICE: (d: Data) =>
+    formatCurrency(
+      NEAR.from(d.saleInfo.price)
+        .mul(NEAR.from("" + (d.numberToMint ?? 1)))
+        .toHuman()
+        .split(" ")[0]
+    ),
+  MINT_CHEDDAR_PRICE: (d: Data) =>
+    formatCheddar(
+      NEAR.from(d.totalCost)
+        .mul(NEAR.from("" + (d.numberToMint ?? 1)))
+        .toHuman()
+        .split(" ")[0]
+    ),
   MINT_CHED: (d: Data) => {},
   MINT_RATE_LIMIT: (d: Data) => d.mintRateLimit,
   INITIAL_COUNT: (d: Data) => formatNumber(d.saleInfo.token_final_supply),
-  REMAINING_COUNT: (d: Data) => formatNumber(d.tokensLeft),
+  REMAINING_COUNT: (d: Data) => formatRemainingNumber(d.tokensLeft),
 } as const
-
-
 
 export const placeholderStrings = Object.keys(replacers)
 
 export type PlaceholderString = keyof typeof replacers
 
-const placeholderRegex = new RegExp(`(${placeholderStrings.join('|')})`, 'gm')
+const placeholderRegex = new RegExp(`(${placeholderStrings.join("|")})`, "gm")
 
 export function fill(text: string, data: Data): string {
-  return text.replace(placeholderRegex, (match) => {
+  return text.replace(placeholderRegex, match => {
     return String(replacers[match as PlaceholderString](data))
   })
 }
 
 // add-to-calendar-button has strange strict requirements on time format
 function formatDatesForAtcb(d: Timestamp) {
-  let [start, end] = new Date(d).toISOString().split('T')
+  let [start, end] = new Date(d).toISOString().split("T")
   return [
     start,
-    end.replace(/:\d\d\..*$/, '') // strip seconds, ms, & TZ
+    end.replace(/:\d\d\..*$/, ""), // strip seconds, ms, & TZ
   ]
 }
 
@@ -177,168 +207,190 @@ function getStartAndEnd(d: Timestamp) {
 }
 
 const actions = {
-  'ADD_TO_CALENDAR(SALE_START)': (d: Data) => addToCalendar({
-    name: d.locale.calendarEvent!,
-    ...getStartAndEnd(d.saleInfo.sale_start),
-    options: ['Google', 'iCal', 'Apple', 'Microsoft365', 'MicrosoftTeams', 'Outlook.com', 'Yahoo'],
-    timeZone: "UTC",
-    trigger: 'click',
-  }),
-  'ADD_TO_CALENDAR(PRESALE_START)': (d: Data) => addToCalendar({
-    name: d.locale.calendarEvent!,
-    ...getStartAndEnd(d.saleInfo.presale_start),
-    options: ['Google', 'iCal', 'Apple', 'Microsoft365', 'MicrosoftTeams', 'Outlook.com', 'Yahoo'],
-    timeZone: "UTC",
-    trigger: 'click',
-  }),
-  'SIGN_IN': signIn,
-  'MintForNear': (d: Data) => TenK.nft_mint_many({ with_cheddar: false, num: d.numberToMint ?? 1 }, {
-    gas: Gas.parse('40 Tgas').mul(Gas.from('' + d.numberToMint)),
-    attachedDeposit: NEAR.from(new BN(d.saleInfo.price).add(new BN('15000000000000000000000'))).mul(NEAR.from('' + d.numberToMint)),
-  }),
-  'MintForChed': (d:Data) => {},
-  'GO_TO_PARAS': () => window.open(`https://paras.id/search?q=${settings.contractName}&sort=priceasc&pmin=.01&is_verified=true`),
+  "ADD_TO_CALENDAR(SALE_START)": (d: Data) =>
+    addToCalendar({
+      name: d.locale.calendarEvent!,
+      ...getStartAndEnd(d.saleInfo.sale_start),
+      options: [
+        "Google",
+        "iCal",
+        "Apple",
+        "Microsoft365",
+        "MicrosoftTeams",
+        "Outlook.com",
+        "Yahoo",
+      ],
+      timeZone: "UTC",
+      trigger: "click",
+    }),
+  "ADD_TO_CALENDAR(PRESALE_START)": (d: Data) =>
+    addToCalendar({
+      name: d.locale.calendarEvent!,
+      ...getStartAndEnd(d.saleInfo.presale_start),
+      options: [
+        "Google",
+        "iCal",
+        "Apple",
+        "Microsoft365",
+        "MicrosoftTeams",
+        "Outlook.com",
+        "Yahoo",
+      ],
+      timeZone: "UTC",
+      trigger: "click",
+    }),
+  SIGN_IN: signIn,
+  MintForNear: (d: Data) =>
+    TenK.nft_mint_many(
+      { with_cheddar: false, num: d.numberToMint ?? 1 },
+      {
+        gas: Gas.parse("40 Tgas").mul(Gas.from("" + d.numberToMint)),
+        attachedDeposit: NEAR.from(
+          new BN(d.saleInfo.price).add(new BN("15000000000000000000000"))
+        ).mul(NEAR.from("" + d.numberToMint)),
+      }
+    ),
+  MintForChed: (d: Data) => {},
+  GO_TO_PARAS: () =>
+    window.open(
+      `https://paras.id/search?q=${settings.contractName}&sort=priceasc&pmin=.01&is_verified=true`
+    ),
 }
 
 export type ActionE = keyof typeof actions
 
 export async function act(action: ActionE, data: Data): void {
+  if (action === "MintForChed") {
+    const transactions: Transaction[] = []
 
-  if(action === "MintForChed") {
-      
-      const transactions: Transaction[] = []
-      
-      let ft_amount: string = ""
+    let ft_amount: string = ""
 
-      ft_amount = NEAR.from(data.totalCost).mul(NEAR.from('' + (data.numberToMint ?? 1)))
-      //(data.totalCost * (data.numberToMint ?? 1)).toString()
+    ft_amount = NEAR.from(data.totalCost).mul(
+      NEAR.from("" + (data.numberToMint ?? 1))
+    )
+    //(data.totalCost * (data.numberToMint ?? 1)).toString()
 
-      nearWebWalletConnection = wallet
-      nearConnectedWalletAccount = new ConnectedWalletAccount(nearWebWalletConnection, near.connection, nearWebWalletConnection.getAccountId())
+    nearWebWalletConnection = wallet
+    nearConnectedWalletAccount = new ConnectedWalletAccount(
+      nearWebWalletConnection,
+      near.connection,
+      nearWebWalletConnection.getAccountId()
+    )
 
-      transactions.unshift({
-        receiverId: settings.contractName,
-        functionCalls: [
-          {
-            methodName: 'nft_mint_many',
-            args: {
-              with_cheddar: true,
-              num: data.numberToMint ?? 1
-            },
-            gas: Gas.parse('40 Tgas').mul(Gas.from('' + data.numberToMint)),
-            amount: NEAR.from("15000000000000000000000").mul(NEAR.from('' + data.numberToMint)),
-          }
-        ]
-      });
+    transactions.unshift({
+      receiverId: settings.contractName,
+      functionCalls: [
+        {
+          methodName: "nft_mint_many",
+          args: {
+            with_cheddar: true,
+            num: data.numberToMint ?? 1,
+          },
+          gas: Gas.parse("40 Tgas").mul(Gas.from("" + data.numberToMint)),
+          amount: NEAR.from("15000000000000000000000").mul(
+            NEAR.from("" + data.numberToMint)
+          ),
+        },
+      ],
+    })
 
-      transactions.unshift({
-        receiverId: settings.ftcontractName,
-        functionCalls: [
-          {
-            methodName: 'ft_transfer_call',
-            args: {
-              receiver_id: settings.contractName,
-              amount: ft_amount,
-              msg: "transfer ft"
-            },
-            amount: new BN(utils.format.parseNearAmount('0.000000000000000000000001')),
-            gas: new BN('75000000000000')
-          }
-        ]
-      });
+    transactions.unshift({
+      receiverId: settings.ftcontractName,
+      functionCalls: [
+        {
+          methodName: "ft_transfer_call",
+          args: {
+            receiver_id: settings.contractName,
+            amount: ft_amount,
+            msg: "transfer ft",
+          },
+          amount: new BN(
+            utils.format.parseNearAmount("0.000000000000000000000001")
+          ),
+          gas: new BN("75000000000000"),
+        },
+      ],
+    })
 
-      // let isAccountRegistered = (await FT.storageBalance(present_account_id)) != null;
+    // let isAccountRegistered = (await FT.storageBalance(present_account_id)) != null;
 
-      // if(!isAccountRegistered) {
-      // transactions.unshift({
-      //   receiverId: settings.ftcontractName,
-      //   functionCalls: [
-      //     {
-      //       methodName: 'storage_deposit',
-      //       args: {
-      //         account_id: present_account_id
-      //       },
-      //       amount: new BN(utils.format.parseNearAmount('0.2')),
-      //       gas: new BN('100000000000000')
-      //     }
-      //   ]
-      // });
-      // }
+    // if(!isAccountRegistered) {
+    // transactions.unshift({
+    //   receiverId: settings.ftcontractName,
+    //   functionCalls: [
+    //     {
+    //       methodName: 'storage_deposit',
+    //       args: {
+    //         account_id: present_account_id
+    //       },
+    //       amount: new BN(utils.format.parseNearAmount('0.2')),
+    //       gas: new BN('100000000000000')
+    //     }
+    //   ]
+    // });
+    // }
 
-      const currentTransactions = await Promise.all(
-        transactions.map((t, i) => {
-          return setupTransaction({
-              receiverId: t.receiverId,
-              nonceOffset: i + 1,
-              actions: t.functionCalls.map((fc) =>
-                functionCall(
-                  fc.methodName,
-                  fc.args,
-                  fc.gas,
-                  fc.amount
-                )
-              ),
-            });
-          })
-        );
+    const currentTransactions = await Promise.all(
+      transactions.map((t, i) => {
+        return setupTransaction({
+          receiverId: t.receiverId,
+          nonceOffset: i + 1,
+          actions: t.functionCalls.map(fc =>
+            functionCall(fc.methodName, fc.args, fc.gas, fc.amount)
+          ),
+        })
+      })
+    )
 
-      requestSignTransOptions = currentTransactions
-      nearWebWalletConnection.requestSignTransactions(requestSignTransOptions)
-     
-    }
-
-    else {
-
-      actions[action](data)
-
-    }
+    requestSignTransOptions = currentTransactions
+    nearWebWalletConnection.requestSignTransactions(requestSignTransOptions)
+  } else {
+    actions[action](data)
+  }
 }
 
 export function can(action: ActionE, data: Data): boolean {
-  if (action === 'MintForNear' || action === 'MintForChed') {
-    return Boolean(data.currentUser) && (
-      (data.saleStatus === 'presale' &&
+  if (action === "MintForNear" || action === "MintForChed") {
+    return (
+      Boolean(data.currentUser) &&
+      ((data.saleStatus === "presale" &&
         data.remainingAllowance !== undefined &&
-        data.remainingAllowance > 0
-      ) ||
-      (data.saleStatus === 'saleOpen' && (
-        // users are added to the whitelist as they mint during saleOpen;
-        // undefined means they haven't minted yet
-        data.remainingAllowance === undefined ||
-        data.remainingAllowance > 0
-      ))
+        data.remainingAllowance > 0) ||
+        (data.saleStatus === "saleOpen" &&
+          // users are added to the whitelist as they mint during saleOpen;
+          // undefined means they haven't minted yet
+          (data.remainingAllowance === undefined ||
+            data.remainingAllowance > 0)))
     )
   }
   return true
 }
 
+// if(action === "MintForNear")
+// {
+//     let s;
+//     console.log("Here is MintForNear!")
 
-  // if(action === "MintForNear")
-  // {
-  //     let s;
-  //     console.log("Here is MintForNear!")
-      
-  //     s = TenK.nft_mint_many({ with_cheddar: false, num: data.numberToMint ?? 1 }, {
-  //       gas: Gas.parse('40 Tgas').mul(Gas.from('' + data.numberToMint)),
-  //       attachedDeposit: NEAR.from("5150000000000000000000000").mul(NEAR.from('' + data.numberToMint)),
-  //     })
-  //     console.log("\ndata: " + s)
-  // }
+//     s = TenK.nft_mint_many({ with_cheddar: false, num: data.numberToMint ?? 1 }, {
+//       gas: Gas.parse('40 Tgas').mul(Gas.from('' + data.numberToMint)),
+//       attachedDeposit: NEAR.from("5150000000000000000000000").mul(NEAR.from('' + data.numberToMint)),
+//     })
+//     console.log("\ndata: " + s)
+// }
 
-  // if(action === "MintForChed")
-  // {
-  //     console.log("Here is MintForChed!");
-  //     FT.storage_deposit({ account_id: "aronpayout.testnet" }, {
-  //       attachedDeposit: NEAR.from("150000000000000000000000"),
-  //     })
-      
-  //     FT.ft_transfer_call({ receiver_id: settings.contractName, amount: "2250000000000000000000000000", msg: "transfer ft" }, {
-  //       gas: Gas.parse('75000000000000 gas'),
-  //       attachedDeposit: NEAR.from("1"),
-  //     })
+// if(action === "MintForChed")
+// {
+//     console.log("Here is MintForChed!");
+//     FT.storage_deposit({ account_id: "aronpayout.testnet" }, {
+//       attachedDeposit: NEAR.from("150000000000000000000000"),
+//     })
 
-  //     TenK.nft_mint_many({ with_cheddar: true, num: data.numberToMint ?? 1 }, {
-  //       attachedDeposit: NEAR.from("1500000000000000000000000"),
-  //     })
-  // }
+//     FT.ft_transfer_call({ receiver_id: settings.contractName, amount: "2250000000000000000000000000", msg: "transfer ft" }, {
+//       gas: Gas.parse('75000000000000 gas'),
+//       attachedDeposit: NEAR.from("1"),
+//     })
 
+//     TenK.nft_mint_many({ with_cheddar: true, num: data.numberToMint ?? 1 }, {
+//       attachedDeposit: NEAR.from("1500000000000000000000000"),
+//     })
+// }
